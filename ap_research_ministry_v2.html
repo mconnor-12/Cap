@@ -633,7 +633,7 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 
   <div class="sync-panel">
     <h3>🔗 Live Connection Settings</h3>
-    <div class="sync-info">This dashboard is prewired to your Google Sheet and deployed Apps Script. On load, it automatically verifies the connection and pulls live student data from the tracker tab.</div>
+    <div class="sync-info">This version is prewired to your Google Sheet and deployed Apps Script. You can keep the default connection or paste a different deployed Apps Script URL as an override. The HTML uses JSONP instead of fetch so it works better from a Claude artifact or other standalone hosted page.</div>
     <div class="form-grid">
       <div class="fg">
         <label>Connected Google Sheet</label>
@@ -641,14 +641,16 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
       </div>
       <div class="fg">
         <label>Connected Web App</label>
-        <input class="fi" type="text" id="sheetsUrl" readonly>
+        <input class="fi" type="text" id="sheetsUrl" placeholder="https://script.google.com/macros/s/YOUR_ID/exec">
       </div>
     </div>
     <div class="sync-url-row" style="margin-top:10px;">
+      <button class="fbtn sm" onclick="saveSheetsUrl()">💾 Save Override</button>
+      <button class="fbtn sm" onclick="resetSheetsUrl()">↺ Use Default</button>
       <button class="fbtn sm" onclick="testSync()">🔄 Verify Connection</button>
       <button class="fbtn sm" onclick="pullLiveData()">⬇️ Pull Live Data</button>
       <button class="fbtn sm" onclick="window.open(APP_CONFIG.sheetUrl,'_blank')">📄 Open Sheet</button>
-      <button class="fbtn sm" onclick="window.open(APP_CONFIG.scriptUrl,'_blank')">🌐 Open Web App</button>
+      <button class="fbtn sm" onclick="window.open(getActiveScriptUrl(),'_blank')">🌐 Open Web App</button>
     </div>
     <div class="sync-status" id="syncStatus"></div>
   </div>
@@ -658,153 +660,385 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
     <div class="sync-info">Paste this into Extensions → Apps Script → Deploy → Web App (Anyone). Replace the Sheet ID. This creates new tabs without touching existing ones, enables live point sync, and exposes student data for refresh.</div>
     <div class="code-block" id="scriptBlock">// ═══════════════════════════════════════════════
 // AP RESEARCH — MINISTRY OF RESEARCH
-// Google Apps Script v2 — Full Integration
+// Google Apps Script v4 — Claude Artifact Compatible
 // Deploy as Web App → Anyone can access
+// Optional: bind to the sheet to use the custom menu
 // ═══════════════════════════════════════════════
 
-const SHEET_ID     = '1llsHnCkLPU7mBB2ICt_vb6_aDiW1-Py1tYBpJjsJF1A';
-const TRACKER_TAB  = 'Data Tracker - Cohort 2026';
-const POINTS_TAB   = 'House Cup Points';
-const MASTERY_TAB  = 'Mastery Tracker';
-const CONTACTS_TAB = 'Parent Contacts';
-const SPRINTS_TAB  = 'Writing Sprints';
+const SHEET_ID = &#x27;1llsHnCkLPU7mBB2ICt_vb6_aDiW1-Py1tYBpJjsJF1A&#x27;;
+const TRACKER_TAB = &#x27;Data Tracker - Cohort 2026&#x27;;
+const TRACKER_GID = 1986422992;
+const POINTS_TAB = &#x27;House Cup Points&#x27;;
+const MASTERY_TAB = &#x27;Mastery Tracker&#x27;;
+const CONTACTS_TAB = &#x27;Parent Contacts&#x27;;
+const SPRINTS_TAB = &#x27;Writing Sprints&#x27;;
+
+const TAB_HEADERS = {
+  [POINTS_TAB]: [&#x27;Date&#x27;,&#x27;House&#x27;,&#x27;Student&#x27;,&#x27;Achievement&#x27;,&#x27;Points&#x27;,&#x27;Note&#x27;,&#x27;IsBonus&#x27;],
+  [MASTERY_TAB]: [&#x27;Date&#x27;,&#x27;Student&#x27;,&#x27;House&#x27;,&#x27;Skill&#x27;,&#x27;Level&#x27;,&#x27;Teacher&#x27;],
+  [CONTACTS_TAB]: [&#x27;Date&#x27;,&#x27;Student&#x27;,&#x27;House&#x27;,&#x27;Type&#x27;,&#x27;Note&#x27;,&#x27;Logged By&#x27;],
+  [SPRINTS_TAB]: [&#x27;Date&#x27;,&#x27;Winning House&#x27;,&#x27;Points&#x27;]
+};
+
+function onOpen() {
+  try {
+    SpreadsheetApp.getUi()
+      .createMenu(&#x27;Ministry of Research&#x27;)
+      .addItem(&#x27;Set Up Required Tabs&#x27;, &#x27;menuSetupTabs&#x27;)
+      .addItem(&#x27;Verify Tabs and Headers&#x27;, &#x27;menuVerifyWorkbook&#x27;)
+      .addItem(&#x27;Repair Headers&#x27;, &#x27;menuRepairHeaders&#x27;)
+      .addSeparator()
+      .addItem(&#x27;Test Students Endpoint&#x27;, &#x27;menuTestStudents&#x27;)
+      .addItem(&#x27;Test Points Endpoint&#x27;, &#x27;menuTestPoints&#x27;)
+      .addItem(&#x27;Test Contacts Endpoint&#x27;, &#x27;menuTestContacts&#x27;)
+      .addItem(&#x27;Test Sprints Endpoint&#x27;, &#x27;menuTestSprints&#x27;)
+      .addToUi();
+  } catch (err) {}
+}
+
+function menuSetupTabs() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  Object.keys(TAB_HEADERS).forEach(name =&gt; ensureTab(ss, name, TAB_HEADERS[name]));
+  SpreadsheetApp.getUi().alert(&#x27;Required tabs are set up.&#x27;);
+}
+
+function menuVerifyWorkbook() {
+  SpreadsheetApp.getUi().alert(JSON.stringify(verifyWorkbook(), null, 2));
+}
+
+function menuRepairHeaders() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  Object.keys(TAB_HEADERS).forEach(name =&gt; repairHeaders(ss, name, TAB_HEADERS[name]));
+  SpreadsheetApp.getUi().alert(&#x27;Managed tab headers repaired.&#x27;);
+}
+
+function menuTestStudents() { showJsonDialog(&#x27;Students&#x27;, getStudents()); }
+function menuTestPoints() { showJsonDialog(&#x27;Points&#x27;, getPoints()); }
+function menuTestContacts() { showJsonDialog(&#x27;Contacts&#x27;, getContacts()); }
+function menuTestSprints() { showJsonDialog(&#x27;Sprints&#x27;, getSprints()); }
 
 function doGet(e) {
-  const action = e.parameter.action || 'ping';
-  const cors = ContentService.createTextOutput;
+  const action = (e &amp;&amp; e.parameter &amp;&amp; e.parameter.action) || &#x27;ping&#x27;;
+  const callback = e &amp;&amp; e.parameter &amp;&amp; e.parameter.callback;
+
   try {
     let result;
-    if (action === 'ping')         result = {ok:true, time: new Date().toISOString()};
-    else if (action === 'students') result = getStudents();
-    else if (action === 'points')   result = getPoints();
-    else if (action === 'mastery')  result = getMastery();
-    else if (action === 'contacts') result = getContacts();
-    else if (action === 'sprints')  result = getSprints();
-    else result = {error: 'Unknown action: ' + action};
-    return cors(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
-  } catch(err) {
-    return cors(JSON.stringify({error: err.toString()})).setMimeType(ContentService.MimeType.JSON);
+
+    if (action === &#x27;ping&#x27;) result = {
+      ok: true,
+      time: new Date().toISOString(),
+      spreadsheetId: SHEET_ID
+    };
+    else if (action === &#x27;students&#x27;) result = getStudents();
+    else if (action === &#x27;points&#x27;) result = getPoints();
+    else if (action === &#x27;mastery&#x27;) result = getMastery();
+    else if (action === &#x27;contacts&#x27;) result = getContacts();
+    else if (action === &#x27;sprints&#x27;) result = getSprints();
+    else if (action === &#x27;verify&#x27;) result = verifyWorkbook();
+
+    // JSONP-friendly write actions for standalone hosted HTML / Claude artifacts
+    else if (action === &#x27;addPoints&#x27;) result = addPoints({
+      house: e.parameter.house || &#x27;&#x27;,
+      student: e.parameter.student || &#x27;&#x27;,
+      achievement: e.parameter.achievement || &#x27;&#x27;,
+      points: Number(e.parameter.points || 0),
+      note: e.parameter.note || &#x27;&#x27;,
+      isBonus: String(e.parameter.isBonus || &#x27;&#x27;).toLowerCase() === &#x27;true&#x27;
+    });
+    else if (action === &#x27;addMastery&#x27;) result = addMastery({
+      student: e.parameter.student || &#x27;&#x27;,
+      house: e.parameter.house || &#x27;&#x27;,
+      skill: e.parameter.skill || &#x27;&#x27;,
+      level: e.parameter.level || &#x27;&#x27;,
+      teacher: e.parameter.teacher || &#x27;&#x27;
+    });
+    else if (action === &#x27;addContact&#x27;) result = addContact({
+      student: e.parameter.student || &#x27;&#x27;,
+      house: e.parameter.house || &#x27;&#x27;,
+      type: e.parameter.type || &#x27;&#x27;,
+      note: e.parameter.note || &#x27;&#x27;,
+      teacher: e.parameter.teacher || e.parameter.loggedBy || &#x27;&#x27;
+    });
+    else if (action === &#x27;addSprint&#x27;) result = addSprint({
+      date: e.parameter.date || &#x27;&#x27;,
+      house: e.parameter.house || &#x27;&#x27;,
+      points: Number(e.parameter.points || 100)
+    });
+    else result = { ok: false, error: &#x27;Unknown action: &#x27; + action };
+
+    return createOutput(result, callback);
+  } catch (err) {
+    return createOutput({ ok: false, error: String(err), stack: err &amp;&amp; err.stack ? err.stack : &#x27;&#x27; }, callback);
   }
 }
 
 function doPost(e) {
-  const cors = ContentService.createTextOutput;
   try {
-    const data = JSON.parse(e.postData.contents);
+    const data = JSON.parse((e &amp;&amp; e.postData &amp;&amp; e.postData.contents) || &#x27;{}&#x27;);
     let result;
-    if (data.action === 'addPoints')   result = addPoints(data);
-    else if (data.action === 'addMastery')  result = addMastery(data);
-    else if (data.action === 'addContact')  result = addContact(data);
-    else if (data.action === 'addSprint')   result = addSprint(data);
-    else result = {error: 'Unknown action: ' + data.action};
-    return cors(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
-  } catch(err) {
-    return cors(JSON.stringify({error: err.toString()})).setMimeType(ContentService.MimeType.JSON);
+
+    if (data.action === &#x27;addPoints&#x27;) result = addPoints(data);
+    else if (data.action === &#x27;addMastery&#x27;) result = addMastery(data);
+    else if (data.action === &#x27;addContact&#x27;) result = addContact(data);
+    else if (data.action === &#x27;addSprint&#x27;) result = addSprint(data);
+    else result = { ok: false, error: &#x27;Unknown action: &#x27; + data.action };
+
+    return ContentService
+      .createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: false, error: String(err), stack: err &amp;&amp; err.stack ? err.stack : &#x27;&#x27; }))
+      .setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+function createOutput(obj, callback) {
+  const payload = JSON.stringify(obj);
+  if (callback) {
+    return ContentService
+      .createTextOutput(callback + &#x27;(&#x27; + payload + &#x27;);&#x27;)
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+  return ContentService
+    .createTextOutput(payload)
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 function getStudents() {
   const ss = SpreadsheetApp.openById(SHEET_ID);
-  const sh = ss.getSheetByName(TRACKER_TAB);
-  if (!sh) return {error: 'Tab not found: ' + TRACKER_TAB};
+  let sh = ss.getSheetByName(TRACKER_TAB);
+  if (!sh) sh = ss.getSheets().find(s =&gt; s.getSheetId() === TRACKER_GID) || null;
+  if (!sh) {
+    return { ok: false, error: &#x27;Tracker tab not found&#x27;, expectedName: TRACKER_TAB, expectedGid: TRACKER_GID };
+  }
+
   const rows = sh.getDataRange().getValues();
-  const headers = rows[0].map(h => String(h).trim());
-  return {
-    students: rows.slice(1)
-      .filter(r => r[1] || r[2])
-      .map(r => {
-        const obj = {};
-        headers.forEach((h,i) => obj[h] = r[i]);
-        return obj;
-      })
-  };
+  if (!rows.length) return { ok: true, headers: [], students: [], count: 0 };
+
+  const headers = rows[0].map(h =&gt; String(h || &#x27;&#x27;).trim());
+  const students = rows.slice(1)
+    .filter(row =&gt; row.some(cell =&gt; String(cell || &#x27;&#x27;).trim() !== &#x27;&#x27;))
+    .map(row =&gt; {
+      const obj = {};
+      headers.forEach((h, i) =&gt; obj[h] = row[i]);
+
+      const first = pickField(obj, [&#x27;First Name&#x27;, &#x27;First&#x27;, &#x27;Student First Name&#x27;]);
+      const last = pickField(obj, [&#x27;Last Name&#x27;, &#x27;Last&#x27;, &#x27;Student Last Name&#x27;]);
+      const full = pickField(obj, [&#x27;Student&#x27;, &#x27;Student Name&#x27;, &#x27;Full Name&#x27;, &#x27;Name&#x27;]) || [first, last].filter(Boolean).join(&#x27; &#x27;).trim();
+      const house = pickField(obj, [&#x27;House&#x27;, &#x27;Team&#x27;, &#x27;Cohort House&#x27;]);
+      const id = pickField(obj, [&#x27;ID&#x27;, &#x27;Student ID&#x27;, &#x27;School ID&#x27;]);
+
+      obj._studentName = full;
+      obj._house = house;
+      obj._studentId = id;
+      return obj;
+    });
+
+  return { ok: true, headers, students, count: students.length };
 }
 
-function getPoints() {
-  const ss = SpreadsheetApp.openById(SHEET_ID);
-  ensureTab(ss, POINTS_TAB, ['Date','House','Student','Achievement','Points','Note','IsBonus']);
-  const sh = ss.getSheetByName(POINTS_TAB);
-  const rows = sh.getDataRange().getValues();
-  const headers = rows[0];
-  return { entries: rows.slice(1).map(r => { const o={}; headers.forEach((h,i)=>o[h]=r[i]); return o; }) };
-}
+function getPoints() { return getEntries(POINTS_TAB, TAB_HEADERS[POINTS_TAB]); }
+function getMastery() { return getEntries(MASTERY_TAB, TAB_HEADERS[MASTERY_TAB]); }
+function getContacts() { return getEntries(CONTACTS_TAB, TAB_HEADERS[CONTACTS_TAB]); }
+function getSprints() { return getEntries(SPRINTS_TAB, TAB_HEADERS[SPRINTS_TAB]); }
 
-function getMastery() {
+function getEntries(tabName, headers) {
   const ss = SpreadsheetApp.openById(SHEET_ID);
-  ensureTab(ss, MASTERY_TAB, ['Date','Student','House','Skill','Level','Teacher']);
-  const sh = ss.getSheetByName(MASTERY_TAB);
+  const sh = ensureTab(ss, tabName, headers);
   const rows = sh.getDataRange().getValues();
-  const headers = rows[0];
-  return { entries: rows.slice(1).map(r => { const o={}; headers.forEach((h,i)=>o[h]=r[i]); return o; }) };
-}
+  if (!rows.length) return { ok: true, headers, entries: [], count: 0 };
 
-function getContacts() {
-  const ss = SpreadsheetApp.openById(SHEET_ID);
-  ensureTab(ss, CONTACTS_TAB, ['Date','Student','House','Type','Note','Logged By']);
-  const sh = ss.getSheetByName(CONTACTS_TAB);
-  const rows = sh.getDataRange().getValues();
-  const headers = rows[0];
-  return { entries: rows.slice(1).map(r => { const o={}; headers.forEach((h,i)=>o[h]=r[i]); return o; }) };
-}
+  const actualHeaders = rows[0].map(h =&gt; String(h || &#x27;&#x27;).trim());
+  const entries = rows.slice(1)
+    .filter(row =&gt; row.some(cell =&gt; String(cell || &#x27;&#x27;).trim() !== &#x27;&#x27;))
+    .map(row =&gt; {
+      const obj = {};
+      actualHeaders.forEach((h, i) =&gt; obj[h] = row[i]);
+      return obj;
+    });
 
-function getSprints() {
-  const ss = SpreadsheetApp.openById(SHEET_ID);
-  ensureTab(ss, SPRINTS_TAB, ['Date','Winning House','Points']);
-  const sh = ss.getSheetByName(SPRINTS_TAB);
-  const rows = sh.getDataRange().getValues();
-  const headers = rows[0];
-  return { entries: rows.slice(1).map(r => { const o={}; headers.forEach((h,i)=>o[h]=r[i]); return o; }) };
+  return { ok: true, headers: actualHeaders, entries, count: entries.length };
 }
 
 function addPoints(data) {
+  requireFields(data, [&#x27;house&#x27;, &#x27;achievement&#x27;]);
   const ss = SpreadsheetApp.openById(SHEET_ID);
-  ensureTab(ss, POINTS_TAB, ['Date','House','Student','Achievement','Points','Note','IsBonus']);
-  ss.getSheetByName(POINTS_TAB).appendRow([
-    new Date().toLocaleDateString('en-US'),
-    data.house, data.student||'(House Award)', data.achievement,
-    Number(data.points)||0, data.note||'', data.isBonus?'Yes':'No'
+  const sh = ensureTab(ss, POINTS_TAB, TAB_HEADERS[POINTS_TAB]);
+
+  sh.appendRow([
+    new Date().toLocaleDateString(&#x27;en-US&#x27;),
+    data.house || &#x27;&#x27;,
+    data.student || &#x27;(House Award)&#x27;,
+    data.achievement || &#x27;&#x27;,
+    Number(data.points) || 0,
+    data.note || &#x27;&#x27;,
+    truthy(data.isBonus) ? &#x27;Yes&#x27; : &#x27;No&#x27;
   ]);
-  return {success: true};
+
+  return { ok: true, success: true };
 }
 
 function addMastery(data) {
+  requireFields(data, [&#x27;student&#x27;, &#x27;skill&#x27;, &#x27;level&#x27;]);
   const ss = SpreadsheetApp.openById(SHEET_ID);
-  ensureTab(ss, MASTERY_TAB, ['Date','Student','House','Skill','Level','Teacher']);
-  ss.getSheetByName(MASTERY_TAB).appendRow([
-    new Date().toLocaleDateString('en-US'),
-    data.student, data.house, data.skill, data.level, data.teacher||''
+  const sh = ensureTab(ss, MASTERY_TAB, TAB_HEADERS[MASTERY_TAB]);
+
+  sh.appendRow([
+    new Date().toLocaleDateString(&#x27;en-US&#x27;),
+    data.student || &#x27;&#x27;,
+    data.house || &#x27;&#x27;,
+    data.skill || &#x27;&#x27;,
+    data.level || &#x27;&#x27;,
+    data.teacher || &#x27;&#x27;
   ]);
-  return {success: true};
+
+  return { ok: true, success: true };
 }
 
 function addContact(data) {
+  requireFields(data, [&#x27;student&#x27;, &#x27;type&#x27;]);
   const ss = SpreadsheetApp.openById(SHEET_ID);
-  ensureTab(ss, CONTACTS_TAB, ['Date','Student','House','Type','Note','Logged By']);
-  ss.getSheetByName(CONTACTS_TAB).appendRow([
-    new Date().toLocaleDateString('en-US'),
-    data.student, data.house, data.type, data.note||'', data.teacher||''
+  const sh = ensureTab(ss, CONTACTS_TAB, TAB_HEADERS[CONTACTS_TAB]);
+
+  sh.appendRow([
+    new Date().toLocaleDateString(&#x27;en-US&#x27;),
+    data.student || &#x27;&#x27;,
+    data.house || &#x27;&#x27;,
+    data.type || &#x27;&#x27;,
+    data.note || &#x27;&#x27;,
+    data.teacher || &#x27;&#x27;
   ]);
-  return {success: true};
+
+  return { ok: true, success: true };
 }
 
 function addSprint(data) {
+  requireFields(data, [&#x27;house&#x27;]);
   const ss = SpreadsheetApp.openById(SHEET_ID);
-  ensureTab(ss, SPRINTS_TAB, ['Date','Winning House','Points']);
-  ss.getSheetByName(SPRINTS_TAB).appendRow([data.date, data.house, 100]);
-  return {success: true};
+  const sh = ensureTab(ss, SPRINTS_TAB, TAB_HEADERS[SPRINTS_TAB]);
+
+  sh.appendRow([
+    data.date || new Date().toLocaleDateString(&#x27;en-US&#x27;),
+    data.house || &#x27;&#x27;,
+    Number(data.points) || 100
+  ]);
+
+  return { ok: true, success: true };
+}
+
+function verifyWorkbook() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const tracker = ss.getSheetByName(TRACKER_TAB) || ss.getSheets().find(s =&gt; s.getSheetId() === TRACKER_GID) || null;
+  const tabs = [{
+    key: &#x27;tracker&#x27;,
+    expectedName: TRACKER_TAB,
+    expectedGid: TRACKER_GID,
+    found: !!tracker,
+    actualName: tracker ? tracker.getName() : &#x27;&#x27;,
+    actualGid: tracker ? tracker.getSheetId() : &#x27;&#x27;,
+    headerStatus: &#x27;not enforced&#x27;
+  }];
+
+  let ok = !!tracker;
+  Object.keys(TAB_HEADERS).forEach(name =&gt; {
+    const sh = ss.getSheetByName(name);
+    const found = !!sh;
+    const expectedHeaders = TAB_HEADERS[name];
+    let actualHeaders = [];
+    let headerMatches = false;
+    if (found &amp;&amp; sh.getLastRow() &gt; 0) {
+      actualHeaders = sh.getRange(1, 1, 1, expectedHeaders.length).getValues()[0].map(h =&gt; String(h || &#x27;&#x27;).trim());
+      headerMatches = expectedHeaders.every((h, i) =&gt; String(actualHeaders[i]) === String(h));
+    }
+    if (!found || !headerMatches) ok = false;
+    tabs.push({
+      key: name,
+      expectedName: name,
+      found,
+      actualName: found ? sh.getName() : &#x27;&#x27;,
+      actualGid: found ? sh.getSheetId() : &#x27;&#x27;,
+      expectedHeaders,
+      actualHeaders,
+      headerMatches
+    });
+  });
+
+  return {
+    ok,
+    spreadsheetId: ss.getId(),
+    spreadsheetName: ss.getName(),
+    checkedAt: new Date().toISOString(),
+    tabs
+  };
 }
 
 function ensureTab(ss, name, headers) {
-  if (!ss.getSheetByName(name)) {
-    const sh = ss.insertSheet(name);
-    sh.appendRow(headers);
-    sh.getRange(1,1,1,headers.length)
-      .setFontWeight('bold')
-      .setBackground('#1a1a2e')
-      .setFontColor('#d4a843');
+  let sh = ss.getSheetByName(name);
+  if (!sh) sh = ss.insertSheet(name);
+
+  if (headers &amp;&amp; headers.length &amp;&amp; sh.getLastRow() === 0) {
+    sh.getRange(1, 1, 1, headers.length).setValues([headers]);
+    styleHeaderRow(sh, headers.length);
     sh.setFrozenRows(1);
   }
-}</div>
+
+  return sh;
+}
+
+function repairHeaders(ss, tabName, headers) {
+  const sh = ensureTab(ss, tabName, headers);
+  sh.getRange(1, 1, 1, headers.length).setValues([headers]);
+  styleHeaderRow(sh, headers.length);
+  sh.setFrozenRows(1);
+}
+
+function styleHeaderRow(sh, colCount) {
+  sh.getRange(1, 1, 1, colCount)
+    .setFontWeight(&#x27;bold&#x27;)
+    .setBackground(&#x27;#1a1a2e&#x27;)
+    .setFontColor(&#x27;#d4a843&#x27;);
+}
+
+function requireFields(obj, fields) {
+  const missing = fields.filter(f =&gt; !obj[f] &amp;&amp; obj[f] !== 0 &amp;&amp; obj[f] !== false);
+  if (missing.length) throw new Error(&#x27;Missing required field(s): &#x27; + missing.join(&#x27;, &#x27;));
+}
+
+function truthy(v) {
+  return v === true || v === &#x27;true&#x27; || v === &#x27;TRUE&#x27; || v === &#x27;yes&#x27; || v === &#x27;Yes&#x27; || v === 1 || v === &#x27;1&#x27;;
+}
+
+function pickField(obj, aliases) {
+  for (let i = 0; i &lt; aliases.length; i++) {
+    const key = aliases[i];
+    if (obj[key] !== undefined &amp;&amp; obj[key] !== null &amp;&amp; String(obj[key]).trim() !== &#x27;&#x27;) {
+      return obj[key];
+    }
+  }
+  return &#x27;&#x27;;
+}
+
+function showJsonDialog(title, data) {
+  try {
+    const html = HtmlService.createHtmlOutput(
+      &#x27;&lt;div style=&quot;font-family:Arial,sans-serif;padding:12px;&quot;&gt;&#x27; +
+      &#x27;&lt;h2 style=&quot;margin-top:0;&quot;&gt;&#x27; + escapeHtml(title) + &#x27;&lt;/h2&gt;&#x27; +
+      &#x27;&lt;pre style=&quot;white-space:pre-wrap;font-size:12px;&quot;&gt;&#x27; +
+      escapeHtml(JSON.stringify(data, null, 2)) +
+      &#x27;&lt;/pre&gt;&lt;/div&gt;&#x27;
+    ).setWidth(800).setHeight(600);
+    SpreadsheetApp.getUi().showModalDialog(html, title);
+  } catch (err) {}
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&amp;/g, &#x27;&amp;amp;&#x27;)
+    .replace(/&lt;/g, &#x27;&amp;lt;&#x27;)
+    .replace(/&gt;/g, &#x27;&amp;gt;&#x27;);
+}
+</div>
     <button class="fbtn sm" onclick="copyScript()" style="margin-top:8px;">📋 Copy Script</button>
   </div>
 
@@ -1641,38 +1875,79 @@ const APP_CONFIG = {
   scriptUrl: 'https://script.google.com/macros/s/AKfycbzxZg8siD6bTmHP50yhvoa52e3Oha2ArTN6DxH1src-cjOFrYQwJbPYWp5Ufc7m9rOTAQ/exec'
 };
 
-let sheetsUrl = APP_CONFIG.scriptUrl;
+let sheetsUrl = localStorage.getItem('apSheetsUrl') || APP_CONFIG.scriptUrl;
+
+function getActiveScriptUrl(){ return sheetsUrl || APP_CONFIG.scriptUrl; }
 
 function initSheetsInput(){
   const urlEl = document.getElementById('sheetsUrl');
   const sheetEl = document.getElementById('sheetDocUrl');
-  if(urlEl) urlEl.value = APP_CONFIG.scriptUrl;
+  if(urlEl) urlEl.value = getActiveScriptUrl();
   if(sheetEl) sheetEl.value = APP_CONFIG.sheetUrl;
 }
 
-async function autoConnectSheets(){
+function saveSheetsUrl(){
+  const input = document.getElementById('sheetsUrl');
+  sheetsUrl = (input && input.value.trim()) || APP_CONFIG.scriptUrl;
+  localStorage.setItem('apSheetsUrl', sheetsUrl);
+  showSync('Override saved. Click Verify Connection to test it.', 'ok');
+}
+
+function resetSheetsUrl(){
+  sheetsUrl = APP_CONFIG.scriptUrl;
+  localStorage.removeItem('apSheetsUrl');
   initSheetsInput();
-  await testSync(true);
-  await pullLiveData();
+  showSync('Default deployed web app restored.', 'ok');
+}
+
+function jsonpRequest(params = {}) {
+  return new Promise((resolve, reject) => {
+    const cbName = '__jsonp_cb_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+    let script;
+    const timeout = setTimeout(() => {
+      cleanup();
+      reject(new Error('Request timed out'));
+    }, 15000);
+
+    function cleanup() {
+      clearTimeout(timeout);
+      try { delete window[cbName]; } catch (e) {}
+      if (script && script.parentNode) script.parentNode.removeChild(script);
+    }
+
+    window[cbName] = function(data) {
+      cleanup();
+      resolve(data);
+    };
+
+    const query = new URLSearchParams({ ...params, callback: cbName });
+    script = document.createElement('script');
+    script.src = getActiveScriptUrl() + '?' + query.toString();
+    script.async = true;
+    script.onerror = function() {
+      cleanup();
+      reject(new Error('Script load failed'));
+    };
+    document.body.appendChild(script);
+  });
 }
 
 async function testSync(silent=false){
-  if(!sheetsUrl){
-    showSync('Apps Script URL is missing from APP_CONFIG.', 'err');
+  if(!getActiveScriptUrl()){
+    showSync('Apps Script URL is missing.', 'err');
     return false;
   }
   if(!silent) showSync('Verifying live connection…', 'ok');
   try{
-    const r = await fetch(sheetsUrl + '?action=ping', {cache:'no-store'});
-    const d = await r.json();
-    if(d.ok){
+    const d = await jsonpRequest({ action:'ping' });
+    if(d && d.ok){
       showSync('✓ Connected to the live spreadsheet web app.', 'ok');
       return true;
     }
     showSync('Connected, but the response was unexpected: ' + JSON.stringify(d), 'err');
     return false;
   } catch(e){
-    showSync('Connection failed. Check deployment access and URL. Error: ' + e.message, 'err');
+    showSync('Connection failed. Check the deployment access, script URL, and redeployment. Error: ' + e.message, 'err');
     return false;
   }
 }
@@ -1757,17 +2032,17 @@ async function pullLiveData(){
   showSync('Pulling live data from Google Sheets…', 'ok');
 
   try{
-    const [studentsRes, pointsRes, contactsRes, sprintsRes] = await Promise.allSettled([
-      fetch(sheetsUrl + '?action=students', {cache:'no-store'}).then(r => r.json()),
-      fetch(sheetsUrl + '?action=points', {cache:'no-store'}).then(r => r.json()),
-      fetch(sheetsUrl + '?action=contacts', {cache:'no-store'}).then(r => r.json()),
-      fetch(sheetsUrl + '?action=sprints', {cache:'no-store'}).then(r => r.json())
+    const [studentsData, pointsData, contactsData, sprintsData] = await Promise.all([
+      jsonpRequest({ action:'students' }),
+      jsonpRequest({ action:'points' }),
+      jsonpRequest({ action:'contacts' }),
+      jsonpRequest({ action:'sprints' })
     ]);
 
     let loadedStudents = 0;
 
-    if(studentsRes.status === 'fulfilled' && Array.isArray(studentsRes.value.students)){
-      const liveStudents = studentsRes.value.students
+    if(Array.isArray(studentsData.students)){
+      const liveStudents = studentsData.students
         .map(mapLiveStudent)
         .filter(s => s.first || s.last || s.house);
 
@@ -1778,23 +2053,26 @@ async function pullLiveData(){
       }
     }
 
-    if(pointsRes.status === 'fulfilled' && Array.isArray(pointsRes.value.entries)){
-      ptsLog = pointsRes.value.entries.map(normalizePointEntry).filter(e => e.house || e.student || e.achievement);
+    if(Array.isArray(pointsData.entries)){
+      ptsLog = pointsData.entries
+        .map(normalizePointEntry)
+        .filter(e => e.house || e.student || e.achievement);
     }
 
-    if(contactsRes.status === 'fulfilled' && Array.isArray(contactsRes.value.entries)){
-      contactD = contactsRes.value.entries.map(normalizeContactEntry).filter(e => e.student || e.type || e.note);
+    if(Array.isArray(contactsData.entries)){
+      contactD = contactsData.entries
+        .map(normalizeContactEntry)
+        .filter(e => e.student || e.type || e.note);
     }
 
-    if(sprintsRes.status === 'fulfilled' && Array.isArray(sprintsRes.value.entries)){
-      sprintD = pointsRes.status === 'fulfilled'
-        ? pointsRes.value.entries.filter(e => String(e.Achievement || e.achievement || '').toLowerCase().includes('felix felicis')).map(e => ({
-            date: e.Date || e.date || '',
-            house: e.House || e.house || '',
-            points: Number(e.Points ?? e.points ?? 100) || 100
-          }))
-        : sprintsRes.value.entries.map(normalizeSprintEntry).filter(e => e.date || e.house);
+    if(Array.isArray(sprintsData.entries)){
+      sprintD = sprintsData.entries
+        .map(normalizeSprintEntry)
+        .filter(e => e.date || e.house);
     }
+
+    const rotwEntry = [...ptsLog].reverse().find(e => String(e.achievement || '').toLowerCase().includes('researcher of the week') && e.student);
+    if(rotwEntry) rotwD = { name: rotwEntry.student, house: rotwEntry.house };
 
     saveAll();
     rebuildDashboardFromLiveData();
@@ -1806,38 +2084,30 @@ async function pullLiveData(){
 }
 
 async function syncToSheets(entry){
-  if(!sheetsUrl) return;
+  if(!getActiveScriptUrl()) return;
   try{
-    await fetch(sheetsUrl, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        action:'addPoints',
-        house: entry.house,
-        student: entry.student,
-        achievement: entry.achievement,
-        points: entry.pts,
-        note: entry.note || '',
-        isBonus: !!entry.isBonus
-      })
+    await jsonpRequest({
+      action:'addPoints',
+      house: entry.house || '',
+      student: entry.student || '',
+      achievement: entry.achievement || '',
+      points: entry.pts || 0,
+      note: entry.note || '',
+      isBonus: !!entry.isBonus
     });
   }catch(e){}
 }
 
 async function syncContactToSheets(entry){
-  if(!sheetsUrl) return;
+  if(!getActiveScriptUrl()) return;
   try{
-    await fetch(sheetsUrl, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        action:'addContact',
-        date: entry.date,
-        student: entry.student,
-        house: entry.house,
-        type: entry.type,
-        note: entry.note || ''
-      })
+    await jsonpRequest({
+      action:'addContact',
+      student: entry.student || '',
+      house: entry.house || '',
+      type: entry.type || '',
+      note: entry.note || '',
+      loggedBy: entry.loggedBy || entry.teacher || ''
     });
   }catch(e){}
 }
@@ -1879,7 +2149,8 @@ function show(id,btn){
 window.addEventListener('DOMContentLoaded',()=>{
   initStars();initCountdown();
   buildCupDisplay();buildOverview();buildRotw();buildLogTable();
-  autoConnectSheets();
+  initSheetsInput();
+  testSync(true).then(()=>pullLiveData());
   document.getElementById('aDate').value=new Date().toISOString().split('T')[0];
   document.getElementById('sprintDate').value=new Date().toISOString().split('T')[0];
   document.getElementById('contactDate').value=new Date().toISOString().split('T')[0];
