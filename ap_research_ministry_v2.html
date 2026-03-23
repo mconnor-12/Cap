@@ -633,13 +633,22 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 
   <div class="sync-panel">
     <h3>🔗 Live Connection Settings</h3>
-    <div class="sync-info">Connect your Google Sheet for live sync. Points logged here will write to a "House Cup Points" tab. Student data can be refreshed from the tracker. Your existing tabs are NEVER modified.</div>
-    <label style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.1em;opacity:.5;display:block;margin-bottom:5px;">Apps Script Web App URL</label>
-    <div class="sync-url-row">
-      <input class="sync-url-input" type="text" id="sheetsUrl" placeholder="https://script.google.com/macros/s/YOUR_ID/exec">
-      <button class="fbtn sm" onclick="saveSheetsUrl()">💾 Save</button>
-      <button class="fbtn sm" onclick="testSync()">🔄 Test</button>
-      <button class="fbtn sm" onclick="pullLiveData()">⬇️ Pull Data</button>
+    <div class="sync-info">This dashboard is prewired to your Google Sheet and deployed Apps Script. On load, it automatically verifies the connection and pulls live student data from the tracker tab.</div>
+    <div class="form-grid">
+      <div class="fg">
+        <label>Connected Google Sheet</label>
+        <input class="fi" type="text" id="sheetDocUrl" readonly>
+      </div>
+      <div class="fg">
+        <label>Connected Web App</label>
+        <input class="fi" type="text" id="sheetsUrl" readonly>
+      </div>
+    </div>
+    <div class="sync-url-row" style="margin-top:10px;">
+      <button class="fbtn sm" onclick="testSync()">🔄 Verify Connection</button>
+      <button class="fbtn sm" onclick="pullLiveData()">⬇️ Pull Live Data</button>
+      <button class="fbtn sm" onclick="window.open(APP_CONFIG.sheetUrl,'_blank')">📄 Open Sheet</button>
+      <button class="fbtn sm" onclick="window.open(APP_CONFIG.scriptUrl,'_blank')">🌐 Open Web App</button>
     </div>
     <div class="sync-status" id="syncStatus"></div>
   </div>
@@ -1625,33 +1634,220 @@ function buildLogTable(){
 }
 
 // ═══ GOOGLE SHEETS SYNC ═══
-let sheetsUrl=localStorage.getItem('apSheetsUrl')||'';
-function initSheetsInput(){const el=document.getElementById('sheetsUrl');if(el)el.value=sheetsUrl;}
-function saveSheetsUrl(){sheetsUrl=document.getElementById('sheetsUrl').value.trim();localStorage.setItem('apSheetsUrl',sheetsUrl);showSync('URL saved! Click Test to verify.','ok');}
-async function testSync(){
-  if(!sheetsUrl){showSync('Paste your Apps Script URL first.','err');return;}
-  showSync('Testing…','ok');
-  try{const r=await fetch(sheetsUrl+'?action=ping');const d=await r.json();if(d.ok)showSync('✓ Connected! Sheet is live. Click Pull Data to sync students.','ok');else showSync('Connected but unexpected: '+JSON.stringify(d),'err');}
-  catch(e){showSync('Failed. Check URL and deployment settings. Error: '+e.message,'err');}
+const APP_CONFIG = {
+  sheetId: '1llsHnCkLPU7mBB2ICt_vb6_aDiW1-Py1tYBpJjsJF1A',
+  trackerGid: '1986422992',
+  sheetUrl: 'https://docs.google.com/spreadsheets/d/1llsHnCkLPU7mBB2ICt_vb6_aDiW1-Py1tYBpJjsJF1A/edit?gid=1986422992#gid=1986422992',
+  scriptUrl: 'https://script.google.com/macros/s/AKfycbzxZg8siD6bTmHP50yhvoa52e3Oha2ArTN6DxH1src-cjOFrYQwJbPYWp5Ufc7m9rOTAQ/exec'
+};
+
+let sheetsUrl = APP_CONFIG.scriptUrl;
+
+function initSheetsInput(){
+  const urlEl = document.getElementById('sheetsUrl');
+  const sheetEl = document.getElementById('sheetDocUrl');
+  if(urlEl) urlEl.value = APP_CONFIG.scriptUrl;
+  if(sheetEl) sheetEl.value = APP_CONFIG.sheetUrl;
 }
-async function pullLiveData(){
-  if(!sheetsUrl){showSync('Save your URL first.','err');return;}
-  showSync('Pulling student data…','ok');
+
+async function autoConnectSheets(){
+  initSheetsInput();
+  await testSync(true);
+  await pullLiveData();
+}
+
+async function testSync(silent=false){
+  if(!sheetsUrl){
+    showSync('Apps Script URL is missing from APP_CONFIG.', 'err');
+    return false;
+  }
+  if(!silent) showSync('Verifying live connection…', 'ok');
   try{
-    const r=await fetch(sheetsUrl+'?action=students');const d=await r.json();
-    if(d.students){showSync(`✓ Refreshed! ${d.students.length} scholars loaded from live sheet.`,'ok');}
-    else showSync('No students found: '+JSON.stringify(d),'err');
-  }catch(e){showSync('Pull failed: '+e.message,'err');}
+    const r = await fetch(sheetsUrl + '?action=ping', {cache:'no-store'});
+    const d = await r.json();
+    if(d.ok){
+      showSync('✓ Connected to the live spreadsheet web app.', 'ok');
+      return true;
+    }
+    showSync('Connected, but the response was unexpected: ' + JSON.stringify(d), 'err');
+    return false;
+  } catch(e){
+    showSync('Connection failed. Check deployment access and URL. Error: ' + e.message, 'err');
+    return false;
+  }
 }
+
+function mapLiveStudent(row){
+  const fullName = String(
+    row._studentName || row['Student Name'] || row['Full Name'] || row['Name'] || row['Student'] || ''
+  ).trim();
+
+  const splitName = fullName ? fullName.split(/\s+/) : [];
+  const firstFromFull = splitName.length ? splitName[0] : '';
+  const lastFromFull = splitName.length > 1 ? splitName.slice(1).join(' ') : '';
+
+  const first = String(row['First Name'] || row['First'] || row.first || firstFromFull || '').trim();
+  const last  = String(row['Last Name'] || row['Last'] || row.last || lastFromFull || '').trim();
+  const house = String(row._house || row['House'] || row.house || '').trim();
+
+  return {
+    first,
+    last,
+    house,
+    block: String(row['Block'] || row['Class Block'] || row['Period'] || row.block || '—').trim() || '—',
+    wc: Number(row['Word Count'] || row['WC'] || row['Words'] || row.wc || 0) || 0,
+    intro: String(row['Introduction'] || row['Intro'] || row.intro || 'Incomplete - Not Started').trim(),
+    lit: String(row['Literature Review'] || row['Lit Review'] || row['Lit'] || row.lit || 'Incomplete - Not Started').trim(),
+    method: String(row['Method'] || row['Methods'] || row.method || 'Incomplete - Not Started').trim(),
+    results: String(row['Results'] || row.results || 'Incomplete - Not Started').trim(),
+    conclusion: String(row['Conclusion'] || row.conclusion || 'Incomplete - Not Started').trim(),
+    score: String(row['Projected Score'] || row['Score'] || row.score || 'Score of 1').trim(),
+    iep: ['true','yes','y'].includes(String(row['IEP'] || row['IEP/504'] || row.iep || '').toLowerCase().trim()),
+    support: String(row['Support'] || row['Intervention'] || row.support || 'No/Optional').trim()
+  };
+}
+
+function normalizePointEntry(e){
+  return {
+    date: e.Date || e.date || '',
+    house: e.House || e.house || '',
+    student: e.Student || e.student || '',
+    achievement: e.Achievement || e.achievement || '',
+    pts: Number(e.Points ?? e.points ?? e.pts ?? 0) || 0,
+    note: e.Note || e.note || '',
+    isBonus: ['yes','true'].includes(String(e.IsBonus ?? e.isBonus ?? '').toLowerCase())
+  };
+}
+
+function normalizeContactEntry(e){
+  return {
+    date: e.Date || e.date || '',
+    student: e.Student || e.student || '',
+    house: e.House || e.house || '',
+    type: e.Type || e.type || '',
+    note: e.Note || e.note || ''
+  };
+}
+
+function normalizeSprintEntry(e){
+  return {
+    date: e.Date || e.date || '',
+    house: e['Winning House'] || e.house || e['House'] || '',
+    points: Number(e.Points ?? e.points ?? 100) || 100
+  };
+}
+
+function rebuildDashboardFromLiveData(){
+  filterAwardStudents();
+  buildCupDisplay();
+  buildOverview();
+  buildRotw();
+  buildLogTable();
+  buildLeaderboard();
+  buildStreaks();
+  buildGoals();
+  buildRoster();
+  buildMastery();
+  buildBlocks();
+}
+
+async function pullLiveData(){
+  if(!await testSync(true)) return;
+
+  showSync('Pulling live data from Google Sheets…', 'ok');
+
+  try{
+    const [studentsRes, pointsRes, contactsRes, sprintsRes] = await Promise.allSettled([
+      fetch(sheetsUrl + '?action=students', {cache:'no-store'}).then(r => r.json()),
+      fetch(sheetsUrl + '?action=points', {cache:'no-store'}).then(r => r.json()),
+      fetch(sheetsUrl + '?action=contacts', {cache:'no-store'}).then(r => r.json()),
+      fetch(sheetsUrl + '?action=sprints', {cache:'no-store'}).then(r => r.json())
+    ]);
+
+    let loadedStudents = 0;
+
+    if(studentsRes.status === 'fulfilled' && Array.isArray(studentsRes.value.students)){
+      const liveStudents = studentsRes.value.students
+        .map(mapLiveStudent)
+        .filter(s => s.first || s.last || s.house);
+
+      if(liveStudents.length){
+        STUDENTS.length = 0;
+        STUDENTS.push(...liveStudents);
+        loadedStudents = liveStudents.length;
+      }
+    }
+
+    if(pointsRes.status === 'fulfilled' && Array.isArray(pointsRes.value.entries)){
+      ptsLog = pointsRes.value.entries.map(normalizePointEntry).filter(e => e.house || e.student || e.achievement);
+    }
+
+    if(contactsRes.status === 'fulfilled' && Array.isArray(contactsRes.value.entries)){
+      contactD = contactsRes.value.entries.map(normalizeContactEntry).filter(e => e.student || e.type || e.note);
+    }
+
+    if(sprintsRes.status === 'fulfilled' && Array.isArray(sprintsRes.value.entries)){
+      sprintD = pointsRes.status === 'fulfilled'
+        ? pointsRes.value.entries.filter(e => String(e.Achievement || e.achievement || '').toLowerCase().includes('felix felicis')).map(e => ({
+            date: e.Date || e.date || '',
+            house: e.House || e.house || '',
+            points: Number(e.Points ?? e.points ?? 100) || 100
+          }))
+        : sprintsRes.value.entries.map(normalizeSprintEntry).filter(e => e.date || e.house);
+    }
+
+    saveAll();
+    rebuildDashboardFromLiveData();
+
+    showSync(`✓ Live sync complete. Loaded ${loadedStudents || STUDENTS.length} scholars from the tracker tab and refreshed synced logs.`, 'ok');
+  } catch(e){
+    showSync('Pull failed: ' + e.message, 'err');
+  }
+}
+
 async function syncToSheets(entry){
   if(!sheetsUrl) return;
-  try{await fetch(sheetsUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'addPoints',...entry})});}catch(e){}
+  try{
+    await fetch(sheetsUrl, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        action:'addPoints',
+        house: entry.house,
+        student: entry.student,
+        achievement: entry.achievement,
+        points: entry.pts,
+        note: entry.note || '',
+        isBonus: !!entry.isBonus
+      })
+    });
+  }catch(e){}
 }
+
 async function syncContactToSheets(entry){
   if(!sheetsUrl) return;
-  try{await fetch(sheetsUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'addContact',...entry})});}catch(e){}
+  try{
+    await fetch(sheetsUrl, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        action:'addContact',
+        date: entry.date,
+        student: entry.student,
+        house: entry.house,
+        type: entry.type,
+        note: entry.note || ''
+      })
+    });
+  }catch(e){}
 }
-function showSync(msg,cls){const el=document.getElementById('syncStatus');el.textContent=msg;el.className='sync-status '+cls;}
+
+function showSync(msg,cls){
+  const el=document.getElementById('syncStatus');
+  if(!el) return;
+  el.textContent=msg;
+  el.className='sync-status '+cls;
+}
 function copyScript(){navigator.clipboard.writeText(document.getElementById('scriptBlock').textContent).then(()=>{const b=event.target;b.textContent='✓ Copied!';setTimeout(()=>b.textContent='📋 Copy Script',2000);});}
 
 // ═══ NAV ═══
@@ -1683,7 +1879,7 @@ function show(id,btn){
 window.addEventListener('DOMContentLoaded',()=>{
   initStars();initCountdown();
   buildCupDisplay();buildOverview();buildRotw();buildLogTable();
-  initSheetsInput();
+  autoConnectSheets();
   document.getElementById('aDate').value=new Date().toISOString().split('T')[0];
   document.getElementById('sprintDate').value=new Date().toISOString().split('T')[0];
   document.getElementById('contactDate').value=new Date().toISOString().split('T')[0];
