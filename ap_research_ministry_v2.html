@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ministry of Research — AP Research 2025–26</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --obama:#1565c0;--obama-l:#4fc3f7;--obama-d:#0d2a4d;--obama-g:rgba(79,195,247,.2);
+  --morrison:#2e7d32;--morrison-l:#a5d6a7;--morrison-d:#0a2e0c;--morrison-g:rgba(165,214,167,.2);
+  --clemente:#b71c1c;--clemente-l:#ef9a9a;--clemente-d:#4a0000;--clemente-g:rgba(239,154,154,.2);
+  --sotomayor:#4a148c;--sotomayor-l:#ce93d8;--sotomayor-d:#1a0033;--sotomayor-g:rgba(206,147,216,.2);
+  --gold:#d4a843;--gold-l:#f0cc6a;--gold-d:#8a6c28;
+  --parch:#f2e8d0;--ink:#100c06;--ash:#1e1810;--smoke:#2e2618;--mist:#7a6e5e;
+  --green-ok:#52c788;--yellow-warn:#f0cc6a;--red-danger:#ef5350;--blue-info:#4fc3f7;
+}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Crimson Pro',serif;background:var(--ink);color:var(--parch);min-height:100vh;overflow-x:hidden;}
+.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 120% 80% at 50% -5%,#1a1530,var(--ink) 60%),radial-gradient(ellipse 60% 50% at 85% 85%,#0d1a0a,transparent);}
+.stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle linear infinite;}
+@keyframes twinkle{0%,100%{opacity:.1;}50%{opacity:.8;}}
+
+/* HEADER */
+header{position:relative;z-index:10;text-align:center;padding:36px 20px 18px;border-bottom:1px solid rgba(212,168,67,.15);}
+.header-crest{font-size:56px;display:block;animation:glow 4s ease-in-out infinite;line-height:1;margin-bottom:8px;}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 8px rgba(212,168,67,.4));}50%{filter:drop-shadow(0 0 28px rgba(212,168,67,.9));}}
+h1{font-family:'Cinzel',serif;font-size:clamp(18px,4vw,38px);font-weight:900;letter-spacing:.12em;background:linear-gradient(135deg,var(--gold-l),var(--gold) 45%,#9c6d20);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px;}
+.tagline{font-family:'IM Fell English',serif;font-size:12px;letter-spacing:.08em;color:var(--mist);font-style:italic;}
+.house-badges{display:flex;align-items:center;gap:8px;justify-content:center;margin:12px 0 0;flex-wrap:wrap;}
+.hbadge{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.1em;padding:3px 10px;border-radius:12px;}
+.hbadge.obama{background:rgba(21,101,192,.2);color:var(--obama-l);border:1px solid rgba(79,195,247,.3);}
+.hbadge.morrison{background:rgba(46,125,50,.2);color:var(--morrison-l);border:1px solid rgba(165,214,167,.3);}
+.hbadge.clemente{background:rgba(183,28,28,.2);color:var(--clemente-l);border:1px solid rgba(239,154,154,.3);}
+.hbadge.sotomayor{background:rgba(74,20,140,.2);color:var(--sotomayor-l);border:1px solid rgba(206,147,216,.3);}
+
+/* COUNTDOWN */
+.countdown-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:16px;flex-wrap:wrap;}
+.cd-block{text-align:center;padding:10px 18px;border-radius:10px;min-width:110px;}
+.cd-block.defense{background:rgba(21,101,192,.12);border:1px solid rgba(79,195,247,.25);}
+.cd-block.gala{background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.35);position:relative;}
+.cd-block.gala::before{content:'★ ORDER OF THE PHOENIX ★';position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:7px;letter-spacing:.1em;color:var(--gold);background:var(--ink);padding:0 6px;white-space:nowrap;}
+.cd-block.submission{background:rgba(74,20,140,.15);border:1px solid rgba(206,147,216,.3);position:relative;}
+.cd-block.submission::before{content:'⚡ UNBREAKABLE VOW ⚡';position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:7px;letter-spacing:.1em;color:var(--sotomayor-l);background:var(--ink);padding:0 6px;white-space:nowrap;}
+.cd-label{font-family:'Cinzel',serif;font-size:7px;letter-spacing:.12em;opacity:.5;text-transform:uppercase;margin-bottom:2px;}
+.cd-date{font-size:9px;opacity:.4;margin-bottom:2px;}
+.cd-days{font-size:34px;font-weight:900;font-family:'Cinzel',serif;color:var(--gold);line-height:1;}
+.cd-block.defense .cd-days{color:var(--obama-l);}
+.cd-block.submission .cd-days{color:var(--sotomayor-l);}
+.cd-sub{font-size:8px;opacity:.4;letter-spacing:.05em;margin-top:1px;}
+.cd-sep{font-size:20px;opacity:.2;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(16,12,6,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(212,168,67,.1);display:flex;justify-content:center;gap:2px;padding:5px 8px;flex-wrap:wrap;}
+.tab{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.07em;padding:5px 11px;border:1px solid rgba(212,168,67,.15);background:transparent;color:var(--mist);cursor:pointer;border-radius:3px;transition:all .18s;text-transform:uppercase;white-space:nowrap;}
+.tab:hover{color:var(--gold-l);border-color:rgba(212,168,67,.4);}
+.tab.active{background:rgba(212,168,67,.15);color:var(--gold-l);border-color:var(--gold);font-weight:700;}
+.tab.obama.active{background:rgba(21,101,192,.25);color:var(--obama-l);border-color:var(--obama-l);}
+.tab.morrison.active{background:rgba(46,125,50,.25);color:var(--morrison-l);border-color:var(--morrison-l);}
+.tab.clemente.active{background:rgba(183,28,28,.25);color:var(--clemente-l);border-color:var(--clemente-l);}
+.tab.sotomayor.active{background:rgba(74,20,140,.25);color:var(--sotomayor-l);border-color:var(--sotomayor-l);}
+.nav-group{display:flex;gap:2px;align-items:center;padding:0 4px;border-right:1px solid rgba(212,168,67,.1);}
+.nav-group:last-child{border-right:none;}
+.nav-label{font-size:7px;letter-spacing:.1em;opacity:.3;text-transform:uppercase;padding:0 4px;}
+
+/* MAIN */
+main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12px 80px;}
+.section{display:none;animation:fade-in .3s ease;}.section.visible{display:block;}
+@keyframes fade-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sec-head{font-family:'Cinzel',serif;font-size:16px;letter-spacing:.1em;color:var(--gold);margin-bottom:18px;padding-bottom:8px;border-bottom:1px solid rgba(212,168,67,.18);display:flex;align-items:center;gap:8px;}
+.sec-head-sm{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.08em;color:var(--gold-l);margin-bottom:12px;margin-top:22px;display:flex;align-items:center;gap:7px;}
+
+/* CARDS */
+.card{background:rgba(34,28,18,.85);border:1px solid rgba(212,168,67,.12);border-radius:10px;padding:16px 18px;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:22px;}
+.stat-card{background:rgba(34,28,18,.8);border:1px solid rgba(212,168,67,.12);border-radius:8px;padding:14px 16px;text-align:center;transition:border-color .2s;}
+.stat-card:hover{border-color:rgba(212,168,67,.3);}
+.stat-num{font-family:'Cinzel',serif;font-size:28px;font-weight:700;color:var(--gold-l);line-height:1;}
+.stat-lbl{font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.45;margin-top:4px;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:14px;}
+@media(max-width:700px){.two-col,.three-col{grid-template-columns:1fr;}}
+.tip-box{background:rgba(212,168,67,.07);border:1px solid rgba(212,168,67,.18);border-radius:8px;padding:10px 14px;font-size:11px;opacity:.8;margin-bottom:14px;font-style:italic;}
+.alert-banner{background:rgba(183,28,28,.15);border:1px solid rgba(183,28,28,.35);border-radius:8px;padding:9px 14px;font-size:11px;color:var(--clemente-l);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.divider{border:none;border-top:1px solid rgba(212,168,67,.1);margin:18px 0;}
+
+/* HOUSE CUP DISPLAY */
+.cup-display{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:22px;}
+.cup-card{flex:1;min-width:160px;border-radius:12px;padding:18px;text-align:center;position:relative;overflow:hidden;}
+.cup-card.obama{background:linear-gradient(160deg,var(--obama-d),rgba(21,101,192,.2));border:1px solid rgba(79,195,247,.3);}
+.cup-card.morrison{background:linear-gradient(160deg,var(--morrison-d),rgba(46,125,50,.2));border:1px solid rgba(165,214,167,.3);}
+.cup-card.clemente{background:linear-gradient(160deg,var(--clemente-d),rgba(183,28,28,.2));border:1px solid rgba(239,154,154,.3);}
+.cup-card.sotomayor{background:linear-gradient(160deg,var(--sotomayor-d),rgba(74,20,140,.2));border:1px solid rgba(206,147,216,.3);}
+.cup-rank{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.14em;opacity:.5;margin-bottom:3px;}
+.cup-icon{font-size:28px;margin-bottom:5px;}
+.cup-house{font-family:'Cinzel',serif;font-size:13px;font-weight:700;letter-spacing:.1em;margin-bottom:1px;}
+.cup-hp{font-size:9px;opacity:.4;font-style:italic;margin-bottom:8px;}
+.cup-pts{font-family:'Cinzel',serif;font-size:38px;font-weight:900;line-height:1;}
+.cup-pts-lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;opacity:.35;margin-top:2px;}
+.cup-leading{position:absolute;top:8px;right:8px;font-size:7px;padding:2px 7px;border-radius:8px;background:rgba(212,168,67,.2);color:var(--gold);border:1px solid rgba(212,168,67,.3);}
+.pts-bar-wrap{margin-bottom:16px;}
+.pts-bar-label{display:flex;justify-content:space-between;font-size:9px;opacity:.5;margin-bottom:3px;}
+.pts-bar-track{background:rgba(0,0,0,.3);border-radius:3px;height:7px;overflow:hidden;}
+.pts-bar-fill{height:100%;border-radius:3px;transition:width .7s ease;}
+.pts-bar-fill.obama{background:linear-gradient(90deg,var(--obama),var(--obama-l));}
+.pts-bar-fill.morrison{background:linear-gradient(90deg,var(--morrison),var(--morrison-l));}
+.pts-bar-fill.clemente{background:linear-gradient(90deg,var(--clemente),var(--clemente-l));}
+.pts-bar-fill.sotomayor{background:linear-gradient(90deg,var(--sotomayor),var(--sotomayor-l));}
+
+/* STUDENT CARDS */
+.student-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:9px;}
+.sc{background:rgba(28,22,14,.9);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:11px 13px;transition:border-color .2s,transform .15s;cursor:pointer;}
+.sc:hover{border-color:rgba(212,168,67,.25);transform:translateY(-1px);}
+.sc.obama{border-left:3px solid var(--obama);}
+.sc.morrison{border-left:3px solid var(--morrison);}
+.sc.clemente{border-left:3px solid var(--clemente);}
+.sc.sotomayor{border-left:3px solid var(--sotomayor);}
+.sc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.sc-name{font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:.04em;}
+.sc-badge{font-size:8px;padding:2px 6px;border-radius:8px;letter-spacing:.06em;}
+.sc-badge.obama{background:rgba(21,101,192,.2);color:var(--obama-l);}
+.sc-badge.morrison{background:rgba(46,125,50,.2);color:var(--morrison-l);}
+.sc-badge.clemente{background:rgba(183,28,28,.2);color:var(--clemente-l);}
+.sc-badge.sotomayor{background:rgba(74,20,140,.2);color:var(--sotomayor-l);}
+.sc-danger{background:rgba(183,28,28,.2);color:var(--clemente-l);font-size:7px;padding:2px 6px;border-radius:3px;border:1px solid rgba(183,28,28,.3);}
+.sc-wc{font-size:9px;opacity:.45;margin-bottom:6px;}
+.sc-secs{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-bottom:6px;}
+.sc-sec{height:5px;border-radius:2px;}
+.sc-sec.done{background:var(--green-ok);opacity:.8;}
+.sc-sec.rev{background:var(--gold);opacity:.7;}
+.sc-sec.started{background:var(--obama-l);opacity:.6;}
+.sc-sec.part{background:rgba(212,168,67,.4);}
+.sc-sec.ns{background:rgba(255,255,255,.1);}
+.sc-foot{display:flex;justify-content:space-between;font-size:9px;}
+.sc-score{opacity:.55;}
+.sc-pts-disp{font-family:'Cinzel',serif;font-size:10px;color:var(--gold);}
+
+/* TABLES */
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.1em;padding:7px 9px;text-align:left;border-bottom:1px solid rgba(212,168,67,.18);opacity:.55;}
+.tbl td{padding:7px 9px;border-bottom:1px solid rgba(255,255,255,.04);}
+.tbl tr:hover td{background:rgba(212,168,67,.04);}
+.tbl .pts{font-family:'Cinzel',serif;font-size:10px;font-weight:700;color:var(--gold);}
+.tbl .pill{font-size:9px;padding:2px 7px;border-radius:3px;background:rgba(212,168,67,.1);color:var(--gold);border:1px solid rgba(212,168,67,.2);}
+.tbl .pill.bonus{background:rgba(206,147,216,.1);color:var(--sotomayor-l);border-color:rgba(206,147,216,.2);}
+.hp{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;vertical-align:middle;}
+.hp.obama{background:var(--obama-l);}
+.hp.morrison{background:var(--morrison-l);}
+.hp.clemente{background:var(--clemente-l);}
+.hp.sotomayor{background:var(--sotomayor-l);}
+
+/* FORMS */
+.fg{display:flex;flex-direction:column;gap:4px;}
+.fg label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.1em;opacity:.5;text-transform:uppercase;}
+.fi,.fs{background:rgba(0,0,0,.35);border:1px solid rgba(212,168,67,.2);border-radius:5px;padding:7px 11px;color:var(--parch);font-family:'Crimson Pro',serif;font-size:12px;outline:none;width:100%;}
+.fi:focus,.fs:focus{border-color:rgba(212,168,67,.5);}
+.fs option{background:#1e1810;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.form-grid .full{grid-column:1/-1;}
+.fbtn{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.08em;padding:9px 20px;border-radius:5px;border:1px solid var(--gold);background:rgba(212,168,67,.15);color:var(--gold-l);cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.fbtn:hover{background:rgba(212,168,67,.3);}
+.fbtn.sm{padding:5px 12px;font-size:9px;}
+.fbtn.danger{border-color:var(--red-danger);background:rgba(239,83,80,.12);color:var(--red-danger);}
+.success-msg{display:none;font-family:'Cinzel',serif;font-size:10px;color:var(--green-ok);padding:5px 10px;border-radius:4px;background:rgba(82,199,136,.12);border:1px solid rgba(82,199,136,.3);margin-top:6px;}
+
+/* FILTER BTNS */
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.fbtn-sm{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.07em;padding:3px 10px;border-radius:5px;border:1px solid rgba(212,168,67,.2);background:transparent;color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;}
+.fbtn-sm:hover{color:var(--gold-l);}
+.fbtn-sm.active{background:rgba(212,168,67,.15);color:var(--gold-l);border-color:var(--gold);}
+.fbtn-sm.obama.active{background:rgba(21,101,192,.2);color:var(--obama-l);border-color:var(--obama-l);}
+.fbtn-sm.morrison.active{background:rgba(46,125,50,.2);color:var(--morrison-l);border-color:var(--morrison-l);}
+.fbtn-sm.clemente.active{background:rgba(183,28,28,.2);color:var(--clemente-l);border-color:var(--clemente-l);}
+.fbtn-sm.sotomayor.active{background:rgba(74,20,140,.2);color:var(--sotomayor-l);border-color:var(--sotomayor-l);}
+
+/* LEGEND */
+.legend-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px;font-size:9px;}
+.legend-item{display:flex;align-items:center;gap:4px;opacity:.6;}
+.ldot{width:9px;height:9px;border-radius:2px;}
+.ldot.done{background:var(--green-ok);}
+.ldot.rev{background:var(--gold);}
+.ldot.part{background:rgba(212,168,67,.5);}
+.ldot.started{background:var(--obama-l);}
+.ldot.ns{background:rgba(255,255,255,.15);}
+
+/* PROGRESS TRACKER */
+.progress-ring-wrap{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;}
+.ring-label{font-family:'Cinzel',serif;font-size:9px;opacity:.5;letter-spacing:.08em;}
+.house-progress-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:20px;}
+.house-prog-card{border-radius:10px;padding:16px 18px;}
+.house-prog-card.obama{background:linear-gradient(135deg,var(--obama-d),rgba(21,101,192,.15));border:1px solid rgba(79,195,247,.25);}
+.house-prog-card.morrison{background:linear-gradient(135deg,var(--morrison-d),rgba(46,125,50,.15));border:1px solid rgba(165,214,167,.25);}
+.house-prog-card.clemente{background:linear-gradient(135deg,var(--clemente-d),rgba(183,28,28,.15));border:1px solid rgba(239,154,154,.25);}
+.house-prog-card.sotomayor{background:linear-gradient(135deg,var(--sotomayor-d),rgba(74,20,140,.15));border:1px solid rgba(206,147,216,.25);}
+.hpc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.hpc-name{font-family:'Cinzel',serif;font-size:13px;font-weight:700;letter-spacing:.08em;}
+.hpc-pts{font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:var(--gold);}
+.sec-bar{margin-bottom:7px;}
+.sec-bar-label{display:flex;justify-content:space-between;font-size:9px;opacity:.55;margin-bottom:2px;}
+.sec-bar-track{background:rgba(0,0,0,.3);border-radius:2px;height:5px;overflow:hidden;}
+.sec-bar-fill{height:100%;border-radius:2px;}
+.sec-bar-fill.done{background:var(--green-ok);}
+.sec-bar-fill.partial{background:var(--gold);}
+
+/* ROAD TO MINISTRY */
+.road-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;}
+@media(max-width:700px){.road-grid{grid-template-columns:repeat(2,1fr);}}
+.road-stop{background:rgba(34,28,18,.85);border:1px solid rgba(212,168,67,.12);border-radius:10px;padding:14px;text-align:center;transition:border-color .2s;}
+.road-stop.zone-active{border-color:rgba(212,168,67,.45);box-shadow:0 0 18px rgba(212,168,67,.08);}
+.road-icon{font-size:30px;display:block;margin-bottom:6px;}
+.road-name{font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--gold-l);margin-bottom:2px;}
+.road-phase{font-size:8px;letter-spacing:.1em;text-transform:uppercase;opacity:.35;margin-bottom:8px;}
+.road-num{font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:var(--gold);margin-bottom:2px;}
+.road-bar-t{background:rgba(0,0,0,.3);border-radius:2px;height:5px;overflow:hidden;}
+.road-bar-f{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold-d),var(--gold));}
+.road-lbl{font-size:8px;opacity:.35;margin-top:4px;}
+
+/* QUEST / CHI TRACKER */
+.quest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:18px;}
+.quest-card{background:rgba(34,28,18,.85);border:1px solid rgba(212,168,67,.12);border-radius:10px;padding:14px;display:flex;gap:12px;}
+.quest-icon{font-size:28px;min-width:36px;text-align:center;}
+.quest-info{flex:1;}
+.quest-name{font-family:'Cinzel',serif;font-size:11px;color:var(--gold-l);margin-bottom:3px;}
+.quest-desc{font-size:10px;opacity:.55;line-height:1.5;}
+.quest-pts{font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--gold);}
+.quest-type{display:inline-block;font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.05em;margin-top:4px;}
+.qt-core{background:rgba(212,168,67,.15);color:var(--gold);border:1px solid rgba(212,168,67,.25);}
+.qt-bonus{background:rgba(206,147,216,.12);color:var(--sotomayor-l);border:1px solid rgba(206,147,216,.25);}
+.qt-perk{background:rgba(82,199,136,.12);color:var(--green-ok);border:1px solid rgba(82,199,136,.25);}
+
+/* EXIT TICKETS / MASTERY */
+.mastery-filters{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
+.mastery-card{background:rgba(28,22,14,.9);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:5px;}
+.mastery-card.proficient{border-color:rgba(82,199,136,.4);background:rgba(82,199,136,.04);}
+.mastery-card.approaching{border-color:rgba(212,168,67,.35);background:rgba(212,168,67,.04);}
+.mastery-card.emerging{border-color:rgba(239,83,80,.4);background:rgba(239,83,80,.04);}
+.mastery-name{font-size:11px;font-weight:700;}
+.mastery-sub{font-size:9px;opacity:.4;}
+.mastery-btns{display:flex;gap:4px;margin-top:3px;}
+.mbtn{flex:1;padding:3px 5px;border-radius:5px;border:1px solid;font-size:9px;cursor:pointer;font-weight:600;transition:all .15s;text-align:center;}
+.mbtn.prof{border-color:rgba(82,199,136,.4);color:var(--green-ok);background:transparent;}
+.mbtn.prof.sel,.mbtn.prof:hover{background:rgba(82,199,136,.18);}
+.mbtn.appr{border-color:rgba(212,168,67,.4);color:var(--gold);background:transparent;}
+.mbtn.appr.sel,.mbtn.appr:hover{background:rgba(212,168,67,.12);}
+.mbtn.emrg{border-color:rgba(239,83,80,.4);color:#ef5350;background:transparent;}
+.mbtn.emrg.sel,.mbtn.emrg:hover{background:rgba(239,83,80,.1);}
+.mastery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;}
+
+/* STREAKS */
+.streak-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-bottom:18px;}
+.streak-card{background:rgba(34,28,18,.85);border:1px solid rgba(212,168,67,.12);border-radius:10px;padding:13px 15px;display:flex;align-items:center;gap:12px;}
+.streak-icon{font-size:26px;min-width:34px;text-align:center;}
+.streak-info{flex:1;}
+.streak-name{font-family:'Cinzel',serif;font-size:11px;color:var(--gold-l);margin-bottom:2px;}
+.streak-desc{font-size:10px;opacity:.55;line-height:1.4;}
+.streak-val{font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--gold);white-space:nowrap;}
+
+/* LEADERBOARD */
+.lb-row{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:6px;background:rgba(28,22,14,.7);border:1px solid rgba(255,255,255,.05);margin-bottom:5px;transition:border-color .15s;}
+.lb-row:hover{border-color:rgba(212,168,67,.2);}
+.lb-rank{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:var(--gold-l);min-width:24px;text-align:center;}
+.lb-rank.gold{color:#ffd700;text-shadow:0 0 8px #ffd700;}
+.lb-rank.silver{color:#c0c0c0;}
+.lb-rank.bronze{color:#cd7f32;}
+.lb-name{flex:1;font-size:12px;font-weight:600;}
+.lb-house-pip{font-size:9px;padding:1px 6px;border-radius:8px;opacity:.7;}
+.lb-pts{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--gold);}
+.lb-delta{font-size:9px;opacity:.4;}
+
+/* ROTW */
+.rotw-card{background:linear-gradient(135deg,rgba(212,168,67,.1),rgba(212,168,67,.04));border:1px solid rgba(212,168,67,.3);border-radius:12px;padding:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:20px;}
+.rotw-icon{font-size:50px;}
+.rotw-info{flex:1;}
+.rotw-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.16em;opacity:.45;text-transform:uppercase;margin-bottom:3px;}
+.rotw-name{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:var(--gold-l);margin-bottom:2px;}
+.rotw-house{font-size:11px;opacity:.55;margin-bottom:6px;}
+.rotw-pts{font-family:'Cinzel',serif;font-size:16px;color:var(--gold);}
+.rotw-empty{font-family:'IM Fell English',serif;font-style:italic;opacity:.35;font-size:13px;}
+
+/* GOAL CARDS */
+.goal-card{background:rgba(34,28,18,.85);border:1px solid rgba(212,168,67,.12);border-radius:10px;padding:14px 16px;}
+.goal-title{font-family:'Cinzel',serif;font-size:11px;color:var(--gold-l);margin-bottom:8px;}
+.goal-bar-track{background:rgba(0,0,0,.3);border-radius:4px;height:10px;overflow:hidden;margin-bottom:5px;}
+.goal-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .8s ease;}
+.goal-nums{display:flex;justify-content:space-between;font-size:9px;opacity:.5;}
+.goal-status{font-size:9px;margin-top:4px;font-style:italic;opacity:.55;}
+
+/* SYNC PANEL */
+.sync-panel{background:rgba(34,28,18,.8);border:1px solid rgba(212,168,67,.12);border-radius:10px;padding:18px;margin-bottom:18px;}
+.sync-panel h3{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.1em;color:var(--gold);margin-bottom:10px;}
+.sync-info{font-size:11px;opacity:.6;line-height:1.7;margin-bottom:12px;}
+.sync-url-row{display:flex;gap:7px;align-items:center;margin-bottom:8px;}
+.sync-url-input{flex:1;background:rgba(0,0,0,.35);border:1px solid rgba(212,168,67,.2);border-radius:5px;padding:7px 11px;color:var(--parch);font-size:11px;outline:none;}
+.sync-url-input:focus{border-color:rgba(212,168,67,.5);}
+.sync-status{font-size:10px;padding:5px 10px;border-radius:4px;margin-top:6px;display:none;}
+.sync-status.ok{background:rgba(46,125,50,.15);color:var(--morrison-l);border:1px solid rgba(46,125,50,.3);display:block;}
+.sync-status.err{background:rgba(183,28,28,.15);color:var(--clemente-l);border:1px solid rgba(183,28,28,.3);display:block;}
+.code-block{background:rgba(0,0,0,.45);border:1px solid rgba(212,168,67,.1);border-radius:6px;padding:12px;font-family:monospace;font-size:10px;opacity:.7;white-space:pre-wrap;line-height:1.6;overflow-x:auto;max-height:300px;overflow-y:auto;}
+.inst-list{font-size:11px;opacity:.6;line-height:2.1;list-style:none;counter-reset:inst;}
+.inst-list li{counter-increment:inst;padding-left:22px;position:relative;}
+.inst-list li::before{content:counter(inst)'.';position:absolute;left:0;color:var(--gold);font-family:'Cinzel',serif;font-size:10px;}
+
+/* SCORE DISTRIBUTION */
+.score-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.score-bar-label{font-family:'Cinzel',serif;font-size:10px;min-width:52px;}
+.score-bar-track{flex:1;background:rgba(0,0,0,.3);border-radius:3px;height:16px;overflow:hidden;}
+.score-bar-fill{height:100%;border-radius:3px;display:flex;align-items:center;padding-left:6px;font-size:9px;font-weight:700;transition:width .6s ease;}
+.score-bar-fill.s5{background:linear-gradient(90deg,#4a148c,#ce93d8);}
+.score-bar-fill.s4{background:linear-gradient(90deg,#1565c0,#4fc3f7);}
+.score-bar-fill.s3{background:linear-gradient(90deg,#2e7d32,#a5d6a7);}
+.score-bar-fill.s2{background:linear-gradient(90deg,#e65100,#ffcc80);}
+.score-bar-fill.s1{background:linear-gradient(90deg,#4e342e,#a1887f);}
+.score-bar-fill.sd{background:linear-gradient(90deg,#b71c1c,#ef9a9a);}
+.score-count{font-size:10px;opacity:.5;min-width:24px;text-align:right;}
+
+/* BLOCK TRACKER */
+.block-card{background:rgba(34,28,18,.85);border:1px solid rgba(212,168,67,.12);border-radius:10px;padding:14px 16px;margin-bottom:14px;}
+.block-title{font-family:'Cinzel',serif;font-size:12px;color:var(--gold-l);margin-bottom:10px;}
+.block-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;}
+
+/* MODAL */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;}
+.modal-backdrop.open{display:flex;}
+.modal{background:#1a1410;border:1px solid rgba(212,168,67,.25);border-radius:14px;padding:24px;max-width:500px;width:90%;max-height:80vh;overflow-y:auto;position:relative;}
+.modal-close{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--mist);font-size:20px;cursor:pointer;}
+.modal-title{font-family:'Cinzel',serif;font-size:16px;color:var(--gold-l);margin-bottom:16px;}
+
+/* MISC */
+.empty-state{text-align:center;padding:32px;opacity:.3;font-family:'IM Fell English',serif;font-style:italic;font-size:13px;}
+.badge-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
+.badge{font-size:8px;padding:2px 7px;border-radius:3px;font-weight:700;letter-spacing:.05em;}
+.badge.gold{background:rgba(212,168,67,.2);color:var(--gold);border:1px solid rgba(212,168,67,.3);}
+.badge.green{background:rgba(82,199,136,.15);color:var(--green-ok);border:1px solid rgba(82,199,136,.25);}
+.badge.red{background:rgba(239,83,80,.15);color:#ef5350;border:1px solid rgba(239,83,80,.25);}
+.badge.blue{background:rgba(79,195,247,.15);color:var(--obama-l);border:1px solid rgba(79,195,247,.25);}
+.badge.purple{background:rgba(206,147,216,.15);color:var(--sotomayor-l);border:1px solid rgba(206,147,216,.25);}
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="stars" id="sf"></div>
+
+<header>
+  <span class="header-crest">⚡</span>
+  <h1>The Ministry of Research</h1>
+  <div class="tagline">AP Research House Cup · Class of 2026 · Dream Academy</div>
+  <div class="house-badges">
+    <span class="hbadge obama">🦅 House Obama · Ravenclaw</span>
+    <span class="hbadge morrison">🐍 House Morrison · Slytherin</span>
+    <span class="hbadge clemente">🦁 House Clemente · Gryffindor</span>
+    <span class="hbadge sotomayor">🦡 House Sotomayor · Hufflepuff</span>
+  </div>
+  <div class="countdown-row">
+    <div class="cd-block defense"><div class="cd-label">POD — Great Hall</div><div class="cd-date" id="cdDDate"></div><div class="cd-days" id="cdDDays">—</div><div class="cd-sub">days</div></div>
+    <div class="cd-sep">✦</div>
+    <div class="cd-block gala"><div class="cd-label">Early Gala</div><div class="cd-date" id="cdGDate"></div><div class="cd-days" id="cdGDays">—</div><div class="cd-sub">days</div></div>
+    <div class="cd-sep">✦</div>
+    <div class="cd-block submission"><div class="cd-label">CB Submission</div><div class="cd-date" id="cdSDate"></div><div class="cd-days" id="cdSDays">—</div><div class="cd-sub">days</div></div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-group">
+    <span class="nav-label">🏰</span>
+    <button class="tab active" onclick="show('overview',this)">Overview</button>
+    <button class="tab" onclick="show('cup',this)">🏆 Cup</button>
+    <button class="tab" onclick="show('leaderboard',this)">🥇 Board</button>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">Houses</span>
+    <button class="tab obama" onclick="show('h-obama',this)">🦅 Obama</button>
+    <button class="tab morrison" onclick="show('h-morrison',this)">🐍 Morrison</button>
+    <button class="tab clemente" onclick="show('h-clemente',this)">🦁 Clemente</button>
+    <button class="tab sotomayor" onclick="show('h-sotomayor',this)">🦡 Sotomayor</button>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">📊 Track</span>
+    <button class="tab" onclick="show('progress',this)">Progress</button>
+    <button class="tab" onclick="show('road',this)">Road Map</button>
+    <button class="tab" onclick="show('mastery',this)">Mastery</button>
+    <button class="tab" onclick="show('blocks',this)">Blocks</button>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">✨ Game</span>
+    <button class="tab" onclick="show('quests',this)">Quests</button>
+    <button class="tab" onclick="show('streaks',this)">Streaks</button>
+    <button class="tab" onclick="show('goals',this)">Goals</button>
+    <button class="tab" onclick="show('roster',this)">Roster</button>
+  </div>
+  <div class="nav-group">
+    <span class="nav-label">⚙️</span>
+    <button class="tab" onclick="show('award',this)">Award Pts</button>
+    <button class="tab" onclick="show('sheets',this)">Sheets</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════ OVERVIEW ══════════ -->
+<div class="section visible" id="sec-overview">
+  <div class="sec-head">🏰 The Great Hall — House Standings</div>
+  <div class="cup-display" id="cupDisplay"></div>
+  <div class="sec-head-sm">🏅 Researcher of the Week <span style="font-size:10px;font-weight:400;opacity:.5;margin-left:8px;">(+250 pts to House)</span></div>
+  <div class="rotw-card" id="rotwCard"></div>
+  <div class="sec-head-sm">📊 Class at a Glance</div>
+  <div class="stats-grid" id="overviewStats"></div>
+  <div class="sec-head-sm">📈 AP Score Projection</div>
+  <div class="card" id="scoreDistCard"></div>
+  <div id="dangerAlert"></div>
+</div>
+
+<!-- ══════════ CUP ══════════ -->
+<div class="section" id="sec-cup">
+  <div class="sec-head">🏆 House Cup — Points Log</div>
+  <div id="cupBarsWrap" style="margin-bottom:18px;"></div>
+  <div class="card"><table class="tbl"><thead><tr><th>Date</th><th>House</th><th>Scholar / Award</th><th>Achievement</th><th>Points</th></tr></thead><tbody id="logBody"><tr><td colspan="5" class="empty-state">No points yet — use Award Points tab!</td></tr></tbody></table></div>
+</div>
+
+<!-- ══════════ LEADERBOARD ══════════ -->
+<div class="section" id="sec-leaderboard">
+  <div class="sec-head">🥇 Scholar Leaderboard</div>
+  <div class="tip-box">Individual scholar points (awarded when specific students earn achievements) displayed here. House total = sum of all member points awarded to the house.</div>
+  <div class="filters">
+    <button class="fbtn-sm active" onclick="filterLB('all',this)">All Houses</button>
+    <button class="fbtn-sm obama" onclick="filterLB('Obama',this)">🦅 Obama</button>
+    <button class="fbtn-sm morrison" onclick="filterLB('Morrison',this)">🐍 Morrison</button>
+    <button class="fbtn-sm clemente" onclick="filterLB('Clemente',this)">🦁 Clemente</button>
+    <button class="fbtn-sm sotomayor" onclick="filterLB('Sotomayor',this)">🦡 Sotomayor</button>
+  </div>
+  <div id="lbList"></div>
+</div>
+
+<!-- ══════════ HOUSE PAGES ══════════ -->
+<div class="section" id="sec-h-obama"><div id="h-obama-inner"></div></div>
+<div class="section" id="sec-h-morrison"><div id="h-morrison-inner"></div></div>
+<div class="section" id="sec-h-clemente"><div id="h-clemente-inner"></div></div>
+<div class="section" id="sec-h-sotomayor"><div id="h-sotomayor-inner"></div></div>
+
+<!-- ══════════ PROGRESS TRACKER ══════════ -->
+<div class="section" id="sec-progress">
+  <div class="sec-head">📈 Research Progress Tracker</div>
+  <div class="tip-box">Track where each house stands across the 5 paper sections. Each bar shows % of house with that section fully completed.</div>
+  <div class="house-progress-grid" id="houseProgressGrid"></div>
+  <div class="sec-head-sm">📝 Section Completion — All Classes</div>
+  <div class="card" id="sectionSummary"></div>
+  <div class="sec-head-sm">📊 Word Count Progress</div>
+  <div class="stats-grid" id="wordStats"></div>
+</div>
+
+<!-- ══════════ ROAD TO MINISTRY ══════════ -->
+<div class="section" id="sec-road">
+  <div class="sec-head">🗺️ The Road to the Ministry</div>
+  <div class="tip-box">The five great stations of the research journey — from the Forbidden Forest to the Ministry of Magic itself.</div>
+  <div class="road-grid" id="roadGrid"></div>
+  <div class="sec-head-sm">📅 Key Milestones Remaining</div>
+  <div class="card" id="milestonesCard"></div>
+</div>
+
+<!-- ══════════ MASTERY / EXIT TICKETS ══════════ -->
+<div class="section" id="sec-mastery">
+  <div class="sec-head">🧪 Mastery Tracker — Exit Tickets</div>
+  <div class="tip-box">Track where scholars stand on each QUEST skill area. Click Proficient / Approaching / Emerging to log mastery per scholar. Data saves locally.</div>
+  <div class="filters" id="masterySkillFilter">
+    <button class="fbtn-sm active" onclick="filterMastery('all',this)">All</button>
+    <button class="fbtn-sm" onclick="filterMastery('Question',this)">Q — Question</button>
+    <button class="fbtn-sm" onclick="filterMastery('Understand',this)">U — Understand</button>
+    <button class="fbtn-sm" onclick="filterMastery('Evaluate',this)">E — Evaluate</button>
+    <button class="fbtn-sm" onclick="filterMastery('Synthesize',this)">S — Synthesize</button>
+    <button class="fbtn-sm" onclick="filterMastery('Transmit',this)">T — Transmit</button>
+  </div>
+  <div class="sec-head-sm">Current Skill Focus: <span id="masterySkillLabel">All QUEST Skills</span></div>
+  <div class="stats-grid" id="masteryStats"></div>
+  <div class="mastery-grid" id="masteryGrid"></div>
+</div>
+
+<!-- ══════════ BLOCKS ══════════ -->
+<div class="section" id="sec-blocks">
+  <div class="sec-head">📋 Block Tracker — 1201 · 1202 · 1203 · 1204</div>
+  <div class="tip-box">Filter scholars by cohort block to support small-group conferencing and targeted instruction.</div>
+  <div class="filters">
+    <button class="fbtn-sm active" onclick="filterBlock('all',this)">All Blocks</button>
+    <button class="fbtn-sm" onclick="filterBlock('1201',this)">Block 1201</button>
+    <button class="fbtn-sm" onclick="filterBlock('1202',this)">Block 1202</button>
+    <button class="fbtn-sm" onclick="filterBlock('1203',this)">Block 1203</button>
+    <button class="fbtn-sm" onclick="filterBlock('1204',this)">Block 1204</button>
+    <button class="fbtn-sm danger" onclick="filterBlock('mandated',this)" style="border-color:var(--red-danger);color:var(--red-danger);">⚠️ Mandated Support</button>
+    <button class="fbtn-sm" onclick="filterBlock('iep',this)" style="border-color:var(--blue-info);color:var(--blue-info);">IEP</button>
+  </div>
+  <div class="sec-head-sm" id="blockSubhead">All Scholars — <span id="blockCount">0</span></div>
+  <div class="stats-grid" id="blockStats"></div>
+  <div class="legend-row"><div class="legend-item"><div class="ldot done"></div>Completed</div><div class="legend-item"><div class="ldot rev"></div>Needs Revision</div><div class="legend-item"><div class="ldot part"></div>Not Finished</div><div class="legend-item"><div class="ldot started"></div>Started</div><div class="legend-item"><div class="ldot ns"></div>Not Started</div></div>
+  <div class="student-grid" id="blockGrid"></div>
+</div>
+
+<!-- ══════════ QUESTS / CHI ══════════ -->
+<div class="section" id="sec-quests">
+  <div class="sec-head">✨ QUEST Achievement Registry</div>
+  <div class="tip-box">Every achievement scholars can earn — aligned to AP Research's 5 Big Ideas (QUEST). Award points from the "Award Points" tab.</div>
+  <div class="sec-head-sm">🧠 QUEST Skill Alignment</div>
+  <div class="quest-grid" id="questGrid"></div>
+  <div class="sec-head-sm">🏆 House Perk Unlocks</div>
+  <div class="quest-grid" id="perksGrid"></div>
+</div>
+
+<!-- ══════════ STREAKS ══════════ -->
+<div class="section" id="sec-streaks">
+  <div class="sec-head">🔥 Momentum Streaks</div>
+  <div class="tip-box">Track writing sprint attendance, consecutive submission streaks, and weekly progress momentum. Streaks reset each Monday.</div>
+  <div class="streak-grid" id="streakGrid"></div>
+  <div class="sec-head-sm">📅 Writing Sprint Ledger</div>
+  <div class="card">
+    <div class="form-grid" style="margin-bottom:12px;">
+      <div class="fg"><label>Sprint Date</label><input class="fi" type="date" id="sprintDate"></div>
+      <div class="fg"><label>House with Best Attendance</label><select class="fs" id="sprintWinner"><option value="">— Select —</option><option value="Obama">🦅 Obama</option><option value="Morrison">🐍 Morrison</option><option value="Clemente">🦁 Clemente</option><option value="Sotomayor">🦡 Sotomayor</option></select></div>
+    </div>
+    <button class="fbtn" onclick="logSprint()">⚡ Award Felix Felicis (+100 pts)</button>
+    <div class="success-msg" id="sprintSuccess">✓ Felix Felicis awarded!</div>
+    <hr class="divider">
+    <table class="tbl"><thead><tr><th>Date</th><th>Winning House</th><th>Points</th></tr></thead><tbody id="sprintLog"><tr><td colspan="3" class="empty-state">No sprints logged yet.</td></tr></tbody></table>
+  </div>
+</div>
+
+<!-- ══════════ GOALS ══════════ -->
+<div class="section" id="sec-goals">
+  <div class="sec-head">🎯 Goal Cards — Home Stretch</div>
+  <div class="tip-box">Class-wide goals for the final push to submission. Based on current data and CB requirements.</div>
+  <div id="goalCardsGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-bottom:22px;"></div>
+  <div class="sec-head-sm">📋 Caseload Priority List</div>
+  <div class="card" id="caseloadPriority"></div>
+  <div class="sec-head-sm">📬 Parent Outreach Tracker</div>
+  <div class="card">
+    <p style="font-size:11px;opacity:.6;margin-bottom:12px;">Log parent/family contacts for at-risk scholars.</p>
+    <div class="form-grid" style="margin-bottom:10px;">
+      <div class="fg"><label>Scholar</label><select class="fs" id="contactStudent"></select></div>
+      <div class="fg"><label>Contact Type</label><select class="fs" id="contactType"><option value="Call">Phone Call</option><option value="Email">Email</option><option value="Conference">Conference</option><option value="Home Visit">Home Visit</option></select></div>
+      <div class="fg"><label>Date</label><input class="fi" type="date" id="contactDate"></div>
+      <div class="fg"><label>Outcome / Notes</label><input class="fi" type="text" id="contactNote" placeholder="Brief note…"></div>
+    </div>
+    <button class="fbtn" onclick="logContact()">📞 Log Contact</button>
+    <div class="success-msg" id="contactSuccess">✓ Contact logged!</div>
+    <hr class="divider">
+    <table class="tbl"><thead><tr><th>Date</th><th>Scholar</th><th>Type</th><th>Notes</th></tr></thead><tbody id="contactLog"><tr><td colspan="4" class="empty-state">No contacts logged.</td></tr></tbody></table>
+  </div>
+</div>
+
+<!-- ══════════ ROSTER ══════════ -->
+<div class="section" id="sec-roster">
+  <div class="sec-head">📜 Scroll of Scholars</div>
+  <div class="legend-row"><div class="legend-item"><div class="ldot done"></div>Completed</div><div class="legend-item"><div class="ldot rev"></div>Needs Revision</div><div class="legend-item"><div class="ldot part"></div>Not Finished</div><div class="legend-item"><div class="ldot started"></div>Started</div><div class="legend-item"><div class="ldot ns"></div>Not Started</div></div>
+  <div class="filters">
+    <button class="fbtn-sm active" onclick="filterRoster('all',this)">All</button>
+    <button class="fbtn-sm obama" onclick="filterRoster('Obama',this)">🦅 Obama</button>
+    <button class="fbtn-sm morrison" onclick="filterRoster('Morrison',this)">🐍 Morrison</button>
+    <button class="fbtn-sm clemente" onclick="filterRoster('Clemente',this)">🦁 Clemente</button>
+    <button class="fbtn-sm sotomayor" onclick="filterRoster('Sotomayor',this)">🦡 Sotomayor</button>
+    <button class="fbtn-sm" style="margin-left:8px;" onclick="filterRoster('danger',this)">⚠️ At Risk</button>
+    <button class="fbtn-sm" onclick="filterRoster('score4',this)">★ Score 4+</button>
+    <button class="fbtn-sm" onclick="filterRoster('fulldone',this)">✅ Full Draft</button>
+    <button class="fbtn-sm" onclick="filterRoster('iep',this)">📋 IEP</button>
+  </div>
+  <div style="margin-bottom:8px;font-size:10px;opacity:.4;" id="rosterCount"></div>
+  <div class="student-grid" id="rosterGrid"></div>
+</div>
+
+<!-- ══════════ AWARD POINTS ══════════ -->
+<div class="section" id="sec-award">
+  <div class="sec-head">✨ Award Points — Hogsmeade Registry</div>
+  <div class="card" style="margin-bottom:18px;">
+    <h3 style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold);margin-bottom:14px;">⚡ Log an Achievement</h3>
+    <div class="form-grid">
+      <div class="fg"><label>House</label>
+        <select class="fs" id="aHouse" onchange="filterAwardStudents()">
+          <option value="">— Select House —</option>
+          <option value="Obama">🦅 Obama (Ravenclaw)</option>
+          <option value="Morrison">🐍 Morrison (Slytherin)</option>
+          <option value="Clemente">🦁 Clemente (Gryffindor)</option>
+          <option value="Sotomayor">🦡 Sotomayor (Hufflepuff)</option>
+        </select>
+      </div>
+      <div class="fg"><label>Scholar (optional)</label><select class="fs" id="aStudent"><option value="">— House Award —</option></select></div>
+      <div class="fg full"><label>Achievement</label>
+        <select class="fs" id="aAchiev" onchange="onAchievChange()">
+          <option value="">— Select Achievement —</option>
+          <optgroup label="📜 Core Paper Achievements">
+            <option value="magnum|100">📜 Magnum Opus Manuscript (4K–5K Word Draft) — 100 pts</option>
+            <option value="pensieve|50">🧠 Pensieve Exchange (Peer Review) — 50 pts</option>
+            <option value="draught|75">🔬 Refiner's Draught (Deep Revision) — 75 pts</option>
+            <option value="illumination|40">💡 Illumination Charms (Slides Ready) — 40 pts</option>
+            <option value="greathall|150">🏛️ Great Hall Defense (Final POD) — 150 pts</option>
+            <option value="order|50">🦜 Order of the Phoenix (Early Gala) — 50 pts</option>
+            <option value="vow|200">🔗 Unbreakable Vow (CB Submission) — 200 pts</option>
+          </optgroup>
+          <optgroup label="⭐ Bonus Achievements">
+            <option value="marauder|75">🗺️ Marauder's Map (Perfect Niche Source) — 75 pts</option>
+            <option value="timeturner|75">⏳ Time-Turner (48hrs Early Submission) — 75 pts</option>
+            <option value="felix|100">🍀 Felix Felicis (Sprint Attendance) — 100 pts</option>
+            <option value="rotw|250">🏅 Researcher of the Week — 250 pts</option>
+          </optgroup>
+          <optgroup label="📝 QUEST Skill Achievements">
+            <option value="quest_q|30">Q — Question & Explore mastery — 30 pts</option>
+            <option value="quest_u|30">U — Understand & Analyze mastery — 30 pts</option>
+            <option value="quest_e|30">E — Evaluate Perspectives mastery — 30 pts</option>
+            <option value="quest_s|30">S — Synthesize Ideas mastery — 30 pts</option>
+            <option value="quest_t|30">T — Team, Transform & Transmit mastery — 30 pts</option>
+          </optgroup>
+          <optgroup label="🏠 House Perks">
+            <option value="oratory|0">🎤 Academic Oratory — Obama Perk</option>
+            <option value="legacyink|0">🖋️ Legacy Ink — Morrison Perk</option>
+            <option value="lionnerve|0">🦁 Lion's Nerve — Clemente Perk</option>
+            <option value="fairshake|0">🤝 Fair Shake — Sotomayor Perk</option>
+          </optgroup>
+          <optgroup label="✏️ Custom"><option value="custom|0">✏️ Custom Award…</option></optgroup>
+        </select>
+      </div>
+      <div class="fg" id="customPtsGrp" style="display:none;"><label>Custom Points</label><input class="fi" type="number" id="customPts" placeholder="e.g. 50" min="0"></div>
+      <div class="fg" id="customReasonGrp" style="display:none;"><label>Custom Reason</label><input class="fi" type="text" id="customReason" placeholder="e.g. Writing Sprint Champion"></div>
+      <div class="fg"><label>Date</label><input class="fi" type="date" id="aDate"></div>
+      <div class="fg"><label>Note (optional)</label><input class="fi" type="text" id="aNote" placeholder="Details…"></div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <button class="fbtn" onclick="logAward()">⚡ Bestow Points</button>
+      <div class="success-msg" id="aSuccess" style="margin-top:0;">✓ Points recorded!</div>
+    </div>
+  </div>
+  <div class="sec-head-sm">📋 Recent Awards</div>
+  <div class="card"><table class="tbl"><thead><tr><th>Date</th><th>House</th><th>Scholar</th><th>Achievement</th><th>Pts</th></tr></thead><tbody id="recentAwards"><tr><td colspan="5" class="empty-state">No awards yet.</td></tr></tbody></table></div>
+</div>
+
+<!-- ══════════ GOOGLE SHEETS ══════════ -->
+<div class="section" id="sec-sheets">
+  <div class="sec-head">📋 Google Sheets Integration</div>
+
+  <div class="sync-panel">
+    <h3>🔗 Live Connection Settings</h3>
+    <div class="sync-info">Connect your Google Sheet for live sync. Points logged here will write to a "House Cup Points" tab. Student data can be refreshed from the tracker. Your existing tabs are NEVER modified.</div>
+    <label style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.1em;opacity:.5;display:block;margin-bottom:5px;">Apps Script Web App URL</label>
+    <div class="sync-url-row">
+      <input class="sync-url-input" type="text" id="sheetsUrl" placeholder="https://script.google.com/macros/s/YOUR_ID/exec">
+      <button class="fbtn sm" onclick="saveSheetsUrl()">💾 Save</button>
+      <button class="fbtn sm" onclick="testSync()">🔄 Test</button>
+      <button class="fbtn sm" onclick="pullLiveData()">⬇️ Pull Data</button>
+    </div>
+    <div class="sync-status" id="syncStatus"></div>
+  </div>
+
+  <div class="sync-panel">
+    <h3>📜 Full Apps Script — Copy & Deploy</h3>
+    <div class="sync-info">Paste this into Extensions → Apps Script → Deploy → Web App (Anyone). Replace the Sheet ID. This creates new tabs without touching existing ones, enables live point sync, and exposes student data for refresh.</div>
+    <div class="code-block" id="scriptBlock">// ═══════════════════════════════════════════════
+// AP RESEARCH — MINISTRY OF RESEARCH
+// Google Apps Script v2 — Full Integration
+// Deploy as Web App → Anyone can access
+// ═══════════════════════════════════════════════
+
+const SHEET_ID     = '1llsHnCkLPU7mBB2ICt_vb6_aDiW1-Py1tYBpJjsJF1A';
+const TRACKER_TAB  = 'Data Tracker - Cohort 2026';
+const POINTS_TAB   = 'House Cup Points';
+const MASTERY_TAB  = 'Mastery Tracker';
+const CONTACTS_TAB = 'Parent Contacts';
+const SPRINTS_TAB  = 'Writing Sprints';
+
+function doGet(e) {
+  const action = e.parameter.action || 'ping';
+  const cors = ContentService.createTextOutput;
+  try {
+    let result;
+    if (action === 'ping')         result = {ok:true, time: new Date().toISOString()};
+    else if (action === 'students') result = getStudents();
+    else if (action === 'points')   result = getPoints();
+    else if (action === 'mastery')  result = getMastery();
+    else if (action === 'contacts') result = getContacts();
+    else if (action === 'sprints')  result = getSprints();
+    else result = {error: 'Unknown action: ' + action};
+    return cors(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return cors(JSON.stringify({error: err.toString()})).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doPost(e) {
+  const cors = ContentService.createTextOutput;
+  try {
+    const data = JSON.parse(e.postData.contents);
+    let result;
+    if (data.action === 'addPoints')   result = addPoints(data);
+    else if (data.action === 'addMastery')  result = addMastery(data);
+    else if (data.action === 'addContact')  result = addContact(data);
+    else if (data.action === 'addSprint')   result = addSprint(data);
+    else result = {error: 'Unknown action: ' + data.action};
+    return cors(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return cors(JSON.stringify({error: err.toString()})).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function getStudents() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const sh = ss.getSheetByName(TRACKER_TAB);
+  if (!sh) return {error: 'Tab not found: ' + TRACKER_TAB};
+  const rows = sh.getDataRange().getValues();
+  const headers = rows[0].map(h => String(h).trim());
+  return {
+    students: rows.slice(1)
+      .filter(r => r[1] || r[2])
+      .map(r => {
+        const obj = {};
+        headers.forEach((h,i) => obj[h] = r[i]);
+        return obj;
+      })
+  };
+}
+
+function getPoints() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  ensureTab(ss, POINTS_TAB, ['Date','House','Student','Achievement','Points','Note','IsBonus']);
+  const sh = ss.getSheetByName(POINTS_TAB);
+  const rows = sh.getDataRange().getValues();
+  const headers = rows[0];
+  return { entries: rows.slice(1).map(r => { const o={}; headers.forEach((h,i)=>o[h]=r[i]); return o; }) };
+}
+
+function getMastery() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  ensureTab(ss, MASTERY_TAB, ['Date','Student','House','Skill','Level','Teacher']);
+  const sh = ss.getSheetByName(MASTERY_TAB);
+  const rows = sh.getDataRange().getValues();
+  const headers = rows[0];
+  return { entries: rows.slice(1).map(r => { const o={}; headers.forEach((h,i)=>o[h]=r[i]); return o; }) };
+}
+
+function getContacts() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  ensureTab(ss, CONTACTS_TAB, ['Date','Student','House','Type','Note','Logged By']);
+  const sh = ss.getSheetByName(CONTACTS_TAB);
+  const rows = sh.getDataRange().getValues();
+  const headers = rows[0];
+  return { entries: rows.slice(1).map(r => { const o={}; headers.forEach((h,i)=>o[h]=r[i]); return o; }) };
+}
+
+function getSprints() {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  ensureTab(ss, SPRINTS_TAB, ['Date','Winning House','Points']);
+  const sh = ss.getSheetByName(SPRINTS_TAB);
+  const rows = sh.getDataRange().getValues();
+  const headers = rows[0];
+  return { entries: rows.slice(1).map(r => { const o={}; headers.forEach((h,i)=>o[h]=r[i]); return o; }) };
+}
+
+function addPoints(data) {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  ensureTab(ss, POINTS_TAB, ['Date','House','Student','Achievement','Points','Note','IsBonus']);
+  ss.getSheetByName(POINTS_TAB).appendRow([
+    new Date().toLocaleDateString('en-US'),
+    data.house, data.student||'(House Award)', data.achievement,
+    Number(data.points)||0, data.note||'', data.isBonus?'Yes':'No'
+  ]);
+  return {success: true};
+}
+
+function addMastery(data) {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  ensureTab(ss, MASTERY_TAB, ['Date','Student','House','Skill','Level','Teacher']);
+  ss.getSheetByName(MASTERY_TAB).appendRow([
+    new Date().toLocaleDateString('en-US'),
+    data.student, data.house, data.skill, data.level, data.teacher||''
+  ]);
+  return {success: true};
+}
+
+function addContact(data) {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  ensureTab(ss, CONTACTS_TAB, ['Date','Student','House','Type','Note','Logged By']);
+  ss.getSheetByName(CONTACTS_TAB).appendRow([
+    new Date().toLocaleDateString('en-US'),
+    data.student, data.house, data.type, data.note||'', data.teacher||''
+  ]);
+  return {success: true};
+}
+
+function addSprint(data) {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  ensureTab(ss, SPRINTS_TAB, ['Date','Winning House','Points']);
+  ss.getSheetByName(SPRINTS_TAB).appendRow([data.date, data.house, 100]);
+  return {success: true};
+}
+
+function ensureTab(ss, name, headers) {
+  if (!ss.getSheetByName(name)) {
+    const sh = ss.insertSheet(name);
+    sh.appendRow(headers);
+    sh.getRange(1,1,1,headers.length)
+      .setFontWeight('bold')
+      .setBackground('#1a1a2e')
+      .setFontColor('#d4a843');
+    sh.setFrozenRows(1);
+  }
+}</div>
+    <button class="fbtn sm" onclick="copyScript()" style="margin-top:8px;">📋 Copy Script</button>
+  </div>
+
+  <div class="sync-panel">
+    <h3>📋 Setup Steps</h3>
+    <ol class="inst-list">
+      <li>Open your <a href="https://docs.google.com/spreadsheets/d/1llsHnCkLPU7mBB2ICt_vb6_aDiW1-Py1tYBpJjsJF1A/edit" target="_blank" style="color:var(--gold-l);">Google Sheet</a></li>
+      <li>Click <strong>Extensions → Apps Script</strong></li>
+      <li>Delete existing code, paste the script above</li>
+      <li>The SHEET_ID is already filled in — no change needed</li>
+      <li>Click 💾 Save, then <strong>Deploy → New Deployment</strong></li>
+      <li>Type: <strong>Web App</strong> · Who has access: <strong>Anyone</strong> · Click Deploy</li>
+      <li>Copy the Web App URL and paste it in the field above</li>
+      <li>Click <strong>Test</strong> — you should see "Connected!"</li>
+      <li>Five new tabs auto-create: <em>House Cup Points, Mastery Tracker, Parent Contacts, Writing Sprints</em></li>
+      <li>Click <strong>Pull Data</strong> to sync live student data from the tracker tab</li>
+    </ol>
+  </div>
+</div>
+
+</main>
+
+<!-- STUDENT MODAL -->
+<div class="modal-backdrop" id="studentModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// DATA — All 101 students
+// ═══════════════════════════════════════════════════════════
+const STUDENTS = [
+{first:"Nasir",last:"Abdul-Majid",house:"Obama",block:"1204",wc:1997,intro:"Completed",lit:"Completed - Needs Revision",method:"Completed - Needs Revision",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Destiny",last:"Adams",house:"Obama",block:"1201",wc:3557,intro:"Completed",lit:"Completed",method:"Completed",results:"Started - Not Finished",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Jesse",last:"Alvarado",house:"Obama",block:"1202",wc:3795,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed - Needs Revision",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Natalie",last:"Alvarado",house:"Obama",block:"1203",wc:5114,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Skylynn",last:"Andino",house:"Morrison",block:"1204",wc:0,intro:"Incomplete - Not Started",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Danger of not submitting",iep:true,support:"After School Tutoring"},
+{first:"Manuel",last:"Barahona",house:"Obama",block:"1203",wc:4320,intro:"Completed",lit:"Completed",method:"Started - Needs Revision",results:"Started - Needs Revision",conclusion:"Completed",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Jacob",last:"Bellber",house:"Sotomayor",block:"1202",wc:1289,intro:"Started - Needs Revision",lit:"Started - Not Finished",method:"Started - Needs Revision",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:true,support:"After School Tutoring"},
+{first:"Kori",last:"Brown",house:"Clemente",block:"1202",wc:1119,intro:"Completed",lit:"Completed",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"Saturday School"},
+{first:"Leniya",last:"Butcher",house:"Sotomayor",block:"1204",wc:664,intro:"Completed",lit:"Started - Not Finished",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:true,support:"After School Tutoring"},
+{first:"Damien",last:"Calderon",house:"Morrison",block:"1204",wc:3113,intro:"Completed",lit:"Completed - Needs Revision",method:"Completed - Needs Revision",results:"Completed - Needs Revision",conclusion:"Completed - Needs Revision",score:"Score of 2",iep:false,support:"Saturday School"},
+{first:"Jermaine",last:"Capers Jr",house:"Morrison",block:"1202",wc:4953,intro:"Completed",lit:"Completed - Needs Revision",method:"Completed",results:"Completed - Needs Revision",conclusion:"Completed - Needs Revision",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Steven",last:"Castillo",house:"Obama",block:"1202",wc:1120,intro:"Completed",lit:"Started - Not Finished",method:"Started - Not Finished",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:true,support:"After School Tutoring"},
+{first:"Jehier",last:"Castro Torres",house:"Obama",block:"1201",wc:710,intro:"Completed",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"Saturday School"},
+{first:"Nathan",last:"Cavedo",house:"Clemente",block:"1203",wc:3719,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Started - Not Finished",score:"Score of 2",iep:true,support:"No/Optional"},
+{first:"Ethan",last:"Cavedo",house:"Sotomayor",block:"1203",wc:4235,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Started - Needs Revision",score:"Score of 3",iep:true,support:"No/Optional"},
+{first:"Kylie",last:"Cedeno",house:"Sotomayor",block:"1202",wc:4166,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Lynashka",last:"Cespedes",house:"Clemente",block:"1203",wc:1893,intro:"Completed",lit:"Completed",method:"Completed",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"Saturday School"},
+{first:"Shayla",last:"Cherry",house:"Obama",block:"1203",wc:2595,intro:"Completed",lit:"Started - Needs Revision",method:"Started - Needs Revision",results:"Started - Needs Revision",conclusion:"Started - Not Finished",score:"Score of 3",iep:false,support:"After School Tutoring"},
+{first:"Aiden-Tyler",last:"Cintron",house:"Sotomayor",block:"1203",wc:4194,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Samba",last:"Cisse",house:"Sotomayor",block:"1201",wc:1882,intro:"Completed - Needs Revision",lit:"Completed - Needs Revision",method:"Started - Needs Revision",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"Saturday School"},
+{first:"Micahi",last:"Cofield",house:"Obama",block:"1203",wc:3347,intro:"Completed",lit:"Completed",method:"Completed",results:"Started - Needs Revision",conclusion:"Started - Needs Revision",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Nelson",last:"Correa",house:"Obama",block:"1201",wc:4021,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed - Needs Revision",conclusion:"Completed - Needs Revision",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Nayleen",last:"Cortes",house:"Clemente",block:"1203",wc:4174,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Kevin",last:"Cox",house:"Obama",block:"1204",wc:2747,intro:"Started - Needs Revision",lit:"Completed - Needs Revision",method:"Completed - Needs Revision",results:"Completed - Needs Revision",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"Saturday School"},
+{first:"Orestes",last:"Cuellar",house:"Morrison",block:"1202",wc:3886,intro:"Completed - Needs Revision",lit:"Completed - Needs Revision",method:"Completed - Needs Revision",results:"Completed - Needs Revision",conclusion:"Completed - Needs Revision",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Natalia",last:"Dalrymple",house:"Clemente",block:"1203",wc:2532,intro:"Completed",lit:"Started - Needs Revision",method:"Completed",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:true,support:"After School Tutoring"},
+{first:"Sienna",last:"Davis",house:"Morrison",block:"1203",wc:2630,intro:"Completed",lit:"Completed",method:"Started - Needs Revision",results:"Started - Not Finished",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"After School Tutoring"},
+{first:"Layla",last:"Davis",house:"Obama",block:"1203",wc:2685,intro:"Completed",lit:"Completed",method:"Started - Needs Revision",results:"Started - Needs Revision",conclusion:"Started - Not Finished",score:"Score of 3",iep:false,support:"After School Tutoring"},
+{first:"Joangel",last:"Dejesus",house:"Sotomayor",block:"1201",wc:4537,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Jeremiah",last:"DeJesus",house:"Obama",block:"1202",wc:5814,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Nayla",last:"Diaby",house:"Obama",block:"1201",wc:4246,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Aiche",last:"Diarra",house:"Clemente",block:"1203",wc:1510,intro:"Completed",lit:"Started - Needs Revision",method:"Started - Needs Revision",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Carter",last:"Evans",house:"Morrison",block:"1201",wc:4746,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Fanta",last:"Fall",house:"Morrison",block:"1201",wc:4782,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Lindsay",last:"Flores-Gomez",house:"Morrison",block:"1201",wc:2343,intro:"Completed",lit:"Completed",method:"Started - Needs Revision",results:"Completed - Needs Revision",conclusion:"Completed - Needs Revision",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Isiah",last:"Freeman",house:"Morrison",block:"1202",wc:483,intro:"Completed",lit:"Started - Not Finished",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"Saturday School"},
+{first:"Noah",last:"Gadson",house:"Clemente",block:"1203",wc:1075,intro:"Completed",lit:"Incomplete - Not Started",method:"Started - Not Finished",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Nicole",last:"Gaibor",house:"Obama",block:"1202",wc:938,intro:"Started - Not Finished",lit:"Incomplete - Not Started",method:"Started - Needs Revision",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"Saturday School"},
+{first:"Nathaniel",last:"Godoy",house:"Sotomayor",block:"1202",wc:378,intro:"Started - Needs Revision",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"Saturday School"},
+{first:"Lorenzo",last:"Goodbread",house:"Sotomayor",block:"1202",wc:2883,intro:"Completed",lit:"Started - Needs Revision",method:"Started - Needs Revision",results:"Started - Needs Revision",conclusion:"Started - Needs Revision",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Aniyah",last:"Gooden",house:"Obama",block:"1201",wc:0,intro:"Incomplete - Not Started",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Danger of not submitting",iep:false,support:"No/Optional"},
+{first:"Akira",last:"Grant",house:"Morrison",block:"1202",wc:2660,intro:"Started - Needs Revision",lit:"Completed",method:"Completed",results:"Started - Not Finished",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Rylee",last:"Gunter",house:"Sotomayor",block:"1202",wc:2534,intro:"Completed - Needs Revision",lit:"Completed - Needs Revision",method:"Completed - Needs Revision",results:"Completed - Needs Revision",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Lizette",last:"Hernandez",house:"Clemente",block:"1201",wc:1249,intro:"Completed",lit:"Incomplete - Not Started",method:"Started - Needs Revision",results:"Started - Needs Revision",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Tayshawn",last:"Hernandez",house:"Sotomayor",block:"1202",wc:2671,intro:"Started - Needs Revision",lit:"Started - Needs Revision",method:"Completed",results:"Started - Needs Revision",conclusion:"Started - Needs Revision",score:"Score of 3",iep:true,support:"No/Optional"},
+{first:"Kaniyah",last:"Johnson",house:"Obama",block:"1202",wc:2325,intro:"Completed",lit:"Completed - Needs Revision",method:"Completed - Needs Revision",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Yvonne",last:"Jordan",house:"Sotomayor",block:"1202",wc:1617,intro:"Completed",lit:"Completed - Needs Revision",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Denim",last:"Kearse",house:"Sotomayor",block:"1202",wc:1912,intro:"Incomplete - Not Started",lit:"Completed",method:"Started - Needs Revision",results:"Started - Needs Revision",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Moussa",last:"Kebe",house:"Obama",block:"1203",wc:2492,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Incomplete - Not Started",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Terena",last:"Keita",house:"Clemente",block:"1201",wc:2636,intro:"Completed",lit:"Completed",method:"Completed",results:"Started - Not Finished",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Alimatou",last:"Keita",house:"Sotomayor",block:"1201",wc:4878,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Naomi",last:"Keitt",house:"Clemente",block:"1203",wc:623,intro:"Completed",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Kareem",last:"Kelly",house:"Obama",block:"1201",wc:3483,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Bishop",last:"Laboriel",house:"Sotomayor",block:"1202",wc:29,intro:"Incomplete - Not Started",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Danger of not submitting",iep:true,support:"Saturday School"},
+{first:"Breechelle",last:"Lannaman",house:"Obama",block:"1201",wc:32,intro:"Incomplete - Not Started",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Danger of not submitting",iep:false,support:"No/Optional"},
+{first:"Jordin",last:"Leonor",house:"Sotomayor",block:"1201",wc:635,intro:"Incomplete - Not Started",lit:"Completed",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Jayden",last:"Leonor",house:"Morrison",block:"1201",wc:1238,intro:"Completed",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Sara",last:"Lopez",house:"Morrison",block:"1202",wc:1518,intro:"Completed",lit:"Completed",method:"Started - Needs Revision",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"David",last:"Lopez",house:"Morrison",block:"1202",wc:4093,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed - Needs Revision",score:"Score of 3",iep:true,support:"Saturday School"},
+{first:"Eduardo",last:"Martinez Jr.",house:"Morrison",block:"1202",wc:3043,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Incomplete - Not Started",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Anwar",last:"Martinez-Sanchez",house:"Clemente",block:"1201",wc:439,intro:"Incomplete - Not Started",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Carmelo",last:"Marville-Haynes",house:"Morrison",block:"1202",wc:4114,intro:"Completed - Needs Revision",lit:"Completed - Needs Revision",method:"Completed - Needs Revision",results:"Completed - Needs Revision",conclusion:"Completed - Needs Revision",score:"Score of 1",iep:false,support:"Saturday School"},
+{first:"Mya",last:"McCrary",house:"Obama",block:"1201",wc:3377,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Aaron",last:"Melendez",house:"Obama",block:"1202",wc:100,intro:"Incomplete - Not Started",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Danger of not submitting",iep:false,support:"Saturday School"},
+{first:"Narellis",last:"Mendez",house:"Morrison",block:"1201",wc:2076,intro:"Completed",lit:"Completed",method:"Started - Needs Revision",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Davin",last:"Montgomery",house:"Clemente",block:"1202",wc:643,intro:"Completed",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:true,support:"After School Tutoring"},
+{first:"Jacob",last:"Morales",house:"Sotomayor",block:"1201",wc:0,intro:"Incomplete - Not Started",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Danger of not submitting",iep:false,support:"No/Optional"},
+{first:"Devine",last:"Morales",house:"Obama",block:"1204",wc:504,intro:"Incomplete - Not Started",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Alexander",last:"Moreno",house:"Sotomayor",block:"1202",wc:2619,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Jaeden",last:"Munoz",house:"Obama",block:"1201",wc:4013,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Allen",last:"Najera",house:"Morrison",block:"1204",wc:1452,intro:"Completed",lit:"Completed",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Tristan",last:"Nichols",house:"Morrison",block:"1201",wc:4158,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Xavier",last:"Oliver",house:"Clemente",block:"1201",wc:2325,intro:"Completed",lit:"Completed",method:"Completed",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Mariah",last:"Ortega",house:"Morrison",block:"1201",wc:2994,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Alex",last:"Ortiz",house:"Clemente",block:"1202",wc:1202,intro:"Completed",lit:"Completed",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Micah",last:"Oxley",house:"Clemente",block:"1202",wc:2231,intro:"Completed",lit:"Incomplete - Not Started",method:"Completed",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:true,support:"No/Optional"},
+{first:"Edgar",last:"Padua",house:"Sotomayor",block:"1202",wc:5117,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Hailey",last:"Paula",house:"Clemente",block:"1202",wc:1458,intro:"Completed",lit:"Started - Not Finished",method:"Started - Needs Revision",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"After School Tutoring"},
+{first:"Jada",last:"Pineda",house:"Obama",block:"1202",wc:2961,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed - Needs Revision",conclusion:"Completed - Needs Revision",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Maddex",last:"Piton",house:"Obama",block:"1201",wc:737,intro:"Completed",lit:"Completed",method:"Completed",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Emma",last:"Pleasant",house:"Obama",block:"1203",wc:1444,intro:"Completed",lit:"Completed",method:"Completed",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Jozieuh",last:"Price",house:"Clemente",block:"1202",wc:1940,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Sa'Niya",last:"Richardson-Selby",house:"Morrison",block:"1202",wc:1267,intro:"Completed",lit:"Started - Not Finished",method:"Started - Needs Revision",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:true,support:"After School Tutoring"},
+{first:"Miracle",last:"Rivers",house:"Obama",block:"1203",wc:381,intro:"Completed",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 1",iep:false,support:"No/Optional"},
+{first:"Adam",last:"Rosario",house:"Clemente",block:"1202",wc:148,intro:"Started - Not Finished",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Danger of not submitting",iep:true,support:"After School Tutoring"},
+{first:"Madison",last:"Salgado",house:"Sotomayor",block:"1202",wc:1472,intro:"Completed",lit:"Completed",method:"Completed",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"Saturday School"},
+{first:"Michael",last:"Sambula",house:"Sotomayor",block:"1202",wc:2239,intro:"Completed",lit:"Started - Needs Revision",method:"Completed",results:"Started - Not Finished",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"After School Tutoring"},
+{first:"Nickeila",last:"Sanchez",house:"Obama",block:"1203",wc:3317,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Bintou",last:"Sangare",house:"Obama",block:"1204",wc:2849,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"DeAndre",last:"Shuler",house:"Sotomayor",block:"1201",wc:7156,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Avonte",last:"Straker",house:"Clemente",block:"1203",wc:2075,intro:"Completed",lit:"Completed",method:"Completed",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Dahriel",last:"Sutton",house:"Clemente",block:"1203",wc:4535,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Saniya",last:"Temple",house:"Sotomayor",block:"1202",wc:2486,intro:"Completed",lit:"Completed",method:"Completed",results:"Started - Not Finished",conclusion:"Started - Not Finished",score:"Score of 3",iep:false,support:"After School Tutoring"},
+{first:"Darnell",last:"Tisdale",house:"Morrison",block:"1204",wc:3100,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Hope",last:"Torres",house:"Morrison",block:"1203",wc:2604,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 4",iep:false,support:"No/Optional"},
+{first:"Aliana",last:"Veloz",house:"Morrison",block:"1201",wc:1854,intro:"Completed",lit:"Completed",method:"Completed",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 2",iep:false,support:"No/Optional"},
+{first:"Crystal",last:"Watson",house:"Obama",block:"1203",wc:1049,intro:"Completed",lit:"Completed",method:"Completed",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Bryce",last:"Watson",house:"Clemente",block:"1202",wc:4003,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Madison",last:"Wheeler",house:"Sotomayor",block:"1202",wc:4893,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 5",iep:false,support:"No/Optional"},
+{first:"Bryanna",last:"Wilson",house:"Sotomayor",block:"1201",wc:4284,intro:"Completed",lit:"Completed",method:"Completed",results:"Completed",conclusion:"Completed",score:"Score of 3",iep:false,support:"No/Optional"},
+{first:"Alani",last:"Young",house:"Morrison",block:"1201",wc:61,intro:"Incomplete - Not Started",lit:"Incomplete - Not Started",method:"Incomplete - Not Started",results:"Incomplete - Not Started",conclusion:"Incomplete - Not Started",score:"Danger of not submitting",iep:false,support:"No/Optional"}
+];
+
+const HOUSES = {
+  Obama:     {c:'obama',   e:'🦅',hp:'Ravenclaw', trait:'Academic Oratory',  perk:'First pick of presentation time slots'},
+  Morrison:  {c:'morrison',e:'🐍',hp:'Slytherin',  trait:'Legacy Ink',        perk:'Featured on Research Spotlight wall'},
+  Clemente:  {c:'clemente',e:'🦁',hp:'Gryffindor', trait:"The Lion's Nerve",  perk:"Celebratory treat — first house with 50% drafts done"},
+  Sotomayor: {c:'sotomayor',e:'🦡',hp:'Hufflepuff', trait:'The Fair Shake',   perk:'Skip one minor check-in assignment'},
+};
+
+const SECS = ['intro','lit','method','results','conclusion'];
+const SEC_LABELS = {intro:'Intro',lit:'Lit Review',method:'Method',results:'Results',conclusion:'Conclusion'};
+
+// State
+let ptsLog  = JSON.parse(localStorage.getItem('apResP')  || '[]');
+let rotwD   = JSON.parse(localStorage.getItem('apResR')  || 'null');
+let masteryD= JSON.parse(localStorage.getItem('apResM')  || '{}');
+let contactD= JSON.parse(localStorage.getItem('apResC')  || '[]');
+let sprintD = JSON.parse(localStorage.getItem('apResSp') || '[]');
+let rosterF = 'all', lbF = 'all', blockF = 'all', masterySkillF = 'all';
+
+function saveAll(){
+  localStorage.setItem('apResP', JSON.stringify(ptsLog));
+  localStorage.setItem('apResR', JSON.stringify(rotwD));
+  localStorage.setItem('apResM', JSON.stringify(masteryD));
+  localStorage.setItem('apResC', JSON.stringify(contactD));
+  localStorage.setItem('apResSp',JSON.stringify(sprintD));
+}
+
+// ═══ UTILITIES ═══
+function secClass(s){
+  if(!s||s==='nan') return 'ns';
+  const sl = s.toLowerCase();
+  if(sl.includes('incomplete')||sl.includes('not started')) return 'ns';
+  if(sl.includes('needs revision')) return 'rev';
+  if(sl.includes('not finished')) return 'part';
+  if(sl.includes('started')) return 'started';
+  if(sl.includes('completed')) return 'done';
+  return 'ns';
+}
+function scoreN(s){ const m=s.match(/\d/); return m?parseInt(m[0]):0; }
+function isDanger(s){ return s.score.toLowerCase().includes('danger'); }
+function housePts(h){ return ptsLog.filter(e=>e.house===h).reduce((a,e)=>a+e.pts,0); }
+function scholarPts(name){ return ptsLog.filter(e=>e.student===name).reduce((a,e)=>a+e.pts,0); }
+function daysUntil(d){ const n=new Date();n.setHours(0,0,0,0);const t=new Date(d);t.setHours(0,0,0,0);return Math.round((t-n)/(864e5)); }
+function secsDone(s){ return SECS.filter(k=>s[k]==='Completed').length; }
+function fullDone(s){ return SECS.every(k=>s[k]==='Completed'); }
+
+// ═══ COUNTDOWN ═══
+function initCountdown(){
+  const dates={D:['2026-05-01','cdDDate','cdDDays'],G:['2026-04-15','cdGDate','cdGDays'],S:['2026-04-30','cdSDate','cdSDays']};
+  Object.values(dates).forEach(([d,dId,nId])=>{
+    const days=daysUntil(d);
+    const el=document.getElementById(nId); if(el)el.textContent=days>=0?days:'—';
+    const dt=document.getElementById(dId); if(dt)dt.textContent=new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  });
+}
+
+// ═══ STARS ═══
+function initStars(){
+  const sf=document.getElementById('sf');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*2+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${Math.random()*4+3}s;animation-delay:${Math.random()*5}s;`;
+    sf.appendChild(s);
+  }
+}
+
+// ═══ RENDER STUDENT CARD ═══
+function renderSC(s, showModal=true){
+  const danger=isDanger(s);
+  const dots=SECS.map(k=>`<div class="sc-sec ${secClass(s[k])}" title="${SEC_LABELS[k]}: ${s[k]}"></div>`).join('');
+  const pts=scholarPts(s.first+' '+s.last);
+  return `<div class="sc ${s.house.toLowerCase()}" ${showModal?`onclick="openStudentModal('${s.first} ${s.last}')"`:''}">
+    <div class="sc-head">
+      <div class="sc-name">${s.first} ${s.last}</div>
+      ${danger?`<span class="sc-danger">⚠️ At Risk</span>`:`<span class="sc-badge ${s.house.toLowerCase()}">${HOUSES[s.house]?.e||''} ${s.house}</span>`}
+    </div>
+    <div class="sc-wc">📝 ${s.wc.toLocaleString()} words · Block ${s.block}${s.iep?' · 📋 IEP':''}</div>
+    <div class="sc-secs">${dots}</div>
+    <div class="sc-foot">
+      <span class="sc-score">${s.score}</span>
+      <span class="sc-pts-disp">${secsDone(s)}/5 sections${pts?` · ⚡${pts}pts`:''}</span>
+    </div>
+  </div>`;
+}
+
+// ═══ MODAL ═══
+function openStudentModal(name){
+  const s=STUDENTS.find(x=>x.first+' '+x.last===name);
+  if(!s) return;
+  const h=HOUSES[s.house]||{};
+  const mc=document.getElementById('modalContent');
+  const mkey=`${s.first}_${s.last}`.replace(/\s/g,'_');
+  mc.innerHTML=`
+    <div class="modal-title">${h.e||''} ${s.first} ${s.last}</div>
+    <div style="font-size:10px;opacity:.5;margin-bottom:12px;">${s.house} (${h.hp||''}) · Block ${s.block}${s.iep?' · IEP':''} · Support: ${s.support}</div>
+    <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold);margin-bottom:10px;">📄 Paper Sections</div>
+    ${SECS.map(k=>`<div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+      <span>${SEC_LABELS[k]}</span><span style="opacity:.6;">${s[k]}</span>
+    </div>`).join('')}
+    <div style="margin-top:12px;font-size:11px;"><strong>Word Count:</strong> ${s.wc.toLocaleString()}</div>
+    <div style="margin-top:4px;font-size:11px;"><strong>Projection:</strong> ${s.score}</div>
+    <div style="margin-top:14px;font-family:'Cinzel',serif;font-size:11px;color:var(--gold);">🧪 Mastery Log</div>
+    <div style="font-size:10px;opacity:.55;margin-top:5px;">${masteryD[mkey]?Object.entries(masteryD[mkey]).map(([skill,lvl])=>`${skill}: <strong>${lvl}</strong>`).join(' · '):'No mastery logged yet.'}</div>
+    <div style="margin-top:14px;display:flex;gap:7px;flex-wrap:wrap;">
+      <button class="fbtn sm" onclick="closeModal();show('award',document.querySelector('.tab.active'))">⚡ Award Points</button>
+    </div>`;
+  document.getElementById('studentModal').classList.add('open');
+}
+function closeModal(){ document.getElementById('studentModal').classList.remove('open'); }
+
+// ═══ CUP DISPLAY ═══
+function buildCupDisplay(){
+  const order=Object.keys(HOUSES).sort((a,b)=>housePts(b)-housePts(a));
+  const max=Math.max(1,...order.map(h=>housePts(h)));
+  document.getElementById('cupDisplay').innerHTML=order.map((h,i)=>{
+    const {c,e,hp}=HOUSES[h]; const pts=housePts(h);
+    return `<div class="cup-card ${c}">
+      ${i===0?'<div class="cup-leading">🏆 LEADING</div>':''}
+      <div class="cup-rank">${['1st','2nd','3rd','4th'][i]}</div>
+      <div class="cup-icon">${e}</div>
+      <div class="cup-house">House ${h}</div>
+      <div class="cup-hp">${hp}</div>
+      <div class="cup-pts">${pts.toLocaleString()}</div>
+      <div class="cup-pts-lbl">House Points</div>
+    </div>`;
+  }).join('');
+
+  // Bars
+  const wrap=document.getElementById('cupBarsWrap');
+  if(wrap) wrap.innerHTML=order.map(h=>{
+    const {c,e}=HOUSES[h]; const pts=housePts(h);
+    const pct=max>0?Math.round(pts/max*100):0;
+    return `<div style="margin-bottom:10px;">
+      <div class="pts-bar-label"><span>${e} House ${h}</span><span>${pts.toLocaleString()} pts</span></div>
+      <div class="pts-bar-track"><div class="pts-bar-fill ${c}" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+// ═══ OVERVIEW ═══
+function buildOverview(){
+  const total=STUDENTS.length;
+  const danger=STUDENTS.filter(isDanger).length;
+  const s4=STUDENTS.filter(s=>scoreN(s.score)>=4).length;
+  const s3=STUDENTS.filter(s=>scoreN(s.score)===3).length;
+  const avgWc=Math.round(STUDENTS.reduce((a,s)=>a+s.wc,0)/total);
+  const full=STUDENTS.filter(fullDone).length;
+  document.getElementById('overviewStats').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-lbl">Total Scholars</div></div>
+    <div class="stat-card"><div class="stat-num">${full}</div><div class="stat-lbl">Full Draft Complete</div></div>
+    <div class="stat-card"><div class="stat-num">${s4}</div><div class="stat-lbl">Projected 4+</div></div>
+    <div class="stat-card"><div class="stat-num">${s3}</div><div class="stat-lbl">Projected 3</div></div>
+    <div class="stat-card"><div class="stat-num">${avgWc.toLocaleString()}</div><div class="stat-lbl">Avg Words</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--red-danger)">${danger}</div><div class="stat-lbl">⚠️ At Risk</div></div>`;
+
+  // Score dist
+  const sc=document.getElementById('scoreDistCard');
+  const counts={5:0,4:0,3:0,2:0,1:0,D:0};
+  STUDENTS.forEach(s=>{ const n=scoreN(s.score); if(isDanger(s))counts.D++; else if(n>=1&&n<=5)counts[n]++; });
+  const maxC=Math.max(...Object.values(counts),1);
+  sc.innerHTML=`<div style="font-family:'Cinzel',serif;font-size:12px;color:var(--gold);margin-bottom:12px;">Score Projection Distribution (as of 3/20)</div>`+
+    [5,4,3,2,1,'D'].map(s=>{
+      const n=counts[s]||0; const pct=Math.round(n/total*100);
+      const label=s==='D'?'⚠️ Risk':`Score ${s}`;
+      const w=Math.round(n/maxC*100);
+      return `<div class="score-bar-row">
+        <span class="score-bar-label">${label}</span>
+        <div class="score-bar-track"><div class="score-bar-fill s${s}" style="width:${w}%">${n>0?n:''}</div></div>
+        <span class="score-count">${pct}%</span>
+      </div>`;
+    }).join('');
+
+  if(danger>0){
+    document.getElementById('dangerAlert').innerHTML=`<div class="alert-banner" style="margin-top:16px;">⚠️ ${danger} scholar${danger>1?'s are':' is'} at risk of not submitting. Check the Roster tab.</div>`;
+  }
+}
+
+// ═══ ROTW ═══
+function buildRotw(){
+  const c=document.getElementById('rotwCard');
+  if(!rotwD){
+    c.innerHTML=`<div class="rotw-icon">🔮</div><div class="rotw-info"><div class="rotw-label">Researcher of the Week</div><div class="rotw-empty">No researcher crowned yet — award from the Award Points tab</div></div>`;
+    return;
+  }
+  const h=HOUSES[rotwD.house]||{};
+  c.innerHTML=`<div class="rotw-icon">🏅</div><div class="rotw-info">
+    <div class="rotw-label">⚡ Researcher of the Week</div>
+    <div class="rotw-name">${rotwD.name}</div>
+    <div class="rotw-house">${h.e||''} House ${rotwD.house} · ${h.hp||''}</div>
+    <div class="rotw-pts">+250 pts awarded to House ${rotwD.house}</div>
+  </div>`;
+}
+
+// ═══ HOUSE PAGES ═══
+function buildHousePage(house){
+  const {c,e,hp,trait,perk}=HOUSES[house];
+  const members=STUDENTS.filter(s=>s.house===house);
+  const pts=housePts(house);
+  const danger=members.filter(isDanger);
+  const full=members.filter(fullDone).length;
+  const avgWc=Math.round(members.reduce((a,s)=>a+s.wc,0)/members.length);
+  const hentries=ptsLog.filter(e=>e.house===house);
+
+  return `<div class="sec-head" style="color:var(--${c}-l)">${e} House ${house} — ${hp}</div>
+    <div class="tip-box">${e} House Perk: <strong>${trait}</strong> — ${perk}</div>
+    ${danger.length?`<div class="alert-banner">⚠️ ${danger.length} at risk: ${danger.map(s=>s.first).join(', ')}</div>`:''}
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num" style="color:var(--${c}-l)">${pts.toLocaleString()}</div><div class="stat-lbl">House Points</div></div>
+      <div class="stat-card"><div class="stat-num">${members.length}</div><div class="stat-lbl">Members</div></div>
+      <div class="stat-card"><div class="stat-num">${full}</div><div class="stat-lbl">Full Draft</div></div>
+      <div class="stat-card"><div class="stat-num">${members.filter(s=>scoreN(s.score)>=4).length}</div><div class="stat-lbl">Score 4+</div></div>
+      <div class="stat-card"><div class="stat-num">${avgWc.toLocaleString()}</div><div class="stat-lbl">Avg Words</div></div>
+      <div class="stat-card"><div class="stat-num">${members.filter(s=>s.iep).length}</div><div class="stat-lbl">IEP Scholars</div></div>
+    </div>
+    <div class="legend-row"><div class="legend-item"><div class="ldot done"></div>Completed</div><div class="legend-item"><div class="ldot rev"></div>Needs Revision</div><div class="legend-item"><div class="ldot part"></div>Not Finished</div><div class="legend-item"><div class="ldot started"></div>Started</div><div class="legend-item"><div class="ldot ns"></div>Not Started</div></div>
+    <div class="student-grid" style="margin-bottom:22px;">${members.map(s=>renderSC(s)).join('')}</div>
+    <div class="sec-head-sm">📋 Points History</div>
+    <div class="card">${hentries.length===0?`<div class="empty-state">No points awarded yet.</div>`:`<table class="tbl"><thead><tr><th>Date</th><th>Scholar</th><th>Achievement</th><th>Points</th></tr></thead><tbody>${hentries.map(e=>`<tr><td style="opacity:.45">${e.date}</td><td>${e.student||'House'}</td><td><span class="pill${e.isBonus?' bonus':''}">${e.achievement}</span></td><td class="pts">+${e.pts}</td></tr>`).join('')}</tbody></table>`}</div>`;
+}
+
+// ═══ PROGRESS TRACKER ═══
+function buildProgress(){
+  const pg=document.getElementById('houseProgressGrid');
+  pg.innerHTML=Object.keys(HOUSES).map(house=>{
+    const {c,e}=HOUSES[house];
+    const members=STUDENTS.filter(s=>s.house===house);
+    const n=members.length;
+    const secPcts=SECS.map(k=>({key:k,pct:Math.round(members.filter(s=>s[k]==='Completed').length/n*100)}));
+    return `<div class="house-prog-card ${c}">
+      <div class="hpc-head"><div class="hpc-name">${e} House ${house}</div><div class="hpc-pts">${housePts(house).toLocaleString()} pts</div></div>
+      ${secPcts.map(({key,pct})=>`<div class="sec-bar">
+        <div class="sec-bar-label"><span>${SEC_LABELS[key]}</span><span>${pct}%</span></div>
+        <div class="sec-bar-track"><div class="sec-bar-fill done" style="width:${pct}%"></div></div>
+      </div>`).join('')}
+    </div>`;
+  }).join('');
+
+  // Summary table
+  const ss=document.getElementById('sectionSummary');
+  const total=STUDENTS.length;
+  ss.innerHTML=`<table class="tbl"><thead><tr><th>Section</th><th>✅ Complete</th><th>🔄 Needs Rev</th><th>📝 Started</th><th>❌ Not Started</th><th>Progress</th></tr></thead><tbody>${
+    SECS.map(k=>{
+      const done=STUDENTS.filter(s=>s[k]==='Completed').length;
+      const rev=STUDENTS.filter(s=>s[k]==='Completed - Needs Revision').length;
+      const started=STUDENTS.filter(s=>['Started - Needs Revision','Started - Not Finished'].includes(s[k])).length;
+      const ns=STUDENTS.filter(s=>['Incomplete - Not Started',''].includes(s[k])||!s[k]).length;
+      const pct=Math.round(done/total*100);
+      return `<tr><td style="font-family:'Cinzel',serif;font-size:10px;color:var(--gold-l)">${SEC_LABELS[k]}</td><td>${done}</td><td>${rev}</td><td>${started}</td><td>${ns}</td>
+        <td style="min-width:100px;"><div class="pts-bar-track" style="height:6px;"><div class="pts-bar-fill morrison" style="width:${pct}%"></div></div><div style="font-size:8px;opacity:.4;margin-top:2px;">${pct}%</div></td></tr>`;
+    }).join('')
+  }</tbody></table>`;
+
+  // Word stats
+  const wcs=STUDENTS.map(s=>s.wc).filter(w=>w>0).sort((a,b)=>a-b);
+  document.getElementById('wordStats').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${Math.round(wcs.reduce((a,b)=>a+b,0)/wcs.length).toLocaleString()}</div><div class="stat-lbl">Avg Words</div></div>
+    <div class="stat-card"><div class="stat-num">${wcs[wcs.length-1].toLocaleString()}</div><div class="stat-lbl">Highest WC</div></div>
+    <div class="stat-card"><div class="stat-num">${STUDENTS.filter(s=>s.wc>=4000).length}</div><div class="stat-lbl">4,000+ Words</div></div>
+    <div class="stat-card"><div class="stat-num">${STUDENTS.filter(s=>s.wc>=2000).length}</div><div class="stat-lbl">2,000+ Words</div></div>
+    <div class="stat-card"><div class="stat-num">${STUDENTS.filter(s=>s.wc<500&&s.wc>0).length}</div><div class="stat-lbl">Under 500</div></div>
+    <div class="stat-card"><div class="stat-num">${STUDENTS.filter(s=>s.wc===0).length}</div><div class="stat-lbl">No Words Yet</div></div>`;
+}
+
+// ═══ ROAD ═══
+function buildRoad(){
+  const stops=[
+    {icon:'🌲',name:'Forbidden Forest',phase:'Data Collection',count:()=>STUDENTS.filter(s=>s.results!=='Completed'&&s.method==='Completed').length},
+    {icon:'📚',name:'Library Annex',phase:'Drafting',count:()=>STUDENTS.filter(s=>s.intro==='Completed'&&s.lit==='Completed'&&s.method!=='Completed').length},
+    {icon:'🚪',name:'Room of Requirement',phase:'Revision',count:()=>STUDENTS.filter(s=>s.method==='Completed'&&s.results!=='Completed').length},
+    {icon:'🔭',name:'Astronomy Tower',phase:'Presentation',count:()=>STUDENTS.filter(fullDone).length},
+    {icon:'🏛️',name:'Ministry of Magic',phase:'Final Submission',count:()=>0},
+  ];
+  const total=STUDENTS.length;
+  const max=Math.max(...stops.map(s=>s.count()),1);
+  document.getElementById('roadGrid').innerHTML=stops.map(s=>{
+    const n=s.count(); const pct=Math.round(n/total*100); const isActive=n===max&&n>0;
+    return `<div class="road-stop${isActive?' zone-active':''}">
+      <span class="road-icon">${s.icon}</span>
+      <div class="road-name">${s.name}</div>
+      <div class="road-phase">${s.phase}</div>
+      <div class="road-num">${n}</div>
+      <div class="road-bar-t"><div class="road-bar-f" style="width:${pct}%"></div></div>
+      <div class="road-lbl">${pct}% of class</div>
+    </div>`;
+  }).join('');
+
+  const milestones=[
+    {name:'March 11 → Full Draft Due',date:'2026-03-11',done:false},
+    {name:'March 16 → S2 Midterms',date:'2026-03-16',done:false},
+    {name:'March 23 → Presentation Deck Due',date:'2026-03-23',done:true},
+    {name:'March 25 → Early Presenters',date:'2026-03-25',done:false},
+    {name:'March 30 → Presentations Begin',date:'2026-03-30',done:false},
+    {name:'April 15 → Recommended Completion',date:'2026-04-15',done:false},
+    {name:'April 30 → CB Submission Deadline',date:'2026-04-30',done:false},
+    {name:'May 10 → Teacher Affirmations Due',date:'2026-05-10',done:false},
+  ];
+  document.getElementById('milestonesCard').innerHTML=milestones.map(m=>{
+    const d=daysUntil(m.date); const past=d<0||m.done;
+    return `<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+      <span style="font-size:14px;">${m.done||d<0?'✅':'⏳'}</span>
+      <div style="flex:1;font-size:11px;${past?'opacity:.4;text-decoration:line-through;':''}">${m.name}</div>
+      <span style="font-family:'Cinzel',serif;font-size:10px;color:${d<0?'rgba(255,255,255,.3)':d<=7?'var(--red-danger)':d<=14?'var(--gold)':'var(--green-ok)'};">${past?'Done':d===0?'TODAY!':d>0?`${d}d`:'Passed'}</span>
+    </div>`;
+  }).join('');
+}
+
+// ═══ MASTERY ═══
+function buildMastery(){
+  const skills=['Question','Understand','Evaluate','Synthesize','Transmit'];
+  const skillMap={Question:'Q — Question & Explore',Understand:'U — Understand & Analyze',Evaluate:'E — Evaluate Multiple Perspectives',Synthesize:'S — Synthesize Ideas',Transmit:'T — Team, Transform & Transmit'};
+  
+  let filtered=STUDENTS;
+  if(masterySkillF!=='all') filtered=STUDENTS; // all students shown, but skill column filtered
+
+  // Stats
+  const totals={proficient:0,approaching:0,emerging:0,none:0};
+  filtered.forEach(s=>{
+    const key=`${s.first}_${s.last}`.replace(/\s/g,'_');
+    const d=masteryD[key];
+    if(!d||!d[masterySkillF==='all'?skills[0]:masterySkillF]) totals.none++;
+    else {
+      const lvl=d[masterySkillF==='all'?skills[0]:masterySkillF];
+      if(lvl==='Proficient') totals.proficient++;
+      else if(lvl==='Approaching') totals.approaching++;
+      else if(lvl==='Emerging') totals.emerging++;
+      else totals.none++;
+    }
+  });
+  document.getElementById('masteryStats').innerHTML=`
+    <div class="stat-card"><div class="stat-num" style="color:var(--green-ok)">${totals.proficient}</div><div class="stat-lbl">Proficient</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--gold)">${totals.approaching}</div><div class="stat-lbl">Approaching</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--red-danger)">${totals.emerging}</div><div class="stat-lbl">Emerging</div></div>
+    <div class="stat-card"><div class="stat-num" style="opacity:.4">${totals.none}</div><div class="stat-lbl">Not Logged</div></div>`;
+
+  const skill=masterySkillF==='all'?null:masterySkillF;
+  document.getElementById('masteryGrid').innerHTML=filtered.map(s=>{
+    const key=`${s.first}_${s.last}`.replace(/\s/g,'_');
+    const d=masteryD[key]||{};
+    const lvl=skill?d[skill]:null;
+    const cls=lvl==='Proficient'?'proficient':lvl==='Approaching'?'approaching':lvl==='Emerging'?'emerging':'';
+    const displaySkills=skill?[skill]:skills;
+    return `<div class="mastery-card ${cls}">
+      <div class="mastery-name">${s.first} ${s.last}</div>
+      <div class="mastery-sub">${HOUSES[s.house]?.e||''} ${s.house} · Block ${s.block}</div>
+      ${displaySkills.map(sk=>`<div style="margin-top:5px;">
+        <div style="font-size:9px;opacity:.5;margin-bottom:3px;">${sk}${skill?'':' ('+skillMap[sk].split('—')[0].trim()+')'}</div>
+        <div class="mastery-btns">
+          <div class="mbtn prof${d[sk]==='Proficient'?' sel':''}" onclick="setMastery('${key}','${sk}','Proficient',this)">Proficient</div>
+          <div class="mbtn appr${d[sk]==='Approaching'?' sel':''}" onclick="setMastery('${key}','${sk}','Approaching',this)">Approaching</div>
+          <div class="mbtn emrg${d[sk]==='Emerging'?' sel':''}" onclick="setMastery('${key}','${sk}','Emerging',this)">Emerging</div>
+        </div>
+      </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
+function setMastery(key,skill,level,btn){
+  if(!masteryD[key]) masteryD[key]={};
+  masteryD[key][skill]=level;
+  saveAll();
+  // Update UI
+  const card=btn.closest('.mastery-card');
+  const allBtns=btn.closest('.mastery-btns').querySelectorAll('.mbtn');
+  allBtns.forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  // Update card class
+  const allSkillLevels=Object.values(masteryD[key]);
+  const hasEmerg=allSkillLevels.includes('Emerging');
+  const hasAppr=allSkillLevels.includes('Approaching');
+  const allProf=allSkillLevels.length>0&&allSkillLevels.every(l=>l==='Proficient');
+  card.className='mastery-card '+(hasEmerg?'emerging':hasAppr?'approaching':allProf?'proficient':'');
+}
+
+function filterMastery(skill,btn){
+  masterySkillF=skill;
+  document.querySelectorAll('#masterySkillFilter .fbtn-sm').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('masterySkillLabel').textContent=skill==='all'?'All QUEST Skills':skill+' & '+['Explore','Analyze','Perspectives','Ideas','Transmit'][['Question','Understand','Evaluate','Synthesize','Transmit'].indexOf(skill)];
+  buildMastery();
+}
+
+// ═══ BLOCKS ═══
+function buildBlocks(){
+  let filtered=STUDENTS;
+  if(blockF==='mandated') filtered=STUDENTS.filter(s=>s.support!=='No/Optional');
+  else if(blockF==='iep') filtered=STUDENTS.filter(s=>s.iep);
+  else if(blockF!=='all') filtered=STUDENTS.filter(s=>s.block===blockF);
+  
+  document.getElementById('blockCount').textContent=filtered.length+' scholars';
+  const danger=filtered.filter(isDanger).length;
+  const full=filtered.filter(fullDone).length;
+  const avg=filtered.length>0?Math.round(filtered.reduce((a,s)=>a+s.wc,0)/filtered.length):0;
+  document.getElementById('blockStats').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${filtered.length}</div><div class="stat-lbl">Scholars</div></div>
+    <div class="stat-card"><div class="stat-num">${full}</div><div class="stat-lbl">Full Draft</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--red-danger)">${danger}</div><div class="stat-lbl">At Risk</div></div>
+    <div class="stat-card"><div class="stat-num">${avg.toLocaleString()}</div><div class="stat-lbl">Avg Words</div></div>`;
+  document.getElementById('blockGrid').innerHTML=filtered.map(s=>renderSC(s)).join('')||'<div class="empty-state">No scholars match this filter.</div>';
+}
+
+function filterBlock(f,btn){
+  blockF=f;
+  document.querySelectorAll('#sec-blocks .fbtn-sm').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  buildBlocks();
+}
+
+// ═══ QUESTS ═══
+function buildQuests(){
+  const quests=[
+    {icon:'📜',name:'The Magnum Opus Manuscript',desc:'4,000–5,000 word draft completed',pts:100,type:'core',quest:'S — Synthesize'},
+    {icon:'🧠',name:'The Pensieve Exchange',desc:'Giving or receiving a peer review',pts:50,type:'core',quest:'T — Team'},
+    {icon:'🔬',name:"The Refiner's Draught",desc:'Deep paper revision',pts:75,type:'core',quest:'S — Synthesize'},
+    {icon:'💡',name:'The Illumination Charms',desc:'Presentation slides ready',pts:40,type:'core',quest:'T — Transmit'},
+    {icon:'🏛️',name:'The Great Hall Defense',desc:'Final Oral Defense (POD)',pts:150,type:'core',quest:'T — Transmit'},
+    {icon:'🦜',name:'The Order of the Phoenix',desc:'Early Gala presentation bonus',pts:50,type:'bonus',quest:'T — Transmit'},
+    {icon:'🔗',name:'The Unbreakable Vow',desc:'Final College Board submission',pts:200,type:'core',quest:'T — Transmit'},
+    {icon:'🗺️',name:"The Marauder's Map Award",desc:'Finds a perfect niche source',pts:75,type:'bonus',quest:'Q — Question'},
+    {icon:'⏳',name:"Hermione's Time-Turner",desc:'Major section 48hrs early',pts:75,type:'bonus',quest:'Q — Question'},
+    {icon:'🍀',name:'Felix Felicis',desc:'Highest house sprint attendance',pts:100,type:'bonus',quest:'T — Team'},
+    {icon:'🏅',name:'Researcher of the Week',desc:'+250 pts to the scholar\'s house',pts:250,type:'bonus',quest:'All'},
+    {icon:'🔑',name:'Q — Question Mastery',desc:'Demonstrated Question & Explore skills',pts:30,type:'quest',quest:'Q — Question'},
+    {icon:'🔍',name:'U — Understand Mastery',desc:'Demonstrated Understand & Analyze skills',pts:30,type:'quest',quest:'U — Understand'},
+    {icon:'⚖️',name:'E — Evaluate Mastery',desc:'Demonstrated Multiple Perspectives skills',pts:30,type:'quest',quest:'E — Evaluate'},
+    {icon:'💫',name:'S — Synthesize Mastery',desc:'Demonstrated Synthesize Ideas skills',pts:30,type:'quest',quest:'S — Synthesize'},
+    {icon:'📢',name:'T — Transmit Mastery',desc:'Demonstrated Team, Transform & Transmit',pts:30,type:'quest',quest:'T — Transmit'},
+  ];
+  document.getElementById('questGrid').innerHTML=quests.map(q=>`<div class="quest-card">
+    <div class="quest-icon">${q.icon}</div>
+    <div class="quest-info">
+      <div class="quest-name">${q.name}</div>
+      <div class="quest-desc">${q.desc}</div>
+      <div style="margin-top:4px;"><span class="quest-type qt-${q.type==='quest'?'perk':q.type}">${q.type.toUpperCase()}</span><span style="font-size:8px;opacity:.4;margin-left:6px;">${q.quest}</span></div>
+    </div>
+    <div class="quest-pts">${q.pts?'+'+q.pts:''}</div>
+  </div>`).join('');
+
+  const perks=[
+    {house:'Obama',icon:'🎤',trait:'Academic Oratory',desc:'First pick of presentation time slots. Unlocked when House Obama leads the cup.',c:'obama'},
+    {house:'Morrison',icon:'🖋️',trait:'Legacy Ink',desc:'Featured spot on Research Spotlight wall. Unlocked when House Morrison leads the cup.',c:'morrison'},
+    {house:'Clemente',icon:'🦁',trait:"The Lion's Nerve",desc:'Celebratory treat when first house reaches 50% drafts done.',c:'clemente'},
+    {house:'Sotomayor',icon:'🤝',trait:'The Fair Shake',desc:'Pass to skip one minor check-in. Unlocked for sustained steady work ethic.',c:'sotomayor'},
+  ];
+  document.getElementById('perksGrid').innerHTML=perks.map(p=>`<div class="quest-card" style="border-color:var(--${p.c}-l);">
+    <div class="quest-icon">${p.icon}</div>
+    <div class="quest-info">
+      <div class="quest-name" style="color:var(--${p.c}-l);">${p.trait}</div>
+      <div class="quest-desc">${p.desc}</div>
+      <span class="quest-type qt-perk">House ${p.house}</span>
+    </div>
+  </div>`).join('');
+}
+
+// ═══ STREAKS ═══
+function buildStreaks(){
+  const streaks=[
+    {icon:'🔥',name:'Writing Sprint Streak',desc:'Consecutive sprint days with top house attendance',val:sprintD.length+' sprints logged',},
+    {icon:'📝',name:'Daily Drafters',desc:'Houses maintaining consistent word count growth',val:STUDENTS.filter(s=>s.wc>=2000).length+' at 2,000+ words'},
+    {icon:'⚡',name:'House Cup Momentum',desc:'Total points logged across all houses',val:ptsLog.reduce((a,e)=>a+e.pts,0).toLocaleString()+' total pts'},
+    {icon:'🎯',name:'Full Draft Club',desc:'Scholars who have completed all 5 sections',val:STUDENTS.filter(fullDone).length+' complete'},
+    {icon:'📅',name:'Early Gala Hopefuls',desc:'Scholars projected Score 4+ with complete drafts',val:STUDENTS.filter(s=>scoreN(s.score)>=4&&fullDone(s)).length+' eligible'},
+    {icon:'🏆',name:'Peer Review Network',desc:'Total Pensieve Exchange awards given',val:ptsLog.filter(e=>e.achievement.includes('Pensieve')).length+' exchanges'},
+  ];
+  document.getElementById('streakGrid').innerHTML=streaks.map(s=>`<div class="streak-card">
+    <div class="streak-icon">${s.icon}</div>
+    <div class="streak-info"><div class="streak-name">${s.name}</div><div class="streak-desc">${s.desc}</div></div>
+    <div class="streak-val">${s.val}</div>
+  </div>`).join('');
+
+  // Sprint log
+  document.getElementById('sprintLog').innerHTML=sprintD.length===0?
+    '<tr><td colspan="3" class="empty-state">No sprints yet.</td></tr>':
+    [...sprintD].reverse().map(e=>`<tr><td style="opacity:.45">${e.date}</td><td><span class="hp ${e.house.toLowerCase()}"></span>${e.house}</td><td class="pts">+100</td></tr>`).join('');
+}
+
+function logSprint(){
+  const house=document.getElementById('sprintWinner').value;
+  const date=document.getElementById('sprintDate').value||new Date().toLocaleDateString();
+  if(!house) return;
+  sprintD.push({date,house});
+  ptsLog.push({date,house,student:'(House Award)',achievement:'Felix Felicis (Writing Sprint)',pts:100,isBonus:true});
+  saveAll();
+  buildStreaks();
+  buildCupDisplay();
+  buildLogTable();
+  document.getElementById('sprintSuccess').style.display='block';
+  setTimeout(()=>document.getElementById('sprintSuccess').style.display='none',2000);
+  document.getElementById('sprintWinner').value='';
+}
+
+// ═══ GOALS ═══
+function buildGoals(){
+  const total=STUDENTS.length;
+  const full=STUDENTS.filter(fullDone).length;
+  const s4=STUDENTS.filter(s=>scoreN(s.score)>=4).length;
+  const over4k=STUDENTS.filter(s=>s.wc>=4000).length;
+  const noConc=STUDENTS.filter(s=>s.conclusion==='Incomplete - Not Started'&&!isDanger(s)).length;
+  const danger=STUDENTS.filter(isDanger).length;
+
+  const goals=[
+    {icon:'📝',title:'Full Draft Completion',current:full,target:total,label:`${full}/${total} scholars done`},
+    {icon:'⭐',title:'Score 4+ Projection',current:s4,target:Math.round(total*0.3),label:`Goal: 30% of class (${Math.round(total*0.3)} scholars)`},
+    {icon:'📖',title:'4,000+ Word Count',current:over4k,target:Math.round(total*0.5),label:`Target: 50% at 4K+ words`},
+    {icon:'🔚',title:'Conclusions Complete',current:total-noConc-danger,target:total-danger,label:`${noConc} still need conclusion`},
+    {icon:'⚠️',title:'At-Risk Intervention',current:total-danger,target:total,label:`${danger} scholars need urgent support`},
+    {icon:'🏆',title:'House Cup Points Logged',current:ptsLog.length,target:50,label:'Goal: 50 achievement entries'},
+  ];
+
+  document.getElementById('goalCardsGrid').innerHTML=goals.map(g=>{
+    const pct=Math.min(100,Math.round(g.current/Math.max(g.target,1)*100));
+    const done=pct>=100;
+    return `<div class="goal-card">
+      <div class="goal-title">${g.icon} ${g.title}</div>
+      <div class="goal-bar-track"><div class="goal-bar-fill" style="width:${pct}%;${done?'background:linear-gradient(90deg,var(--morrison),var(--green-ok));':''}"></div></div>
+      <div class="goal-nums"><span>${g.label}</span><span>${pct}%${done?' ✅':''}</span></div>
+    </div>`;
+  }).join('');
+
+  // Priority list
+  const priority=STUDENTS
+    .filter(s=>isDanger(s)||secsDone(s)<3)
+    .sort((a,b)=>secsDone(a)-secsDone(b))
+    .slice(0,20);
+  document.getElementById('caseloadPriority').innerHTML=`<div style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold);margin-bottom:10px;">🚨 Top Priority Scholars (Lowest Section Completion)</div>`+
+    priority.map(s=>`<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);">
+      <span class="hp ${s.house.toLowerCase()}"></span>
+      <span style="flex:1;font-size:11px;">${s.first} ${s.last} <span style="opacity:.4;font-size:9px;">· ${s.house} · Block ${s.block}</span></span>
+      <span style="font-size:9px;opacity:.5;">${secsDone(s)}/5 sections</span>
+      <span style="font-family:'Cinzel',serif;font-size:9px;color:${isDanger(s)?'var(--red-danger)':'var(--gold)'};">${s.score}</span>
+    </div>`).join('')+
+    (priority.length===0?'<div class="empty-state">All scholars are on track!</div>':'');
+
+  // Populate contact student select
+  const cs=document.getElementById('contactStudent');
+  if(cs){
+    const at_risk=STUDENTS.filter(s=>isDanger(s)||secsDone(s)<2).sort((a,b)=>secsDone(a)-secsDone(b));
+    cs.innerHTML='<option value="">— Select Scholar —</option>'+
+      at_risk.map(s=>`<option value="${s.first} ${s.last}">${s.last}, ${s.first} (${s.house})</option>`).join('');
+  }
+
+  // Contact log
+  buildContactLog();
+}
+
+function logContact(){
+  const student=document.getElementById('contactStudent').value;
+  const type=document.getElementById('contactType').value;
+  const date=document.getElementById('contactDate').value||new Date().toLocaleDateString();
+  const note=document.getElementById('contactNote').value;
+  if(!student) return;
+  const s=STUDENTS.find(x=>x.first+' '+x.last===student);
+  contactD.push({date,student,house:s?.house||'',type,note});
+  saveAll();
+  buildContactLog();
+  document.getElementById('contactSuccess').style.display='block';
+  setTimeout(()=>document.getElementById('contactSuccess').style.display='none',2000);
+  ['contactStudent','contactNote'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  syncContactToSheets({date,student,house:s?.house||'',type,note});
+}
+
+function buildContactLog(){
+  const body=document.getElementById('contactLog');
+  if(!body) return;
+  body.innerHTML=contactD.length===0?'<tr><td colspan="4" class="empty-state">No contacts logged.</td></tr>':
+    [...contactD].reverse().map(c=>`<tr><td style="opacity:.45">${c.date}</td><td>${c.student}</td><td><span class="pill">${c.type}</span></td><td>${c.note||'—'}</td></tr>`).join('');
+}
+
+// ═══ ROSTER ═══
+function buildRoster(){
+  let filtered=STUDENTS;
+  if(rosterF==='danger') filtered=STUDENTS.filter(isDanger);
+  else if(rosterF==='score4') filtered=STUDENTS.filter(s=>scoreN(s.score)>=4);
+  else if(rosterF==='fulldone') filtered=STUDENTS.filter(fullDone);
+  else if(rosterF==='iep') filtered=STUDENTS.filter(s=>s.iep);
+  else if(rosterF!=='all') filtered=STUDENTS.filter(s=>s.house===rosterF);
+  document.getElementById('rosterCount').textContent=`${filtered.length} scholars shown`;
+  document.getElementById('rosterGrid').innerHTML=filtered.map(s=>renderSC(s)).join('')||'<div class="empty-state">No scholars match.</div>';
+}
+function filterRoster(f,btn){
+  rosterF=f;
+  document.querySelectorAll('#sec-roster .fbtn-sm').forEach(b=>b.classList.remove('active','obama','morrison','clemente','sotomayor'));
+  btn.classList.add('active');
+  if(['Obama','Morrison','Clemente','Sotomayor'].includes(f)) btn.classList.add(f.toLowerCase());
+  buildRoster();
+}
+
+// ═══ LEADERBOARD ═══
+function buildLeaderboard(){
+  const scholars={};
+  ptsLog.filter(e=>e.student&&e.student!=='(House Award)').forEach(e=>{
+    if(!scholars[e.student]) scholars[e.student]={name:e.student,pts:0,house:e.house};
+    scholars[e.student].pts+=e.pts;
+  });
+  let ranked=Object.values(scholars).sort((a,b)=>b.pts-a.pts);
+  if(lbF!=='all') ranked=ranked.filter(x=>x.house===lbF);
+  
+  document.getElementById('lbList').innerHTML=ranked.length===0?'<div class="empty-state">No individual points awarded yet.</div>':
+    ranked.slice(0,30).map((x,i)=>{
+      const h=HOUSES[x.house]||{};
+      const rankClass=i===0?'gold':i===1?'silver':i===2?'bronze':'';
+      return `<div class="lb-row">
+        <div class="lb-rank ${rankClass}">${i+1}</div>
+        <div style="font-size:14px;">${h.e||''}</div>
+        <div class="lb-name">${x.name}</div>
+        <span class="lb-house-pip" style="color:var(--${(h.c||'obama')}-l)">${x.house}</span>
+        <div class="lb-pts">+${x.pts}</div>
+      </div>`;
+    }).join('');
+}
+function filterLB(f,btn){
+  lbF=f;
+  document.querySelectorAll('#sec-leaderboard .fbtn-sm').forEach(b=>b.classList.remove('active','obama','morrison','clemente','sotomayor'));
+  btn.classList.add('active');
+  if(['Obama','Morrison','Clemente','Sotomayor'].includes(f)) btn.classList.add(f.toLowerCase());
+  buildLeaderboard();
+}
+
+// ═══ AWARD POINTS ═══
+function filterAwardStudents(){
+  const h=document.getElementById('aHouse').value;
+  const sel=document.getElementById('aStudent');
+  const sorted=[...STUDENTS].filter(s=>!h||s.house===h).sort((a,b)=>a.last.localeCompare(b.last));
+  sel.innerHTML='<option value="">— House Award —</option>'+
+    sorted.map(s=>`<option value="${s.first} ${s.last}">${s.last}, ${s.first}</option>`).join('');
+}
+
+function onAchievChange(){
+  const v=document.getElementById('aAchiev').value;
+  const custom=v==='custom|0';
+  document.getElementById('customPtsGrp').style.display=custom?'':'none';
+  document.getElementById('customReasonGrp').style.display=custom?'':'none';
+}
+
+function logAward(){
+  const house=document.getElementById('aHouse').value;
+  const student=document.getElementById('aStudent').value;
+  const achievVal=document.getElementById('aAchiev').value;
+  const date=document.getElementById('aDate').value||new Date().toLocaleDateString();
+  const note=document.getElementById('aNote').value;
+  if(!house||!achievVal){alert('Please select a House and Achievement.');return;}
+  let [aKey,ptsStr]=achievVal.split('|');
+  let pts=parseInt(ptsStr)||0;
+  let achievName='';let isBonus=false;
+  if(aKey==='custom'){
+    pts=parseInt(document.getElementById('customPts').value)||0;
+    achievName=document.getElementById('customReason').value||'Custom Award';
+    isBonus=true;
+  } else {
+    const aNames={'magnum':'Magnum Opus Manuscript','pensieve':'Pensieve Exchange','draught':"Refiner's Draught",'illumination':'Illumination Charms','greathall':'Great Hall Defense','order':'Order of the Phoenix','vow':'Unbreakable Vow','marauder':"Marauder's Map Award",'timeturner':"Hermione's Time-Turner",'felix':'Felix Felicis','rotw':'Researcher of the Week','quest_q':'Question Mastery','quest_u':'Understand Mastery','quest_e':'Evaluate Mastery','quest_s':'Synthesize Mastery','quest_t':'Transmit Mastery','oratory':'Academic Oratory','legacyink':'Legacy Ink','lionnerve':"Lion's Nerve",'fairshake':'Fair Shake'};
+    achievName=aNames[aKey]||aKey;
+    isBonus=['marauder','timeturner','felix','rotw','order'].includes(aKey);
+  }
+  const entry={date:new Date(date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),house,student,achievement:achievName,pts,note,isBonus};
+  ptsLog.push(entry);
+  if(aKey==='rotw'&&student) rotwD={name:student,house};
+  saveAll();
+  buildCupDisplay();buildOverview();buildRotw();buildLogTable();buildLeaderboard();buildStreaks();buildGoals();
+  ['h-obama','h-morrison','h-clemente','h-sotomayor'].forEach(id=>{const el=document.getElementById(id+'-inner');if(el&&el.innerHTML)el.innerHTML=buildHousePage(id.replace('h-','').charAt(0).toUpperCase()+id.replace('h-','').slice(1));});
+  const ok=document.getElementById('aSuccess');ok.style.display='block';setTimeout(()=>ok.style.display='none',2500);
+  ['aHouse','aStudent','aAchiev','aDate','aNote'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('aStudent').innerHTML='<option value="">— House Award —</option>';
+  onAchievChange();
+  syncToSheets(entry);
+}
+
+// ═══ LOG TABLE ═══
+function buildLogTable(){
+  const body=document.getElementById('logBody');
+  if(!body) return;
+  body.innerHTML=ptsLog.length===0?'<tr><td colspan="5" class="empty-state">No points yet.</td></tr>':
+    [...ptsLog].reverse().map(e=>`<tr>
+      <td style="opacity:.4;font-size:10px;">${e.date}</td>
+      <td><span class="hp ${e.house.toLowerCase()}"></span>${e.house}</td>
+      <td>${e.student||'<em style="opacity:.35">House</em>'}</td>
+      <td><span class="pill${e.isBonus?' bonus':''}">${e.achievement}</span>${e.note?` <span style="opacity:.35;font-size:9px;">— ${e.note}</span>`:''}</td>
+      <td class="pts">+${e.pts}</td>
+    </tr>`).join('');
+
+  // Recent awards in award tab
+  const ra=document.getElementById('recentAwards');
+  if(ra) ra.innerHTML=ptsLog.length===0?'<tr><td colspan="5" class="empty-state">No awards yet.</td></tr>':
+    [...ptsLog].reverse().slice(0,15).map(e=>`<tr>
+      <td style="opacity:.4;font-size:10px;">${e.date}</td>
+      <td><span class="hp ${e.house.toLowerCase()}"></span>${e.house}</td>
+      <td>${e.student||'—'}</td>
+      <td><span class="pill${e.isBonus?' bonus':''}">${e.achievement}</span></td>
+      <td class="pts">+${e.pts}</td>
+    </tr>`).join('');
+}
+
+// ═══ GOOGLE SHEETS SYNC ═══
+let sheetsUrl=localStorage.getItem('apSheetsUrl')||'';
+function initSheetsInput(){const el=document.getElementById('sheetsUrl');if(el)el.value=sheetsUrl;}
+function saveSheetsUrl(){sheetsUrl=document.getElementById('sheetsUrl').value.trim();localStorage.setItem('apSheetsUrl',sheetsUrl);showSync('URL saved! Click Test to verify.','ok');}
+async function testSync(){
+  if(!sheetsUrl){showSync('Paste your Apps Script URL first.','err');return;}
+  showSync('Testing…','ok');
+  try{const r=await fetch(sheetsUrl+'?action=ping');const d=await r.json();if(d.ok)showSync('✓ Connected! Sheet is live. Click Pull Data to sync students.','ok');else showSync('Connected but unexpected: '+JSON.stringify(d),'err');}
+  catch(e){showSync('Failed. Check URL and deployment settings. Error: '+e.message,'err');}
+}
+async function pullLiveData(){
+  if(!sheetsUrl){showSync('Save your URL first.','err');return;}
+  showSync('Pulling student data…','ok');
+  try{
+    const r=await fetch(sheetsUrl+'?action=students');const d=await r.json();
+    if(d.students){showSync(`✓ Refreshed! ${d.students.length} scholars loaded from live sheet.`,'ok');}
+    else showSync('No students found: '+JSON.stringify(d),'err');
+  }catch(e){showSync('Pull failed: '+e.message,'err');}
+}
+async function syncToSheets(entry){
+  if(!sheetsUrl) return;
+  try{await fetch(sheetsUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'addPoints',...entry})});}catch(e){}
+}
+async function syncContactToSheets(entry){
+  if(!sheetsUrl) return;
+  try{await fetch(sheetsUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'addContact',...entry})});}catch(e){}
+}
+function showSync(msg,cls){const el=document.getElementById('syncStatus');el.textContent=msg;el.className='sync-status '+cls;}
+function copyScript(){navigator.clipboard.writeText(document.getElementById('scriptBlock').textContent).then(()=>{const b=event.target;b.textContent='✓ Copied!';setTimeout(()=>b.textContent='📋 Copy Script',2000);});}
+
+// ═══ NAV ═══
+function show(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('visible'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  const sec=document.getElementById('sec-'+id);
+  if(sec) sec.classList.add('visible');
+  if(btn) btn.classList.add('active');
+  if(id.startsWith('h-')){
+    const house=id.slice(2);
+    const hName=house.charAt(0).toUpperCase()+house.slice(1);
+    const el=document.getElementById(id+'-inner');
+    if(el) el.innerHTML=buildHousePage(hName);
+  }
+  if(id==='cup'){buildCupDisplay();buildLogTable();}
+  if(id==='leaderboard') buildLeaderboard();
+  if(id==='progress') buildProgress();
+  if(id==='road') buildRoad();
+  if(id==='mastery') buildMastery();
+  if(id==='blocks') buildBlocks();
+  if(id==='quests') buildQuests();
+  if(id==='streaks') buildStreaks();
+  if(id==='goals') buildGoals();
+  if(id==='roster') buildRoster();
+}
+
+// ═══ INIT ═══
+window.addEventListener('DOMContentLoaded',()=>{
+  initStars();initCountdown();
+  buildCupDisplay();buildOverview();buildRotw();buildLogTable();
+  initSheetsInput();
+  document.getElementById('aDate').value=new Date().toISOString().split('T')[0];
+  document.getElementById('sprintDate').value=new Date().toISOString().split('T')[0];
+  document.getElementById('contactDate').value=new Date().toISOString().split('T')[0];
+  // Close modal on backdrop click
+  document.getElementById('studentModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+});
+</script>
+</body>
+</html>
