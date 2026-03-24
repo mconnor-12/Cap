@@ -428,44 +428,44 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 .email-check-item input[type=checkbox]{accent-color:var(--gold);}
 .email-preview{background:rgba(0,0,0,.3);border:1px solid rgba(212,168,67,.1);border-radius:6px;padding:14px;font-size:11px;line-height:1.75;min-height:200px;white-space:pre-wrap;font-family:'Crimson Pro',serif;color:var(--parch);}
 
-/* ══ AWARD ROSTER TAB ══════════════════════════════ */
-.ar-toolbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:14px;padding:10px 14px;background:rgba(28,22,14,.7);border:1px solid rgba(212,168,67,.1);border-radius:8px;}
-.ar-view-btn{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.07em;padding:6px 14px;border-radius:5px;border:1px solid rgba(212,168,67,.2);background:transparent;color:rgba(255,255,255,.5);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px;}
-.ar-view-btn.active{background:rgba(212,168,67,.2);color:var(--gold-l);border-color:var(--gold);}
-.ar-view-btn:hover{color:var(--gold-l);}
-.ar-sep{width:1px;height:20px;background:rgba(212,168,67,.15);margin:0 2px;flex-shrink:0;}
-/* Cards grid (same look as Chi Tracker image 1) */
-.ar-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px;margin-bottom:16px;}
-.ar-card{background:rgba(28,22,14,.9);border:1px solid rgba(212,168,67,.12);border-radius:8px;padding:12px 14px;cursor:pointer;transition:all .15s;position:relative;display:flex;justify-content:space-between;align-items:center;}
-.ar-card:hover{border-color:rgba(212,168,67,.3);background:rgba(34,28,18,.95);}
-.ar-card.ar-sel{border-color:var(--gold);background:rgba(212,168,67,.08);}
-.ar-card.ar-sel::before{content:'✓';position:absolute;top:6px;right:8px;font-size:10px;color:var(--gold);font-family:'Cinzel',serif;}
-.ar-card-left{}
-.ar-card-name{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:var(--parch);margin-bottom:2px;}
-.ar-card-sub{font-size:9px;opacity:.45;}
-.ar-card-pts{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:var(--gold);padding-right:18px;}
-/* Roster table (image 2 style) */
-.ar-roster-wrap{overflow-x:auto;border-radius:8px;border:1px solid rgba(212,168,67,.1);margin-bottom:16px;}
-.ar-tbl{width:100%;border-collapse:collapse;font-size:11px;}
-.ar-tbl th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.1em;padding:7px 10px;text-align:left;border-bottom:1px solid rgba(212,168,67,.15);opacity:.5;position:sticky;top:0;background:#1a1410;white-space:nowrap;}
-.ar-tbl td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,.035);vertical-align:middle;}
-.ar-tbl tr:hover td{background:rgba(212,168,67,.04);}
-.ar-tbl tr.ar-sel td{background:rgba(212,168,67,.08);}
-.ar-tbl tr.ar-sel td:first-child{border-left:2px solid var(--gold);}
-.ar-chk{width:16px;height:16px;accent-color:var(--gold);cursor:pointer;}
-/* Bottom action bar — appears when scholars are selected */
-.ar-action-bar{background:rgba(22,18,10,.97);border:1px solid rgba(212,168,67,.25);border-radius:10px;padding:14px 18px;margin-bottom:16px;display:none;}
-.ar-action-bar.visible{display:block;}
-.ar-action-bar-top{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
-.ar-sel-count{font-family:'Cinzel',serif;font-size:12px;color:var(--gold);}
-.ar-achieve-grid{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
-.ar-ach-btn{font-family:'Cinzel',serif;font-size:8px;padding:5px 11px;border-radius:5px;border:1px solid rgba(212,168,67,.2);background:transparent;color:rgba(255,255,255,.5);cursor:pointer;transition:all .14s;white-space:nowrap;}
-.ar-ach-btn:hover,.ar-ach-btn.sel{background:rgba(212,168,67,.15);color:var(--gold-l);border-color:var(--gold);}
-.ar-ach-btn.bonus:hover,.ar-ach-btn.bonus.sel{background:rgba(74,20,140,.2);color:var(--sotomayor-l);border-color:var(--sotomayor-l);}
-.ar-bestow-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.ar-pts-preview{font-family:'Cinzel',serif;font-size:11px;color:var(--gold);opacity:.7;}
-/* Select-All row */
-.ar-sel-all-row{display:flex;align-items:center;gap:8px;padding:6px 0;margin-bottom:6px;font-family:'Cinzel',serif;font-size:9px;opacity:.6;}
+/* ══ GOAL HUB ══════════════════════════════════════════ */
+.gh-wrap{overflow-x:auto;border-radius:10px;border:1px solid rgba(212,168,67,.12);}
+.gh-tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.gh-tbl th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.1em;padding:9px 11px;text-align:left;border-bottom:1px solid rgba(212,168,67,.18);opacity:.5;background:#1a1410;position:sticky;top:0;white-space:nowrap;cursor:pointer;user-select:none;}
+.gh-tbl th:hover{opacity:.85;}
+.gh-tbl td{padding:9px 11px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;}
+.gh-tbl tr:hover td{background:rgba(212,168,67,.035);}
+.gh-name{font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--parch);margin-bottom:2px;cursor:pointer;}
+.gh-name:hover{color:var(--gold-l);}
+.gh-house{font-size:9px;display:flex;align-items:center;gap:3px;}
+.gh-goal-cell{max-width:220px;min-width:160px;}
+.gh-goal-text{font-size:10px;line-height:1.5;opacity:.75;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.gh-goal-empty{font-size:10px;opacity:.3;font-style:italic;}
+.gh-goal-input{background:rgba(0,0,0,.3);border:1px solid rgba(212,168,67,.25);border-radius:5px;padding:5px 8px;color:var(--parch);font-family:'Crimson Pro',serif;font-size:11px;outline:none;width:100%;resize:vertical;min-height:52px;line-height:1.4;}
+.gh-goal-input:focus{border-color:rgba(212,168,67,.5);}
+.gh-status{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.04em;cursor:pointer;border:1px solid;transition:all .15s;white-space:nowrap;user-select:none;}
+.gh-status.mastered{background:rgba(82,199,136,.15);color:var(--green-ok);border-color:rgba(82,199,136,.3);}
+.gh-status.approaching{background:rgba(240,204,106,.12);color:var(--yellow-warn);border-color:rgba(240,204,106,.3);}
+.gh-status.needs-work{background:rgba(239,83,80,.12);color:var(--red-danger);border-color:rgba(239,83,80,.3);}
+.gh-status.not-assessed{background:rgba(255,255,255,.05);color:rgba(255,255,255,.35);border-color:rgba(255,255,255,.12);}
+.gh-status .gh-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.gh-status.mastered .gh-dot{background:var(--green-ok);}
+.gh-status.approaching .gh-dot{background:var(--yellow-warn);}
+.gh-status.needs-work .gh-dot{background:var(--red-danger);}
+.gh-status.not-assessed .gh-dot{background:rgba(255,255,255,.2);}
+.gh-edit-btn{font-family:'Cinzel',serif;font-size:8px;padding:4px 11px;border-radius:5px;border:1px solid rgba(212,168,67,.25);background:transparent;color:var(--gold-l);cursor:pointer;white-space:nowrap;transition:all .15s;}
+.gh-edit-btn:hover{background:rgba(212,168,67,.15);}
+.gh-save-btn{font-family:'Cinzel',serif;font-size:8px;padding:3px 9px;border-radius:5px;border:1px solid rgba(82,199,136,.35);background:rgba(82,199,136,.1);color:var(--green-ok);cursor:pointer;white-space:nowrap;}
+.gh-save-btn:hover{background:rgba(82,199,136,.2);}
+.gh-noticing-cell{max-width:180px;font-size:9px;opacity:.6;line-height:1.5;font-style:italic;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+/* filter bar */
+.gh-filter-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.gh-search{background:rgba(0,0,0,.3);border:1px solid rgba(212,168,67,.2);border-radius:5px;padding:6px 12px;color:var(--parch);font-family:'Crimson Pro',serif;font-size:11px;outline:none;width:220px;}
+.gh-search::placeholder{opacity:.35;}
+.gh-search:focus{border-color:rgba(212,168,67,.45);}
+/* legend dots */
+.gh-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px;font-size:9px;opacity:.6;}
+.gh-legend-item{display:flex;align-items:center;gap:5px;}
 
 </style>
 </head>
@@ -522,8 +522,7 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
   </div>
   <div class="nav-group">
     <span class="nav-label">⚙️</span>
-    <button class="tab" onclick="show('award',this)">⚡ Quick Award</button>
-    <button class="tab" onclick="show('awardRoster',this)">👥 Award Roster</button>
+    <button class="tab" onclick="show('award',this)">Award Pts</button>
     <button class="tab" onclick="show('scholargoals',this)">🎓 Sch. Goals</button>
     <button class="tab" onclick="show('email',this)">📬 Email</button>
     <button class="tab" onclick="show('sheets',this)">Sheets</button>
@@ -698,10 +697,9 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
   <div class="student-grid" id="rosterGrid"></div>
 </div>
 
-<!-- ══════════ QUICK AWARD ══════════ -->
+<!-- ══════════ AWARD POINTS ══════════ -->
 <div class="section" id="sec-award">
-  <div class="sec-head">⚡ Quick Award — by Group</div>
-  <div class="tip-box">Select a group, pick an achievement, optionally add individual scholars, then bestow. Auto-awards show when word count milestones are reached.</div>
+  <div class="sec-head">✨ Award Points — Hogsmeade Registry</div>
   <div class="view-toggle">
     <button class="vt-btn active" onclick="setAwardView('house',this)">🏠 By House</button>
     <button class="vt-btn" onclick="setAwardView('period',this)">📅 By Period</button>
@@ -710,7 +708,7 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
   </div>
   <div class="quick-award-panel">
     <div class="qa-title">⚡ Quick Award</div>
-    <div class="qa-sub">Select a group · pick an achievement · optionally add scholars · bestow!</div>
+    <div class="qa-sub">Select a group · pick an achievement · optionally add scholars · bestow! Tap multiple scholars for bulk awards.</div>
     <div class="qa-step-label" id="qaGroupLabel">Step 1 — Select House</div>
     <div id="qaGroupRow" style="margin-bottom:18px;"></div>
     <div id="qaAutoAlerts"></div>
@@ -794,113 +792,97 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
   <div class="card"><table class="tbl"><thead><tr><th>Date</th><th>House</th><th>Scholar</th><th>Achievement</th><th>Pts</th></tr></thead><tbody id="recentAwards"><tr><td colspan="5" class="empty-state">No awards yet.</td></tr></tbody></table></div>
 </div>
 
-<!-- ══════════ AWARD ROSTER ══════════ -->
-<div class="section" id="sec-awardRoster">
-  <div class="sec-head">👥 Award Roster — Select &amp; Bestow</div>
+<!-- ══════════ SCHOLAR GOALS — GOAL HUB ══════════ -->
+<div class="section" id="sec-scholargoals">
 
-  <!-- Toolbar: view toggle + filters -->
-  <div class="ar-toolbar">
-    <button class="ar-view-btn active" id="arCardsBtn" onclick="setArView('cards',this)">🃏 Cards</button>
-    <button class="ar-view-btn" id="arRosterBtn" onclick="setArView('roster',this)">📋 Roster</button>
-    <div class="ar-sep"></div>
-    <button class="fbtn-sm active" onclick="filterAR('all',this)">All</button>
-    <button class="fbtn-sm obama" onclick="filterAR('Obama',this)">🦅 Obama</button>
-    <button class="fbtn-sm morrison" onclick="filterAR('Morrison',this)">🐍 Morrison</button>
-    <button class="fbtn-sm clemente" onclick="filterAR('Clemente',this)">🦁 Clemente</button>
-    <button class="fbtn-sm sotomayor" onclick="filterAR('Sotomayor',this)">🦡 Sotomayor</button>
-    <div class="ar-sep"></div>
-    <button class="fbtn-sm" onclick="filterAR('1201',this)">1201</button>
-    <button class="fbtn-sm" onclick="filterAR('1202',this)">1202</button>
-    <button class="fbtn-sm" onclick="filterAR('1203',this)">1203</button>
-    <button class="fbtn-sm" onclick="filterAR('1204',this)">1204</button>
-    <div class="ar-sep"></div>
-    <button class="fbtn-sm" onclick="filterAR('Griffin',this)">Griffin</button>
-    <button class="fbtn-sm" onclick="filterAR('Lima',this)">Lima</button>
-    <button class="fbtn-sm" onclick="filterAR('Flemens',this)">Flemens</button>
-    <div class="ar-sep"></div>
-    <button class="fbtn-sm" onclick="filterAR('danger',this)">⚠️ Risk</button>
-    <button class="fbtn-sm" onclick="filterAR('nopts',this)">△ No Pts</button>
-    <div class="ar-sep"></div>
-    <input type="text" id="arSearch" class="fi" placeholder="Search name…" oninput="renderAR()" style="width:150px;padding:4px 10px;font-size:11px;">
-    <button class="fbtn-sm" onclick="arClearAll()" style="margin-left:auto;">✕ Clear</button>
+  <!-- ── TOP VIEW TOGGLE (matching screenshot) ── -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:18px;">
+    <div class="sec-head" style="margin-bottom:0;">🎯 Goal Hub</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <button class="vt-btn active" id="ghViewHub"  onclick="ghSetView('hub',this)">📊 Goal Hub</button>
+      <button class="vt-btn"        id="ghViewDetail" onclick="ghSetView('detail',this)">🧠 Scholar Detail</button>
+    </div>
   </div>
+  <div style="font-size:11px;opacity:.6;margin-bottom:16px;">View, edit, and track every scholar's skill + habit goals. Click any row to open Scholar Detail. Click a status pill to cycle it.</div>
 
-  <!-- Select-All row -->
-  <div class="ar-sel-all-row">
-    <input type="checkbox" id="arSelectAll" class="ar-chk" onchange="arToggleAll(this.checked)">
-    <label for="arSelectAll" style="cursor:pointer;">Select All Visible</label>
-    <span id="arSelCount" style="font-family:'Cinzel',serif;font-size:10px;background:rgba(212,168,67,.15);color:var(--gold);padding:2px 9px;border-radius:10px;border:1px solid rgba(212,168,67,.25);margin-left:4px;">0 selected</span>
-  </div>
+  <!-- ── GOAL HUB VIEW ── -->
+  <div id="ghHubView">
+    <!-- Filter bar -->
+    <div class="gh-filter-bar">
+      <input class="gh-search" id="ghSearch" placeholder="Search name, goal text…" oninput="buildGoalHub()">
+      <button class="fbtn-sm active" onclick="ghFilter('all',this)">All</button>
+      <button class="fbtn-sm obama"   onclick="ghFilter('Obama',this)">🦅 Obama</button>
+      <button class="fbtn-sm morrison" onclick="ghFilter('Morrison',this)">🐍 Morrison</button>
+      <button class="fbtn-sm clemente" onclick="ghFilter('Clemente',this)">🦁 Clemente</button>
+      <button class="fbtn-sm sotomayor" onclick="ghFilter('Sotomayor',this)">🦡 Sotomayor</button>
+      <button class="fbtn-sm" onclick="ghFilter('1201',this)">1201</button>
+      <button class="fbtn-sm" onclick="ghFilter('1202',this)">1202</button>
+      <button class="fbtn-sm" onclick="ghFilter('1203',this)">1203</button>
+      <button class="fbtn-sm" onclick="ghFilter('1204',this)">1204</button>
+      <button class="fbtn-sm" onclick="ghFilter('Griffin',this)">Griffin</button>
+      <button class="fbtn-sm" onclick="ghFilter('Lima',this)">Lima</button>
+      <button class="fbtn-sm" onclick="ghFilter('Flemens',this)">Flemens</button>
+      <button class="fbtn-sm" onclick="ghFilter('nogoal',this)">⚡ Needs Goal</button>
+      <button class="fbtn-sm" onclick="ghFilter('mastered',this)">✅ Fully Mastered</button>
+    </div>
+    <!-- Legend -->
+    <div class="gh-legend">
+      <div class="gh-legend-item"><span style="width:9px;height:9px;border-radius:50%;background:var(--green-ok);display:inline-block;"></span> Mastered</div>
+      <div class="gh-legend-item"><span style="width:9px;height:9px;border-radius:50%;background:var(--yellow-warn);display:inline-block;"></span> Approaching</div>
+      <div class="gh-legend-item"><span style="width:9px;height:9px;border-radius:50%;background:var(--red-danger);display:inline-block;"></span> Needs Work</div>
+      <div class="gh-legend-item"><span style="width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2);display:inline-block;"></span> Not Yet Assessed</div>
+      <span style="opacity:.4;margin-left:4px;">· Click any row to edit goals or mark mastery</span>
+    </div>
 
-  <!-- Card view -->
-  <div id="arCardView">
-    <div class="ar-card-grid" id="arCardGrid"></div>
-  </div>
-
-  <!-- Roster view -->
-  <div id="arRosterView" style="display:none;">
-    <div class="ar-roster-wrap">
-      <table class="ar-tbl">
+    <div class="gh-wrap">
+      <table class="gh-tbl" id="ghTable">
         <thead><tr>
-          <th style="width:26px;"></th>
-          <th>Last</th>
-          <th>First</th>
-          <th>House</th>
-          <th>Block</th>
-          <th>Caseload</th>
-          <th>Words</th>
-          <th>Sections</th>
-          <th>Pts ⚡</th>
+          <th onclick="ghSort('name')" style="min-width:130px;">Name ↕</th>
+          <th onclick="ghSort('house')" style="min-width:90px;">House</th>
+          <th style="min-width:200px;">Skills Goal</th>
+          <th onclick="ghSort('skill')" style="min-width:120px;">Skill Status ↕</th>
+          <th style="min-width:200px;">Habit Goal</th>
+          <th onclick="ghSort('habit')" style="min-width:120px;">Habit Status ↕</th>
+          <th style="min-width:160px;">Noticings / Progress</th>
+          <th>Actions</th>
         </tr></thead>
-        <tbody id="arRosterBody"></tbody>
+        <tbody id="ghBody"></tbody>
       </table>
     </div>
   </div>
 
-  <!-- Action bar — floats up when scholars are checked -->
-  <div class="ar-action-bar" id="arActionBar">
-    <div class="ar-action-bar-top">
-      <span class="ar-sel-count" id="arActionCount">0 scholars selected</span>
-      <button class="fbtn-sm" onclick="arClearAll()">✕ Clear selection</button>
+  <!-- ── SCHOLAR DETAIL VIEW ── -->
+  <div id="ghDetailView" style="display:none;">
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <button class="fbtn sm" onclick="ghSetView('hub',document.getElementById('ghViewHub'))" style="font-size:9px;">← Back to Goal Hub</button>
+      <select class="fs" id="sgStudent" onchange="buildScholarGoals()" style="max-width:300px;"></select>
     </div>
-    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.1em;opacity:.45;margin-bottom:7px;">SELECT ACHIEVEMENT</div>
-    <div class="ar-achieve-grid" id="arAchieveGrid"></div>
-    <div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap;">
-      <input class="fi" type="text" id="arCustomReason" placeholder="Custom reason…" style="flex:1;max-width:200px;">
-      <input class="fi" type="number" id="arCustomPts" placeholder="pts" style="width:70px;" min="0">
+    <div id="sgNoticings" style="margin-bottom:18px;"></div>
+    <div class="two-col" style="margin-bottom:18px;">
+      <div class="card">
+        <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold);margin-bottom:8px;">📌 Skills Goal (Short-Term — This Week)</div>
+        <textarea class="fi" id="sgShortGoal" placeholder="e.g. Complete limitations section with 2 specific constraints identified…" style="height:80px;resize:vertical;"></textarea>
+        <div style="display:flex;gap:7px;align-items:center;margin-top:8px;flex-wrap:wrap;">
+          <button class="fbtn sm" onclick="saveScholarGoal('short')">💾 Save</button>
+          <span style="font-family:'Cinzel',serif;font-size:9px;opacity:.5;margin-right:4px;">Status:</span>
+          <span id="sgSkillStatusPill" onclick="cycleSkillStatus()" style="cursor:pointer;"></span>
+          <div class="success-msg" id="sgShortSuccess" style="margin-top:0;">✓ Saved!</div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold);margin-bottom:8px;">🔭 Habit Goal (Long-Term — Semester)</div>
+        <textarea class="fi" id="sgLongGoal" placeholder="e.g. Develop an analytical voice that moves from description to interpretation…" style="height:80px;resize:vertical;"></textarea>
+        <div style="display:flex;gap:7px;align-items:center;margin-top:8px;flex-wrap:wrap;">
+          <button class="fbtn sm" onclick="saveScholarGoal('long')">💾 Save</button>
+          <span style="font-family:'Cinzel',serif;font-size:9px;opacity:.5;margin-right:4px;">Status:</span>
+          <span id="sgHabitStatusPill" onclick="cycleHabitStatus()" style="cursor:pointer;"></span>
+          <div class="success-msg" id="sgLongSuccess" style="margin-top:0;">✓ Saved!</div>
+        </div>
+      </div>
     </div>
-    <div class="ar-bestow-row" style="margin-top:12px;">
-      <button class="fbtn" onclick="arBestow()">⚡ Bestow to Selected</button>
-      <span class="ar-pts-preview" id="arPtsPreview"></span>
-      <div class="success-msg" id="arSuccess" style="margin-top:0;">✓ Points awarded!</div>
-    </div>
+    <div class="sec-head-sm">📐 AP Research Rubric Skill Areas</div>
+    <div id="skillBuckets"></div>
   </div>
-</div>
-
-<!-- ══════════ SCHOLAR GOALS ══════════ -->
-<div class="section" id="sec-scholargoals">
-  <div class="sec-head">🎓 Scholar Development Goals</div>
-  <div class="tip-box">AP Research rubric skill areas — each with actionable weekly sub-goals. Select a scholar to view their noticings placard, set short/long-term goals, and track AP skill bucket progress.</div>
-  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px;">
-    <select class="fs" id="sgStudent" onchange="buildScholarGoals()" style="max-width:300px;"></select>
-  </div>
-  <div id="sgNoticings" style="margin-bottom:18px;"></div>
-  <div class="two-col" style="margin-bottom:18px;">
-    <div class="card">
-      <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold);margin-bottom:8px;">📌 Short-Term Goal (This Week)</div>
-      <textarea class="fi" id="sgShortGoal" placeholder="e.g. Complete limitations section with 2 specific constraints identified…" style="height:80px;resize:vertical;"></textarea>
-      <button class="fbtn sm" style="margin-top:8px;" onclick="saveScholarGoal('short')">💾 Save</button>
-      <div class="success-msg" id="sgShortSuccess" style="margin-top:4px;">✓ Saved!</div>
-    </div>
-    <div class="card">
-      <div style="font-family:'Cinzel',serif;font-size:11px;color:var(--gold);margin-bottom:8px;">🔭 Long-Term Skill Goal (Semester)</div>
-      <textarea class="fi" id="sgLongGoal" placeholder="e.g. Develop an analytical voice that moves from description to interpretation…" style="height:80px;resize:vertical;"></textarea>
-      <button class="fbtn sm" style="margin-top:8px;" onclick="saveScholarGoal('long')">💾 Save</button>
-      <div class="success-msg" id="sgLongSuccess" style="margin-top:4px;">✓ Saved!</div>
-    </div>
-  </div>
-  <div class="sec-head-sm">📐 AP Research Rubric Skill Areas</div>
-  <div id="skillBuckets"></div>
 </div>
 
 <!-- ══════════ EMAIL WRAP-UP ══════════ -->
@@ -2676,7 +2658,7 @@ function showToast(icon,msg,houseClass){
 
 function rebuildAll(){
   buildCupDisplay();buildOverview();buildRotw();buildLogTable();buildLeaderboard();buildStreaks();buildGoals();buildAwardPanel();
-  if(document.getElementById('arCardGrid')) renderAR();
+  if(document.getElementById('ghBody')) buildGoalHub();
   ['h-obama','h-morrison','h-clemente','h-sotomayor'].forEach(id=>{
     const el=document.getElementById(id+'-inner');
     if(el&&el.innerHTML) el.innerHTML=buildHousePage(id.replace('h-','').charAt(0).toUpperCase()+id.replace('h-','').slice(1));
@@ -2708,105 +2690,210 @@ function renderSC(s, showModal=true){
   </div>`;
 }
 
-// ═══ SCHOLAR GOALS & AP RUBRIC BUCKETS ═══
+// ═══════════════════════════════════════════════════════════
+// SCHOLAR GOALS — DATA & GOAL HUB
+// ═══════════════════════════════════════════════════════════
 let scholarGoalsD = JSON.parse(localStorage.getItem('apResSG') || '{}');
+let ghFilterVal = 'all';
+let ghSortCol = 'name';
+let ghSortDir = 1;
 
+// ── Status helpers ─────────────────────────────────────────────────────────
+const GH_STATUSES = ['not-assessed','approaching','mastered','needs-work'];
+const GH_LABELS   = {'mastered':'Mastered ✓','approaching':'Approaching','needs-work':'Needs Work','not-assessed':'Not Yet Assessed'};
+
+function getGoalStatus(key, type){
+  const data = JSON.parse(localStorage.getItem('apResGHSt')||'{}');
+  return (data[key]&&data[key][type]) || 'not-assessed';
+}
+
+function setGoalStatus(key, type, val){
+  const data = JSON.parse(localStorage.getItem('apResGHSt')||'{}');
+  if(!data[key]) data[key]={};
+  data[key][type] = val;
+  localStorage.setItem('apResGHSt', JSON.stringify(data));
+}
+
+function cycleGoalStatus(key, type){
+  const cur = getGoalStatus(key, type);
+  const next = GH_STATUSES[(GH_STATUSES.indexOf(cur)+1) % GH_STATUSES.length];
+  setGoalStatus(key, type, next);
+  return next;
+}
+
+function statusPillHTML(status, key, type){
+  const lbl = GH_LABELS[status]||status;
+  const kesc = key.replace(/'/g,"\'");
+  return `<span class="gh-status ${status}" onclick="ghCycleInline('${kesc}','${type}',this)"><span class="gh-dot"></span>${lbl}</span>`;
+}
+
+// ── Goal Hub build ─────────────────────────────────────────────────────────
+function ghFilter(f, btn){
+  ghFilterVal = f;
+  document.querySelectorAll('#ghHubView .fbtn-sm').forEach(b=>b.classList.remove('active','obama','morrison','clemente','sotomayor'));
+  btn.classList.add('active');
+  if(['Obama','Morrison','Clemente','Sotomayor'].includes(f)) btn.classList.add(f.toLowerCase());
+  buildGoalHub();
+}
+
+function ghSort(col){
+  if(ghSortCol===col) ghSortDir*=-1; else{ghSortCol=col;ghSortDir=1;}
+  buildGoalHub();
+}
+
+function getGHFiltered(){
+  const q = (document.getElementById('ghSearch')?.value||'').toLowerCase().trim();
+  let list = STUDENTS;
+  if(ghFilterVal==='nogoal') list=STUDENTS.filter(s=>{
+    const d=scholarGoalsD[s.first+' '+s.last]||{};
+    return !d.short&&!d.long;
+  });
+  else if(ghFilterVal==='mastered') list=STUDENTS.filter(s=>{
+    const key=s.first+' '+s.last;
+    return getGoalStatus(key,'skill')==='mastered'&&getGoalStatus(key,'habit')==='mastered';
+  });
+  else if(['Obama','Morrison','Clemente','Sotomayor'].includes(ghFilterVal)) list=STUDENTS.filter(s=>s.house===ghFilterVal);
+  else if(['1201','1202','1203','1204'].includes(ghFilterVal)) list=STUDENTS.filter(s=>s.block===ghFilterVal);
+  else if(['Griffin','Lima','Flemens'].includes(ghFilterVal)) list=STUDENTS.filter(s=>s.caseload===ghFilterVal);
+  
+  if(q) list=list.filter(s=>{
+    const key=s.first+' '+s.last;
+    const d=scholarGoalsD[key]||{};
+    return (s.first+' '+s.last).toLowerCase().includes(q)||
+           (d.short||'').toLowerCase().includes(q)||
+           (d.long||'').toLowerCase().includes(q)||
+           (s.house||'').toLowerCase().includes(q);
+  });
+
+  // Sort
+  list = [...list].sort((a,b)=>{
+    const ka=a.first+' '+a.last, kb=b.first+' '+b.last;
+    if(ghSortCol==='name') return a.last.localeCompare(b.last)*ghSortDir;
+    if(ghSortCol==='house') return a.house.localeCompare(b.house)*ghSortDir;
+    if(ghSortCol==='skill') return getGoalStatus(ka,'skill').localeCompare(getGoalStatus(kb,'skill'))*ghSortDir;
+    if(ghSortCol==='habit') return getGoalStatus(ka,'habit').localeCompare(getGoalStatus(kb,'habit'))*ghSortDir;
+    return 0;
+  });
+  return list;
+}
+
+function buildGoalHub(){
+  const body = document.getElementById('ghBody');
+  if(!body) return;
+  const students = getGHFiltered();
+
+  body.innerHTML = students.map(s=>{
+    const key  = s.first+' '+s.last;
+    const kesc = key.replace(/'/g,"\'");
+    const d    = scholarGoalsD[key]||{};
+    const h    = HOUSES[s.house]||{};
+    const hcol = `var(--${h.c||'obama'}-l)`;
+    const skillSt = getGoalStatus(key,'skill');
+    const habitSt = getGoalStatus(key,'habit');
+    // Noticings / progress summary
+    const noticing = s.noticings&&s.noticings.trim() ? s.noticings.slice(0,120)+(s.noticings.length>120?'…':'') : '';
+    const secDone  = secsDone(s);
+    const pts      = scholarPts(key);
+
+    return `<tr>
+      <td>
+        <div class="gh-name" onclick="ghOpenDetail('${kesc}')">${s.last}, ${s.first}${s.iep?` <span class="iep-tag">IEP</span>`:''}</div>
+        ${isDanger(s)?`<div style="font-size:8px;color:var(--red-danger);">⚠️ At Risk</div>`:''}
+        <div style="font-size:8px;opacity:.4;margin-top:1px;">Block ${s.block} · ${s.caseload||''}</div>
+      </td>
+      <td>
+        <div class="gh-house">
+          <span style="font-size:13px;">${h.e||''}</span>
+          <span style="color:${hcol};font-size:10px;">${s.house}</span>
+        </div>
+        <div style="font-size:8px;opacity:.4;margin-top:2px;">${s.score.replace('Score of ','Score ').replace('Danger of not submitting','⚠️')}</div>
+      </td>
+      <td class="gh-goal-cell">
+        ${d.short
+          ? `<div class="gh-goal-text">${d.short}</div>`
+          : `<div class="gh-goal-empty">No skills goal set — click Edit</div>`}
+      </td>
+      <td>${statusPillHTML(skillSt, key, 'skill')}</td>
+      <td class="gh-goal-cell">
+        ${d.long
+          ? `<div class="gh-goal-text">${d.long}</div>`
+          : `<div class="gh-goal-empty">No habit goal set — click Edit</div>`}
+      </td>
+      <td>${statusPillHTML(habitSt, key, 'habit')}</td>
+      <td>
+        ${noticing ? `<div class="gh-noticing-cell">"${noticing}"</div>` : `<div style="font-size:9px;opacity:.3;">—</div>`}
+        <div style="font-size:8px;opacity:.45;margin-top:3px;">${secDone}/5 sections · ${s.wc.toLocaleString()}w${pts?` · ⚡${pts}pts`:''}</div>
+      </td>
+      <td><button class="gh-edit-btn" onclick="ghOpenDetail('${kesc}')">✏️ Edit</button></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="8" class="empty-state">No scholars match.</td></tr>';
+}
+
+function ghCycleInline(key, type, el){
+  const next = cycleGoalStatus(key, type);
+  el.className = 'gh-status ' + next;
+  el.querySelector('.gh-dot')?.setAttribute('class','gh-dot');
+  const span = el.querySelector('span:last-child');
+  if(span) span.textContent = GH_LABELS[next];
+  else el.innerHTML = `<span class="gh-dot"></span>${GH_LABELS[next]}`;
+}
+
+function ghSetView(v, btn){
+  document.querySelectorAll('#sec-scholargoals .vt-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('ghHubView').style.display    = v==='hub'   ? '' : 'none';
+  document.getElementById('ghDetailView').style.display = v==='detail'? '' : 'none';
+  if(v==='hub') buildGoalHub();
+  else initScholarGoalSelect();
+}
+
+function ghOpenDetail(key){
+  ghSetView('detail', document.getElementById('ghViewDetail'));
+  initScholarGoalSelect();
+  const sel=document.getElementById('sgStudent');
+  if(sel){ sel.value=key; buildScholarGoals(); }
+}
+
+// ── Scholar Detail ─────────────────────────────────────────────────────────
 function saveScholarGoal(type){
   const key=document.getElementById('sgStudent')?.value;
   if(!key) return;
   if(!scholarGoalsD[key]) scholarGoalsD[key]={};
-  const val=document.getElementById(type==='short'?'sgShortGoal':'sgLongGoal')?.value||'';
-  scholarGoalsD[key][type]=val;
+  scholarGoalsD[key][type]=document.getElementById(type==='short'?'sgShortGoal':'sgLongGoal')?.value||'';
   localStorage.setItem('apResSG',JSON.stringify(scholarGoalsD));
   const el=document.getElementById(type==='short'?'sgShortSuccess':'sgLongSuccess');
   if(el){el.style.display='block';setTimeout(()=>el.style.display='none',1800);}
+  renderDetailStatusPills(key);
 }
 
-const AP_BUCKETS = [
-  {
-    icon:'🔎', title:'Question & Explore (Q)',
-    tag:'Q', tagColor:'rgba(212,168,67,.15)', tagBorder:'rgba(212,168,67,.3)', tagText:'var(--gold)',
-    desc:'Curiosity, research question development, source access, inquiry design',
-    goals:[
-      {id:'q1', text:'Research question is focused, novel, and researchable — not too broad or narrow'},
-      {id:'q2', text:'Identifies a clear GAP in the existing scholarly conversation'},
-      {id:'q3', text:'Uses at least 5 peer-reviewed sources with evidence of deep reading (not just summaries)'},
-      {id:'q4', text:'Sources are current, credible, and directly relevant to the RQ'},
-      {id:'q5', text:'Method is clearly aligned with the research question (not just convenient)'},
-    ]
-  },
-  {
-    icon:'🔬', title:'Understand & Analyze (U)',
-    tag:'U', tagColor:'rgba(79,195,247,.12)', tagBorder:'rgba(79,195,247,.3)', tagText:'var(--obama-l)',
-    desc:'Summarizing scholarly arguments, analyzing evidence, evaluating sources',
-    goals:[
-      {id:'u1', text:'Literature review synthesizes sources — doesn\'t just list them one by one'},
-      {id:'u2', text:'Identifies patterns, agreements, tensions, and gaps across sources'},
-      {id:'u3', text:'Accurately represents what scholars actually argue (avoids oversimplification)'},
-      {id:'u4', text:'Contextualizes their study within the broader scholarly conversation'},
-      {id:'u5', text:'Critiques limitations of existing studies to justify the new inquiry'},
-    ]
-  },
-  {
-    icon:'⚖️', title:'Evaluate Multiple Perspectives (E)',
-    tag:'E', tagColor:'rgba(165,214,167,.1)', tagBorder:'rgba(165,214,167,.3)', tagText:'var(--morrison-l)',
-    desc:'Comparing viewpoints, acknowledging complexity, avoiding bias',
-    goals:[
-      {id:'e1', text:'Paper acknowledges at least one counter-argument or alternate perspective'},
-      {id:'e2', text:'Explains WHY certain sources or perspectives were included or excluded'},
-      {id:'e3', text:'Avoids oversimplifying — captures the nuance in the scholarly debate'},
-      {id:'e4', text:'Bias and positionality are acknowledged where relevant'},
-      {id:'e5', text:'Limitations of the method and data are explicitly discussed'},
-    ]
-  },
-  {
-    icon:'💫', title:'Synthesize Ideas (S)',
-    tag:'S', tagColor:'rgba(206,147,216,.1)', tagBorder:'rgba(206,147,216,.3)', tagText:'var(--sotomayor-l)',
-    desc:'Creating new understanding, connecting evidence to claims, implications',
-    goals:[
-      {id:'s1', text:'Results section presents findings clearly and connects them to the RQ'},
-      {id:'s2', text:'Discussion moves beyond description — interprets the significance of findings'},
-      {id:'s3', text:'New understanding is clearly articulated (what is now known that wasn\'t before?)'},
-      {id:'s4', text:'Implications for a specific community of practice are concrete and specific'},
-      {id:'s5', text:'Future directions go beyond "more research is needed" — specific and actionable'},
-      {id:'s6', text:'Limitations are substantive — not just "small sample size" without explanation'},
-    ]
-  },
-  {
-    icon:'📢', title:'Team, Transform & Transmit (T)',
-    tag:'T', tagColor:'rgba(239,154,154,.1)', tagBorder:'rgba(239,154,154,.3)', tagText:'var(--clemente-l)',
-    desc:'Academic writing, citation, presentation, oral defense',
-    goals:[
-      {id:'t1', text:'Paper follows an academic structure with clearly labeled sections'},
-      {id:'t2', text:'Citations are complete and consistently formatted (APA/MLA/Chicago)'},
-      {id:'t3', text:'Writing is precise — no vague language like "contributes to ongoing conversations"'},
-      {id:'t4', text:'Presentation slides distill — don\'t replicate — the paper content'},
-      {id:'t5', text:'Can defend inquiry choices with clarity, evidence, and conviction'},
-      {id:'t6', text:'Writing demonstrates scholar\'s own voice — not derivative of sources'},
-    ]
-  },
-  {
-    icon:'📄', title:'Academic Paper Completion',
-    tag:'PAPER', tagColor:'rgba(34,28,18,.8)', tagBorder:'rgba(212,168,67,.2)', tagText:'var(--gold)',
-    desc:'5 required sections, 4000–5000 words, bibliography',
-    goals:[
-      {id:'p1', text:'Introduction contextualizes RQ and reviews previous work in the field'},
-      {id:'p2', text:'Literature Review synthesizes 5+ sources and identifies the gap'},
-      {id:'p3', text:'Method explains AND justifies the chosen approach (alignment to RQ)'},
-      {id:'p4', text:'Results presents findings clearly (data, quotes, or artifacts as evidence)'},
-      {id:'p5', text:'Discussion/Analysis interprets significance and connects to RQ'},
-      {id:'p6', text:'Conclusion states new understanding + implications + future directions'},
-      {id:'p7', text:'Bibliography complete and properly formatted'},
-      {id:'p8', text:'Total word count 4,000–5,000 (headings/citations count; figures don\'t)'},
-    ]
-  },
-];
+function cycleSkillStatus(){
+  const key=document.getElementById('sgStudent')?.value; if(!key) return;
+  cycleGoalStatus(key,'skill'); renderDetailStatusPills(key);
+}
+function cycleHabitStatus(){
+  const key=document.getElementById('sgStudent')?.value; if(!key) return;
+  cycleGoalStatus(key,'habit'); renderDetailStatusPills(key);
+}
+
+function renderDetailStatusPills(key){
+  const sp=document.getElementById('sgSkillStatusPill');
+  const hp=document.getElementById('sgHabitStatusPill');
+  if(sp) sp.outerHTML = statusPillHTML(getGoalStatus(key,'skill'),key,'skill').replace('onclick="ghCycleInline','id="sgSkillStatusPill" onclick="cycleSkillStatus() //');
+  if(hp) hp.outerHTML = statusPillHTML(getGoalStatus(key,'habit'),key,'habit').replace('onclick="ghCycleInline','id="sgHabitStatusPill" onclick="cycleHabitStatus() //');
+  // Simpler: just set class+text directly
+  const spEl=document.getElementById('sgSkillStatusPill');
+  const hpEl=document.getElementById('sgHabitStatusPill');
+  if(spEl){const st=getGoalStatus(key,'skill');spEl.className='gh-status '+st;spEl.innerHTML=`<span class="gh-dot"></span>${GH_LABELS[st]}`;}
+  if(hpEl){const st=getGoalStatus(key,'habit');hpEl.className='gh-status '+st;hpEl.innerHTML=`<span class="gh-dot"></span>${GH_LABELS[st]}`;}
+}
 
 function buildScholarGoals(){
   const key=document.getElementById('sgStudent')?.value;
   if(!key){
-    document.getElementById('sgNoticings').innerHTML='';
-    document.getElementById('skillBuckets').innerHTML='';
+    const n=document.getElementById('sgNoticings');if(n)n.innerHTML='';
+    const b=document.getElementById('skillBuckets');if(b)b.innerHTML='';
+    const sp=document.getElementById('sgSkillStatusPill');if(sp)sp.innerHTML='';
+    const hp=document.getElementById('sgHabitStatusPill');if(hp)hp.innerHTML='';
     return;
   }
   const s=STUDENTS.find(x=>x.first+' '+x.last===key);
@@ -2814,96 +2901,83 @@ function buildScholarGoals(){
   
   // Noticings placard
   const notWrap=document.getElementById('sgNoticings');
-  if(s&&s.noticings&&s.noticings.trim()){
-    const hn=HOUSES[s.house]||{};
-    notWrap.innerHTML=`<div class="noticing-card">
-      <div class="noticing-name">${hn.e||''} ${s.first} ${s.last} · ${s.house} · Block ${s.block} · Score: ${s.score}</div>
-      <div class="noticing-text">"${s.noticings}"</div>
-      <span class="noticing-badge" style="background:rgba(212,168,67,.1);color:var(--gold);border:1px solid rgba(212,168,67,.2);">📝 Teacher Noticings (3/20)</span>
-    </div>`;
-  } else {
-    notWrap.innerHTML=s?`<div class="noticing-card"><div class="noticing-name">${s.first} ${s.last}</div><div class="noticing-text" style="opacity:.4;">No noticings recorded yet for this scholar.</div></div>`:'';
+  if(notWrap){
+    if(s&&s.noticings&&s.noticings.trim()){
+      const hn=HOUSES[s.house]||{};
+      notWrap.innerHTML=`<div class="noticing-card">
+        <div class="noticing-name">${hn.e||''} ${s.first} ${s.last} · ${s.house} · Block ${s.block} · ${s.score}</div>
+        <div class="noticing-text">"${s.noticings}"</div>
+        <span class="noticing-badge" style="background:rgba(212,168,67,.1);color:var(--gold);border:1px solid rgba(212,168,67,.2);">📝 Teacher Noticings (3/20)</span>
+      </div>`;
+    } else {
+      notWrap.innerHTML=s?`<div class="noticing-card"><div class="noticing-name">${s.first} ${s.last}</div><div class="noticing-text" style="opacity:.4;">No noticings recorded yet.</div></div>`:'';
+    }
   }
 
-  // Goals
-  const sgKey=`apResGoal_${key.replace(/\s/g,'_')}`;
-  let savedGoals=JSON.parse(localStorage.getItem(sgKey)||'{}');
-  if(document.getElementById('sgShortGoal')) document.getElementById('sgShortGoal').value=stored.short||savedGoals.short||'';
-  if(document.getElementById('sgLongGoal'))  document.getElementById('sgLongGoal').value=stored.long||savedGoals.long||'';
+  if(document.getElementById('sgShortGoal')) document.getElementById('sgShortGoal').value=stored.short||'';
+  if(document.getElementById('sgLongGoal'))  document.getElementById('sgLongGoal').value=stored.long||'';
+  renderDetailStatusPills(key);
 
   // Skill buckets
   const subGoalSaved=JSON.parse(localStorage.getItem('apResSubGoals')||'{}');
-  const studentSubGoals=subGoalSaved[key]||{};
-  
-  document.getElementById('skillBuckets').innerHTML=AP_BUCKETS.map((b,bi)=>{
-    const completedCount=b.goals.filter(g=>studentSubGoals[g.id]).length;
-    const pct=Math.round(completedCount/b.goals.length*100);
+  const sg=subGoalSaved[key]||{};
+  const buckEl=document.getElementById('skillBuckets');
+  if(!buckEl) return;
+  buckEl.innerHTML=AP_BUCKETS.map((b,bi)=>{
+    const done=b.goals.filter(g=>sg[g.id]).length;
+    const kesc=key.replace(/'/g,"\'");
     return `<div class="skill-bucket" id="bucket_${bi}">
       <div class="skill-bucket-head" onclick="toggleBucket(${bi})">
         <span class="skill-bucket-icon">${b.icon}</span>
-        <div style="flex:1;">
-          <div class="skill-bucket-title">${b.title}</div>
-          <div style="font-size:9px;opacity:.5;margin-top:2px;">${b.desc}</div>
-        </div>
+        <div style="flex:1;"><div class="skill-bucket-title">${b.title}</div><div style="font-size:9px;opacity:.5;">${b.desc}</div></div>
         <span class="skill-bucket-tag" style="background:${b.tagColor};border:1px solid ${b.tagBorder};color:${b.tagText};">${b.tag}</span>
-        <span style="font-family:'Cinzel',serif;font-size:11px;color:${pct===100?'var(--green-ok)':'var(--gold)'};margin-left:10px;">${completedCount}/${b.goals.length}</span>
+        <span style="font-family:'Cinzel',serif;font-size:11px;color:${done===b.goals.length?'var(--green-ok)':'var(--gold)'};margin-left:10px;">${done}/${b.goals.length}</span>
       </div>
       <div class="skill-bucket-body">
-        <div style="font-size:9px;opacity:.4;margin-bottom:10px;">Check off goals as the scholar demonstrates each skill. Saves locally and syncs to Sheets.</div>
+        <div style="font-size:9px;opacity:.4;margin-bottom:10px;">Check off goals as the scholar demonstrates each skill.</div>
         ${b.goals.map(g=>`<div class="sub-goal">
-          <div class="sub-goal-check${studentSubGoals[g.id]?' done':''}" onclick="toggleSubGoal('${key}','${g.id}',${bi},this)">${studentSubGoals[g.id]?'✓':''}</div>
-          <div class="sub-goal-text${studentSubGoals[g.id]?' done':''}">${g.text}</div>
+          <div class="sub-goal-check${sg[g.id]?' done':''}" onclick="toggleSubGoal('${kesc}','${g.id}',${bi},this)">${sg[g.id]?'✓':''}</div>
+          <div class="sub-goal-text${sg[g.id]?' done':''}">${g.text}</div>
         </div>`).join('')}
         <div style="margin-top:10px;">
-          <div style="font-family:'Cinzel',serif;font-size:8px;opacity:.4;margin-bottom:4px;">ACTION NOTE FOR THIS AREA</div>
-          <input class="fi" type="text" id="bucketNote_${bi}_${key.replace(/\s/g,'_')}" 
-            placeholder="e.g. Re-teach implications structure in next conference…"
-            value="${(studentSubGoals['note_'+bi])||''}"
-            onblur="saveBucketNote('${key}',${bi},this.value)" style="font-size:11px;">
+          <div style="font-family:'Cinzel',serif;font-size:8px;opacity:.4;margin-bottom:4px;">ACTION NOTE</div>
+          <input class="fi" type="text" id="bn_${bi}_${key.replace(/[^a-zA-Z0-9]/g,'_')}"
+            placeholder="Conference notes / next steps…" value="${sg['note_'+bi]||''}"
+            onblur="saveBucketNote('${kesc}',${bi},this.value)" style="font-size:11px;">
         </div>
       </div>
     </div>`;
   }).join('');
 }
 
-function toggleBucket(bi){
-  const b=document.getElementById('bucket_'+bi);
-  if(b) b.classList.toggle('open');
-}
+function toggleBucket(bi){document.getElementById('bucket_'+bi)?.classList.toggle('open');}
 
-function toggleSubGoal(studentKey, goalId, bucketIdx, el){
+function toggleSubGoal(sk,gid,bi,el){
   let data=JSON.parse(localStorage.getItem('apResSubGoals')||'{}');
-  if(!data[studentKey]) data[studentKey]={};
-  data[studentKey][goalId]=!data[studentKey][goalId];
+  if(!data[sk])data[sk]={};
+  data[sk][gid]=!data[sk][gid];
   localStorage.setItem('apResSubGoals',JSON.stringify(data));
-  el.classList.toggle('done');
-  el.textContent=data[studentKey][goalId]?'✓':'';
-  const txt=el.nextElementSibling;
-  if(txt) txt.classList.toggle('done',!!data[studentKey][goalId]);
-  // Update count in bucket header
-  const b=AP_BUCKETS[bucketIdx];
-  const completedCount=b.goals.filter(g=>data[studentKey]&&data[studentKey][g.id]).length;
-  const hdr=document.getElementById('bucket_'+bucketIdx)?.querySelector('.skill-bucket-head span:last-child');
-  if(hdr) hdr.textContent=completedCount+'/'+b.goals.length;
+  el.classList.toggle('done');el.textContent=data[sk][gid]?'✓':'';
+  const txt=el.nextElementSibling;if(txt)txt.classList.toggle('done',!!data[sk][gid]);
+  const b=AP_BUCKETS[bi];
+  const cnt=b.goals.filter(g=>data[sk]&&data[sk][g.id]).length;
+  const hdr=document.getElementById('bucket_'+bi)?.querySelector('.skill-bucket-head span:last-child');
+  if(hdr)hdr.textContent=cnt+'/'+b.goals.length;
 }
 
-function saveBucketNote(studentKey, bi, val){
+function saveBucketNote(sk,bi,val){
   let data=JSON.parse(localStorage.getItem('apResSubGoals')||'{}');
-  if(!data[studentKey]) data[studentKey]={};
-  data[studentKey]['note_'+bi]=val;
+  if(!data[sk])data[sk]={};
+  data[sk]['note_'+bi]=val;
   localStorage.setItem('apResSubGoals',JSON.stringify(data));
 }
 
-// Populate scholar goals student select
 function initScholarGoalSelect(){
   const sel=document.getElementById('sgStudent');
   if(!sel) return;
   const sorted=[...STUDENTS].sort((a,b)=>a.last.localeCompare(b.last));
   sel.innerHTML='<option value="">— Select a scholar —</option>'+
-    sorted.map(s=>{
-      const hasNoticing=s.noticings&&s.noticings.trim();
-      return `<option value="${s.first} ${s.last}">${s.last}, ${s.first} (${s.house})${hasNoticing?' 📝':''}`;
-    }).join('');
+    sorted.map(s=>`<option value="${s.first} ${s.last}">${s.last}, ${s.first} (${s.house})${s.noticings&&s.noticings.trim()?' 📝':''}</option>`).join('');
 }
 
 // ═══ EMAIL SYSTEM ═══
@@ -3095,8 +3169,7 @@ function show(id,btn){
   if(id==='goals') buildGoals();
   if(id==='roster') buildRoster();
   if(id==='award') buildAwardPanel();
-  if(id==='awardRoster'){buildARAchieveGrid();renderAR();}
-  if(id==='scholargoals'){initScholarGoalSelect();}
+  if(id==='scholargoals'){buildGoalHub();}
   if(id==='email'){buildEmailGroupSelect();}
 }
 
@@ -3112,194 +3185,6 @@ window.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('contactDate').value=new Date().toISOString().split('T')[0];
   document.getElementById('studentModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
 });
-
-// ═══════════════════════════════════════════════════════════
-// AWARD ROSTER TAB — Chi-Tracker-style card + roster view
-// ═══════════════════════════════════════════════════════════
-let arView = 'cards';
-let arFilter = 'all';
-let arSelected = new Set();
-let arAchieve = null;
-
-// ── Filter/view helpers ────────────────────────────────────────────────────
-function setArView(v, btn){
-  arView = v;
-  document.querySelectorAll('#sec-awardRoster .ar-view-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('arCardView').style.display  = v==='cards' ?'':'none';
-  document.getElementById('arRosterView').style.display= v==='roster'?'':'none';
-  renderAR();
-}
-
-function filterAR(f, btn){
-  arFilter = f;
-  document.querySelectorAll('#sec-awardRoster .fbtn-sm').forEach(b=>b.classList.remove('active','obama','morrison','clemente','sotomayor'));
-  btn.classList.add('active');
-  if(['Obama','Morrison','Clemente','Sotomayor'].includes(f)) btn.classList.add(f.toLowerCase());
-  arSelected.clear();
-  const sa=document.getElementById('arSelectAll'); if(sa) sa.checked=false;
-  renderAR(); updateARBar();
-}
-
-function getARFiltered(){
-  const q=(document.getElementById('arSearch')?.value||'').toLowerCase().trim();
-  let list = STUDENTS;
-  if(arFilter==='danger')      list=STUDENTS.filter(isDanger);
-  else if(arFilter==='nopts')  list=STUDENTS.filter(s=>scholarPts(s.first+' '+s.last)===0);
-  else if(['Obama','Morrison','Clemente','Sotomayor'].includes(arFilter)) list=STUDENTS.filter(s=>s.house===arFilter);
-  else if(['1201','1202','1203','1204'].includes(arFilter)) list=STUDENTS.filter(s=>s.block===arFilter);
-  else if(['Griffin','Lima','Flemens'].includes(arFilter))  list=STUDENTS.filter(s=>s.caseload===arFilter);
-  if(q) list=list.filter(s=>(s.first+' '+s.last).toLowerCase().includes(q)||(s.house||'').toLowerCase().includes(q)||(s.block||'').includes(q));
-  return [...list].sort((a,b)=>a.last.localeCompare(b.last));
-}
-
-// ── Render ─────────────────────────────────────────────────────────────────
-function renderAR(){
-  const students = getARFiltered();
-  // Update select-all checkbox state
-  const allSel = students.length>0 && students.every(s=>arSelected.has(s.first+' '+s.last));
-  const sa=document.getElementById('arSelectAll'); if(sa) sa.checked=allSel;
-
-  if(arView==='cards'){
-    const grid=document.getElementById('arCardGrid');
-    if(!grid) return;
-    grid.innerHTML = students.map(s=>{
-      const name = s.first+' '+s.last;
-      const pts  = scholarPts(name);
-      const h    = HOUSES[s.house]||{};
-      const sel  = arSelected.has(name);
-      const nesc = name.replace(/'/g,"\'");
-      const hcol = `var(--${h.c||'obama'}-l)`;
-      return `<div class="ar-card${sel?' ar-sel':''}" onclick="arToggleStudent('${nesc}',this)">
-        <div class="ar-card-left">
-          <div class="ar-card-name">${s.first} ${s.last}${s.iep?` <span class="iep-tag">IEP</span>`:''}</div>
-          <div class="ar-card-sub" style="color:${hcol};">${h.emoji||h.e||''} ${s.house} · Block ${s.block}${isDanger(s)?' · ⚠️':''}</div>
-          <div class="ar-card-sub">${s.caseload||''}</div>
-        </div>
-        <div class="ar-card-pts">${pts}</div>
-      </div>`;
-    }).join('') || '<div class="empty-state">No scholars match.</div>';
-  } else {
-    const body=document.getElementById('arRosterBody');
-    if(!body) return;
-    body.innerHTML = students.map(s=>{
-      const name = s.first+' '+s.last;
-      const pts  = scholarPts(name);
-      const h    = HOUSES[s.house]||{};
-      const sel  = arSelected.has(name);
-      const nesc = name.replace(/'/g,"\'");
-      return `<tr class="${sel?'ar-sel':''}" onclick="arToggleStudent('${nesc}',this)">
-        <td onclick="event.stopPropagation()"><input type="checkbox" class="ar-chk" ${sel?'checked':''} onchange="arToggleStudent('${nesc}',this.closest('tr'))"></td>
-        <td style="font-family:'Cinzel',serif;font-size:10px;font-weight:600;">${s.last}</td>
-        <td style="color:var(--${h.c||'obama'}-l);font-size:10px;">${s.first}</td>
-        <td style="font-size:10px;">${h.emoji||h.e||''} <span style="color:var(--${h.c||'obama'}-l)">${s.house}</span></td>
-        <td style="font-size:10px;opacity:.6;">${s.block}</td>
-        <td style="font-size:10px;opacity:.6;">${s.caseload||'—'}</td>
-        <td style="font-family:'Cinzel',serif;font-size:10px;color:var(--gold);">${s.wc.toLocaleString()}</td>
-        <td style="font-size:10px;opacity:.6;">${secsDone(s)}/5</td>
-        <td style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold);font-weight:700;">${pts}</td>
-      </tr>`;
-    }).join('') || '<tr><td colspan="9" class="empty-state">No scholars match.</td></tr>';
-  }
-}
-
-// ── Selection ──────────────────────────────────────────────────────────────
-function arToggleStudent(name, row){
-  if(arSelected.has(name)) arSelected.delete(name);
-  else arSelected.add(name);
-  if(row){
-    row.classList.toggle('ar-sel', arSelected.has(name));
-    const cb=row.querySelector('input[type=checkbox]');
-    if(cb) cb.checked=arSelected.has(name);
-  }
-  updateARBar();
-  // Update select-all state
-  const vis=getARFiltered();
-  const allSel=vis.length>0&&vis.every(s=>arSelected.has(s.first+' '+s.last));
-  const sa=document.getElementById('arSelectAll'); if(sa) sa.checked=allSel;
-}
-
-function arToggleAll(checked){
-  getARFiltered().forEach(s=>{
-    const name=s.first+' '+s.last;
-    if(checked) arSelected.add(name); else arSelected.delete(name);
-  });
-  renderAR(); updateARBar();
-}
-
-function arClearAll(){
-  arSelected.clear(); arAchieve=null;
-  document.querySelectorAll('.ar-ach-btn').forEach(b=>b.classList.remove('sel'));
-  const sa=document.getElementById('arSelectAll'); if(sa) sa.checked=false;
-  renderAR(); updateARBar();
-}
-
-// ── Action bar ─────────────────────────────────────────────────────────────
-function updateARBar(){
-  const bar=document.getElementById('arActionBar');
-  const countEl=document.getElementById('arActionCount');
-  const selEl=document.getElementById('arSelCount');
-  const n=arSelected.size;
-  if(bar) bar.classList.toggle('visible', n>0);
-  if(countEl) countEl.textContent=n+' scholar'+(n!==1?'s':'')+' selected';
-  if(selEl) selEl.textContent=n+' selected';
-  updateARPreview();
-}
-
-function buildARAchieveGrid(){
-  const grid=document.getElementById('arAchieveGrid');
-  if(!grid) return;
-  grid.innerHTML=QA_ACHIEVES.map(a=>`<button class="ar-ach-btn${a.type!=='core'?' bonus':''}${arAchieve&&arAchieve.key===a.key?' sel':''}" onclick="arPickAchieve('${a.key}',${a.pts},this)">${a.icon} ${a.name} <span style="opacity:.5">+${a.pts}</span></button>`).join('');
-}
-
-function arPickAchieve(key,pts,btn){
-  arAchieve={key,pts,name:ANAMES_MAP[key]||key};
-  document.querySelectorAll('.ar-ach-btn').forEach(b=>b.classList.remove('sel'));
-  btn.classList.add('sel');
-  updateARPreview();
-}
-
-function updateARPreview(){
-  const prev=document.getElementById('arPtsPreview');
-  if(!prev) return;
-  if(!arAchieve||!arSelected.size){prev.textContent='';return;}
-  prev.textContent=`+${arAchieve.pts} × ${arSelected.size} = +${arAchieve.pts*arSelected.size} pts total`;
-}
-
-function arBestow(){
-  if(!arSelected.size){showToast('👥','Select at least one scholar first.','');return;}
-  const customR=(document.getElementById('arCustomReason')?.value||'').trim();
-  const customP=parseInt(document.getElementById('arCustomPts')?.value||'0')||0;
-  let achieve=arAchieve;
-  if(!achieve){
-    if(customR&&customP>0) achieve={key:'custom',pts:customP,name:customR};
-    else{showToast('🏆','Pick an achievement first.','');return;}
-  }
-  const date=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-  const isBonus=['marauder','timeturner','rotw','order','custom'].includes(achieve.key);
-  let totalPts=0, count=0;
-  arSelected.forEach(name=>{
-    const s=STUDENTS.find(x=>x.first+' '+x.last===name);
-    if(!s) return;
-    const entry={date,house:s.house,student:name,achievement:achieve.name,pts:achieve.pts,note:'Roster award',isBonus};
-    ptsLog.push(entry);
-    if(achieve.key==='rotw') rotwD={name,house:s.house};
-    syncToSheets(entry);
-    totalPts+=achieve.pts; count++;
-  });
-  saveAll(); rebuildAll();
-  // Reset
-  arSelected.clear(); arAchieve=null;
-  document.querySelectorAll('.ar-ach-btn').forEach(b=>b.classList.remove('sel'));
-  const sa=document.getElementById('arSelectAll'); if(sa) sa.checked=false;
-  if(document.getElementById('arCustomReason')) document.getElementById('arCustomReason').value='';
-  if(document.getElementById('arCustomPts'))    document.getElementById('arCustomPts').value='';
-  renderAR(); updateARBar();
-  const ok=document.getElementById('arSuccess');
-  if(ok){ok.style.display='block';setTimeout(()=>ok.style.display='none',2500);}
-  showToast('⚡',`${achieve.name} — +${totalPts} pts across ${count} scholars!`,'');
-}
-
 
 </script>
 <div class="toast" id="toast"><div class="toast-icon" id="toastIcon">⚡</div><div class="toast-body" id="toastBody"></div></div>
