@@ -974,10 +974,14 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
       <button class="fbtn sm" onclick="testSync()">🔄 Verify Connection</button>
       <button class="fbtn sm" onclick="pullLiveData()">⬇️ Pull Live Data</button>
       <button class="fbtn sm" onclick="window.open(APP_CONFIG.sheetUrl,'_blank')">📄 Open Sheet</button>
-      <button class="fbtn sm" onclick="window.open(getActiveScriptUrl(),'_blank')" title="Open this in a new tab to authorize — required once per browser">🌐 Authorize Web App</button>
+      <button class="fbtn sm" onclick="window.open(getActiveScriptUrl(),'_blank')" title="Open this in a new tab to authorize — required once per browser">🌐 Open Web App</button>
     </div>
-    <div style="font-size:10px;opacity:.55;margin-top:8px;line-height:1.6;">
-      <strong style="color:var(--gold-l);">First time on a new browser?</strong> Click <strong>🌐 Authorize Web App</strong> → sign into Google → you'll see JSON text → come back and click <strong>⬇️ Pull Live Data</strong>.
+    <div style="background:rgba(212,168,67,.1);border:1px solid rgba(212,168,67,.3);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:11px;line-height:1.7;">
+      <strong style="color:var(--gold-l);font-family:'Cinzel',serif;font-size:10px;letter-spacing:.06em;">⚡ FIRST TIME ON A NEW BROWSER?</strong><br>
+      1. Click <strong>🌐 Open Web App</strong> above → a new tab opens<br>
+      2. Sign into your Google account when prompted<br>
+      3. You'll see a page of JSON text — that means it worked<br>
+      4. Close that tab, come back here, click <strong>⬇️ Pull Live Data</strong>
     </div>
     <div class="sync-status" id="syncStatus"></div>
   </div>
