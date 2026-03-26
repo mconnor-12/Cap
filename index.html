@@ -430,10 +430,10 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 
 /* ══ GOAL HUB ══════════════════════════════════════════ */
 .gh-wrap{overflow-x:auto;border-radius:10px;border:1px solid rgba(212,168,67,.12);}
-.gh-tbl{width:100%;border-collapse:collapse;font-size:11px;}
-.gh-tbl th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.1em;padding:9px 11px;text-align:left;border-bottom:1px solid rgba(212,168,67,.18);opacity:.5;background:#1a1410;position:sticky;top:0;white-space:nowrap;cursor:pointer;user-select:none;}
+.gh-tbl{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed;}
+.gh-tbl th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.1em;padding:9px 11px;text-align:left;border-bottom:1px solid rgba(212,168,67,.18);opacity:.5;background:#1a1410;position:sticky;top:0;white-space:nowrap;cursor:pointer;user-select:none;overflow:hidden;}
 .gh-tbl th:hover{opacity:.85;}
-.gh-tbl td{padding:9px 11px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;}
+.gh-tbl td{padding:9px 11px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;overflow:hidden;}
 .gh-tbl tr:hover td{background:rgba(212,168,67,.035);}
 .gh-name{font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--parch);margin-bottom:2px;cursor:pointer;}
 .gh-name:hover{color:var(--gold-l);}
@@ -443,8 +443,8 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 .gh-goal-empty{font-size:10px;opacity:.3;font-style:italic;}
 .gh-goal-input{background:rgba(0,0,0,.3);border:1px solid rgba(212,168,67,.25);border-radius:5px;padding:5px 8px;color:var(--parch);font-family:'Crimson Pro',serif;font-size:11px;outline:none;width:100%;resize:vertical;min-height:52px;line-height:1.4;}
 .gh-goal-input:focus{border-color:rgba(212,168,67,.5);}
-.gh-status{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.02em;cursor:pointer;border:1px solid;transition:all .15s;white-space:nowrap;user-select:none;width:100%;box-sizing:border-box;overflow:hidden;}
-.gh-status-cell{width:130px;min-width:130px;max-width:130px;overflow:hidden;}
+.gh-status{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.02em;cursor:pointer;border:1px solid;transition:all .15s;white-space:nowrap;user-select:none;max-width:128px;box-sizing:border-box;}
+.gh-status-cell{width:138px;min-width:138px;max-width:138px;overflow:hidden;padding:6px 8px !important;}
 .gh-status.mastered{background:rgba(82,199,136,.15);color:var(--green-ok);border-color:rgba(82,199,136,.3);}
 .gh-status.approaching{background:rgba(240,204,106,.12);color:var(--yellow-warn);border-color:rgba(240,204,106,.3);}
 .gh-status.needs-work{background:rgba(239,83,80,.12);color:var(--red-danger);border-color:rgba(239,83,80,.3);}
@@ -530,9 +530,9 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
     <button class="tab" id="refreshNavBtn" onclick="navPullLiveData(this)" title="Pull latest student data & points from Google Sheets">🔄 Refresh</button>
   </div>
 </nav>
-<div id="syncTimeLabel" style="text-align:center;font-size:8px;opacity:.3;padding:2px 0;font-family:'Cinzel',serif;letter-spacing:.06em;"></div>
 
 <main>
+<div id="syncTimeLabel" style="text-align:center;font-size:8px;opacity:.3;padding:3px 0 0;font-family:'Cinzel',serif;letter-spacing:.06em;margin-bottom:-8px;"></div>
 
 <!-- ══════════ OVERVIEW ══════════ -->
 <div class="section visible" id="sec-overview">
@@ -839,14 +839,24 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 
     <div class="gh-wrap">
       <table class="gh-tbl" id="ghTable">
+        <colgroup>
+          <col style="width:145px;">
+          <col style="width:100px;">
+          <col style="width:210px;">
+          <col style="width:138px;">
+          <col style="width:210px;">
+          <col style="width:138px;">
+          <col style="width:180px;">
+          <col style="width:80px;">
+        </colgroup>
         <thead><tr>
-          <th onclick="ghSort('name')" style="min-width:130px;">Name ↕</th>
-          <th onclick="ghSort('house')" style="min-width:90px;">House</th>
-          <th style="min-width:200px;">Skills Goal</th>
+          <th onclick="ghSort('name')">Name ↕</th>
+          <th onclick="ghSort('house')">House</th>
+          <th>Skills Goal</th>
           <th onclick="ghSort('skill')" class="gh-status-cell">Skill Status ↕</th>
-          <th style="min-width:200px;">Habit Goal</th>
+          <th>Habit Goal</th>
           <th onclick="ghSort('habit')" class="gh-status-cell">Habit Status ↕</th>
-          <th style="min-width:160px;">Noticings / Progress</th>
+          <th>Noticings / Progress</th>
           <th>Actions</th>
         </tr></thead>
         <tbody id="ghBody"></tbody>
@@ -3042,7 +3052,8 @@ function buildEmailGroupSelect(){
   const vals=[...new Set(STUDENTS.map(s=>s[field]).filter(Boolean))].sort();
   wrap.innerHTML=`<div class="view-group-grid">${vals.map(v=>{
     const group=STUDENTS.filter(s=>s[field]===v);
-    return `<div class="vg-card" onclick="emailAddGroup(STUDENTS.filter(s=>s['${field}']==='${v}'))">
+    const safeVal=encodeURIComponent(v);
+    return `<div class="vg-card" data-field="${field}" data-val="${safeVal}" onclick="emailAddGroupByAttr(this)">
       <div class="vg-card-title">${emailView==='period'?'Block '+v:v}</div>
       <div class="vg-card-sub">${group.length} scholars · click to add all</div>
     </div>`;
@@ -3055,6 +3066,16 @@ function emailAddStudent(name){
   if(!s||emailRecipients.some(r=>r.name===name)) return;
   if(s.email) emailRecipients.push({name,email:s.email,parentEmail:s.parent,house:s.house});
   renderEmailChips();
+}
+
+function emailAddGroupByAttr(card){
+  const field=card.dataset.field;
+  const val=decodeURIComponent(card.dataset.val);
+  const group=STUDENTS.filter(s=>s[field]===val);
+  emailAddGroup(group);
+  // Visual feedback
+  card.classList.add('sel');
+  setTimeout(()=>card.classList.remove('sel'),800);
 }
 
 function emailAddGroup(group){
