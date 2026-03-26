@@ -443,7 +443,8 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 .gh-goal-empty{font-size:10px;opacity:.3;font-style:italic;}
 .gh-goal-input{background:rgba(0,0,0,.3);border:1px solid rgba(212,168,67,.25);border-radius:5px;padding:5px 8px;color:var(--parch);font-family:'Crimson Pro',serif;font-size:11px;outline:none;width:100%;resize:vertical;min-height:52px;line-height:1.4;}
 .gh-goal-input:focus{border-color:rgba(212,168,67,.5);}
-.gh-status{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:12px;font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.03em;cursor:pointer;border:1px solid;transition:all .15s;white-space:nowrap;user-select:none;max-width:140px;overflow:hidden;}
+.gh-status{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.02em;cursor:pointer;border:1px solid;transition:all .15s;white-space:nowrap;user-select:none;width:100%;box-sizing:border-box;overflow:hidden;}
+.gh-status-cell{width:130px;min-width:130px;max-width:130px;overflow:hidden;}
 .gh-status.mastered{background:rgba(82,199,136,.15);color:var(--green-ok);border-color:rgba(82,199,136,.3);}
 .gh-status.approaching{background:rgba(240,204,106,.12);color:var(--yellow-warn);border-color:rgba(240,204,106,.3);}
 .gh-status.needs-work{background:rgba(239,83,80,.12);color:var(--red-danger);border-color:rgba(239,83,80,.3);}
@@ -832,7 +833,7 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
       <div class="gh-legend-item"><span style="width:9px;height:9px;border-radius:50%;background:var(--green-ok);display:inline-block;"></span> Mastered</div>
       <div class="gh-legend-item"><span style="width:9px;height:9px;border-radius:50%;background:var(--yellow-warn);display:inline-block;"></span> Approaching</div>
       <div class="gh-legend-item"><span style="width:9px;height:9px;border-radius:50%;background:var(--red-danger);display:inline-block;"></span> Needs Work</div>
-      <div class="gh-legend-item"><span style="width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2);display:inline-block;"></span> Not Yet Assessed</div>
+      <div class="gh-legend-item"><span style="width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.2);display:inline-block;"></span> Not Assessed</div>
       <span style="opacity:.4;margin-left:4px;">· Click any row to edit goals or mark mastery</span>
     </div>
 
@@ -842,9 +843,9 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
           <th onclick="ghSort('name')" style="min-width:130px;">Name ↕</th>
           <th onclick="ghSort('house')" style="min-width:90px;">House</th>
           <th style="min-width:200px;">Skills Goal</th>
-          <th onclick="ghSort('skill')" style="min-width:120px;">Skill Status ↕</th>
+          <th onclick="ghSort('skill')" class="gh-status-cell">Skill Status ↕</th>
           <th style="min-width:200px;">Habit Goal</th>
-          <th onclick="ghSort('habit')" style="min-width:120px;">Habit Status ↕</th>
+          <th onclick="ghSort('habit')" class="gh-status-cell">Habit Status ↕</th>
           <th style="min-width:160px;">Noticings / Progress</th>
           <th>Actions</th>
         </tr></thead>
@@ -2728,7 +2729,7 @@ let ghSortDir = 1;
 
 // ── Status helpers ─────────────────────────────────────────────────────────
 const GH_STATUSES = ['not-assessed','approaching','mastered','needs-work'];
-const GH_LABELS   = {'mastered':'Mastered ✓','approaching':'Approaching','needs-work':'Needs Work','not-assessed':'Not Yet Assessed'};
+const GH_LABELS   = {'mastered':'Mastered ✓','approaching':'Approaching','needs-work':'Needs Work','not-assessed':'Not Assessed'};
 
 function getGoalStatus(key, type){
   const data = JSON.parse(localStorage.getItem('apResGHSt')||'{}');
@@ -2841,13 +2842,13 @@ function buildGoalHub(){
           ? `<div class="gh-goal-text">${d.short}</div>`
           : `<div class="gh-goal-empty">No skills goal set — click Edit</div>`}
       </td>
-      <td>${statusPillHTML(skillSt, key, 'skill')}</td>
+      <td class="gh-status-cell">${statusPillHTML(skillSt, key, 'skill')}</td>
       <td class="gh-goal-cell">
         ${d.long
           ? `<div class="gh-goal-text">${d.long}</div>`
           : `<div class="gh-goal-empty">No habit goal set — click Edit</div>`}
       </td>
-      <td>${statusPillHTML(habitSt, key, 'habit')}</td>
+      <td class="gh-status-cell">${statusPillHTML(habitSt, key, 'habit')}</td>
       <td>
         ${noticing ? `<div class="gh-noticing-cell">"${noticing}"</div>` : `<div style="font-size:9px;opacity:.3;">—</div>`}
         <div style="font-size:8px;opacity:.45;margin-top:3px;">${secDone}/5 sections · ${s.wc.toLocaleString()}w${pts?` · ⚡${pts}pts`:''}</div>
