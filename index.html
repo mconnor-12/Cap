@@ -1265,7 +1265,7 @@ function isDanger(s){ return s.score.toLowerCase().includes('danger'); }
 function housePts(h){ return ptsLog.filter(e=>e.house===h).reduce((a,e)=>a+e.pts,0); }
 function scholarPts(name){ return ptsLog.filter(e=>e.student===name).reduce((a,e)=>a+e.pts,0); }
 function daysUntil(d){ const n=new Date();n.setHours(0,0,0,0);const t=new Date(d);t.setHours(0,0,0,0);return Math.round((t-n)/(864e5)); }
-function secsDone(s){ return SECS.filter(k=>s[k]==='Completed').length; }
+function secsDone(s){ return SECS.filter(k=>s[k]&&s[k].startsWith('Completed')).length; }
 function fullDone(s){ return SECS.every(k=>s[k]==='Completed'); }
 
 // ═══ COUNTDOWN ═══
@@ -2019,23 +2019,74 @@ function mapLiveStudent(row){
   const lastFromFull = splitName.length > 1 ? splitName.slice(1).join(' ') : '';
 
   const first = String(row['First Name'] || row['First'] || row.first || firstFromFull || '').trim();
-  const last  = String(row['Last Name'] || row['Last'] || row.last || lastFromFull || '').trim();
+  const last  = String(row['Last Name']  || row['Last']  || row.last  || lastFromFull  || '').trim();
   const house = String(row._house || row['House'] || row.house || '').trim();
 
+  // Helper: pick first non-empty value from a list of possible column names
+  function pick(...keys){ for(const k of keys){ const v=String(row[k]||'').trim(); if(v) return v; } return ''; }
+
+  // Fuzzy fallback: scan all row keys for columns matching a keyword
+  function fuzzyPick(keyword){
+    const lk = keyword.toLowerCase();
+    for(const k of Object.keys(row)){
+      if(k.toLowerCase().includes(lk)){
+        const v = String(row[k]||'').trim();
+        if(v) return v;
+      }
+    }
+    return '';
+  }
+
+  // Section status — matches many possible header formats from the tracker sheet
+  const intro = pick(
+    'Introduction','Intro','Intro: Draft Status','Introduction: Draft Status',
+    'Intro Draft Status','Introduction Draft Status'
+  ) || fuzzyPick('intro') || 'Incomplete - Not Started';
+
+  const lit = pick(
+    'Literature Review','Lit Review','Lit',
+    'Literature Review: Draft Status','Literature Review Draft Status',
+    'Lit Review: Draft Status','Lit Review Draft Status'
+  ) || fuzzyPick('literature') || fuzzyPick('lit review') || 'Incomplete - Not Started';
+
+  const method = pick(
+    'Method','Methods','Method + Procedure',
+    'Method: Draft Status','Method + Procedure: Draft Status',
+    'Method Draft Status','Methods: Draft Status'
+  ) || fuzzyPick('method') || 'Incomplete - Not Started';
+
+  const results = pick(
+    'Results','Results + Findings',
+    'Results: Draft Status','Results + Findings: Draft Status',
+    'Results Draft Status','Results + Findings Draft Status'
+  ) || fuzzyPick('results') || 'Incomplete - Not Started';
+
+  const conclusion = pick(
+    'Conclusion','Conclusion: Draft Status','Conclusion Draft Status'
+  ) || fuzzyPick('conclusion') || 'Incomplete - Not Started';
+
+  // Score — "Submission Projection as the paper reads on 3/XX" changes date constantly
+  const score = pick(
+    'Projected Score','Score','Projection','AP Score Projection','Submission Projection'
+  ) || fuzzyPick('submission projection') || fuzzyPick('projection') || fuzzyPick('score') || 'Score of 1';
+
+  // Word count — strip any non-numeric chars (commas, spaces)
+  const wcRaw = row['Word Count'] || row['WC'] || row['Words'] || row['Word count'] || row.wc || 0;
+  const wc = Number(String(wcRaw).replace(/[^0-9]/g,'')) || 0;
+
   return {
-    first,
-    last,
-    house,
-    block: String(row['Block'] || row['Class Block'] || row['Period'] || row.block || '—').trim() || '—',
-    wc: Number(row['Word Count'] || row['WC'] || row['Words'] || row.wc || 0) || 0,
-    intro: String(row['Introduction'] || row['Intro'] || row.intro || 'Incomplete - Not Started').trim(),
-    lit: String(row['Literature Review'] || row['Lit Review'] || row['Lit'] || row.lit || 'Incomplete - Not Started').trim(),
-    method: String(row['Method'] || row['Methods'] || row.method || 'Incomplete - Not Started').trim(),
-    results: String(row['Results'] || row.results || 'Incomplete - Not Started').trim(),
-    conclusion: String(row['Conclusion'] || row.conclusion || 'Incomplete - Not Started').trim(),
-    score: String(row['Projected Score'] || row['Score'] || row.score || 'Score of 1').trim(),
-    iep: ['true','yes','y'].includes(String(row['IEP'] || row['IEP/504'] || row.iep || '').toLowerCase().trim()),
-    support: String(row['Support'] || row['Intervention'] || row.support || 'No/Optional').trim()
+    first, last, house,
+    block:   pick('Block','Class Block','Period','Block/Period') || '—',
+    wc,
+    intro, lit, method, results, conclusion, score,
+    iep: ['true','yes','y','1'].includes(pick('IEP','IEP/504','IEP 504','Has IEP').toLowerCase()),
+    support: pick('Support','Intervention','Support Type','Mandated Support') || 'No/Optional',
+    email:   pick('Email','Student Email','School Email'),
+    parent:  pick('Parent Email','Family Email','Guardian Email','Parent/Guardian Email'),
+    caseload:pick('Caseload','Case Manager','Teacher Caseload'),
+    advisor: pick('Advisor','College Advisor','College Counselor'),
+    noticings: pick('Noticings','Teacher Notes','Notes','Feedback','Teacher Noticings'),
+    draftlink: pick('Draft Link','Draft','Paper Link','Google Doc Link','Draftlink')
   };
 }
 
