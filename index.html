@@ -443,7 +443,7 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 .gh-goal-empty{font-size:10px;opacity:.3;font-style:italic;}
 .gh-goal-input{background:rgba(0,0,0,.3);border:1px solid rgba(212,168,67,.25);border-radius:5px;padding:5px 8px;color:var(--parch);font-family:'Crimson Pro',serif;font-size:11px;outline:none;width:100%;resize:vertical;min-height:52px;line-height:1.4;}
 .gh-goal-input:focus{border-color:rgba(212,168,67,.5);}
-.gh-status{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.04em;cursor:pointer;border:1px solid;transition:all .15s;white-space:nowrap;user-select:none;}
+.gh-status{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:12px;font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.03em;cursor:pointer;border:1px solid;transition:all .15s;white-space:nowrap;user-select:none;max-width:140px;overflow:hidden;}
 .gh-status.mastered{background:rgba(82,199,136,.15);color:var(--green-ok);border-color:rgba(82,199,136,.3);}
 .gh-status.approaching{background:rgba(240,204,106,.12);color:var(--yellow-warn);border-color:rgba(240,204,106,.3);}
 .gh-status.needs-work{background:rgba(239,83,80,.12);color:var(--red-danger);border-color:rgba(239,83,80,.3);}
@@ -526,8 +526,10 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
     <button class="tab" onclick="show('scholargoals',this)">🎓 Sch. Goals</button>
     <button class="tab" onclick="show('email',this)">📬 Email</button>
     <button class="tab" onclick="show('sheets',this)">Sheets</button>
+    <button class="tab" id="refreshNavBtn" onclick="navPullLiveData(this)" title="Pull latest student data & points from Google Sheets">🔄 Refresh</button>
   </div>
 </nav>
+<div id="syncTimeLabel" style="text-align:center;font-size:8px;opacity:.3;padding:2px 0;font-family:'Cinzel',serif;letter-spacing:.06em;"></div>
 
 <main>
 
@@ -915,6 +917,7 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
       <label class="email-check-item"><input type="checkbox" id="ec_progress" checked> Paper section progress</label>
       <label class="email-check-item"><input type="checkbox" id="ec_wc" checked> Word count update</label>
       <label class="email-check-item"><input type="checkbox" id="ec_score"> Projected AP score</label>
+      <label class="email-check-item"><input type="checkbox" id="ec_points"> House points earned ⚡</label>
       <label class="email-check-item"><input type="checkbox" id="ec_goal" checked> Short-term weekly goal</label>
       <label class="email-check-item"><input type="checkbox" id="ec_deadline" checked> Upcoming deadlines</label>
       <label class="email-check-item"><input type="checkbox" id="ec_support"> Support / intervention info</label>
@@ -927,7 +930,9 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
       <button class="fbtn" onclick="generateEmailPreview()">🔮 Generate Preview</button>
       <button class="fbtn" onclick="copyEmailText()" style="border-color:rgba(79,195,247,.4);color:var(--obama-l);">📋 Copy Text</button>
       <button class="fbtn" onclick="openMailtoLink()" style="border-color:rgba(165,214,167,.4);color:var(--morrison-l);">📧 Open in Mail</button>
+      <button class="fbtn" onclick="openGmailLink()" style="border-color:rgba(212,168,67,.5);color:var(--gold-l);">📬 Open in Gmail</button>
     </div>
+    <div style="font-size:9px;opacity:.38;margin-top:7px;font-style:italic;">💡 "Open in Gmail" uses Gmail's compose window and respects your logged-in Gmail account. "Open in Mail" uses your system default mail app. In both cases, review BCC addresses before sending.</div>
   </div>
   <div class="email-panel">
     <h3>👁️ Preview</h3>
@@ -944,6 +949,12 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 
   <div class="sync-panel">
     <h3>🔗 Live Connection Settings</h3>
+    <div class="alert-banner" style="margin-bottom:14px;">
+      <span>⚠️</span>
+      <div>
+        <strong>Multi-Teacher Access Fix:</strong> For another teacher to read data, the Apps Script must be deployed as <strong>Execute as: Me</strong> and <strong>Who has access: Anyone</strong> (not "Anyone with a Google Account"). If the other teacher gets an error, redeploy with those exact settings and paste the new URL below. All teachers should use the same URL and click 🔄 Refresh to see current data.
+      </div>
+    </div>
     <div class="sync-info">This version is prewired to your Google Sheet and deployed Apps Script. You can keep the default connection or paste a different deployed Apps Script URL as an override. The HTML uses JSONP instead of fetch so it works better from a Claude artifact or other standalone hosted page.</div>
     <div class="form-grid">
       <div class="fg">
@@ -1361,11 +1372,13 @@ function escapeHtml(str) {
       <li>Delete existing code, paste the script above</li>
       <li>The SHEET_ID is already filled in — no change needed</li>
       <li>Click 💾 Save, then <strong>Deploy → New Deployment</strong></li>
-      <li>Type: <strong>Web App</strong> · Who has access: <strong>Anyone</strong> · Click Deploy</li>
-      <li>Copy the Web App URL and paste it in the field above</li>
-      <li>Click <strong>Test</strong> — you should see "Connected!"</li>
+      <li>Type: <strong>Web App</strong> · Execute as: <strong>Me</strong> · Who has access: <strong>Anyone</strong> (NOT "Anyone with a Google Account") · Click Deploy</li>
+      <li>⚠️ <strong>IMPORTANT for multi-teacher access:</strong> "Execute as: Me" + "Anyone" is required so colleagues can read data without being logged into Google. If you previously deployed as "Anyone with a Google Account," redeploy and use the new URL.</li>
+      <li>Copy the Web App URL and paste it in the field above, then click 💾 Save Override</li>
+      <li>Click <strong>🔄 Verify Connection</strong> — you should see "Connected!"</li>
       <li>Five new tabs auto-create: <em>House Cup Points, Mastery Tracker, Parent Contacts, Writing Sprints</em></li>
-      <li>Click <strong>Pull Data</strong> to sync live student data from the tracker tab</li>
+      <li>Click <strong>⬇️ Pull Live Data</strong> to sync live student data from the tracker tab</li>
+      <li>Share the HTML file URL with your co-teacher — they should click 🔄 Refresh in the nav to pull current data</li>
     </ol>
   </div>
 </div>
@@ -1503,6 +1516,7 @@ let rotwD   = JSON.parse(localStorage.getItem('apResR')  || 'null');
 let masteryD= JSON.parse(localStorage.getItem('apResM')  || '{}');
 let contactD= JSON.parse(localStorage.getItem('apResC')  || '[]');
 let sprintD = JSON.parse(localStorage.getItem('apResSp') || '[]');
+let dismissedAutoAwards = JSON.parse(localStorage.getItem('apResDis') || '[]');
 let rosterF = 'all', lbF = 'all', blockF = 'all', masterySkillF = 'all';
 
 function saveAll(){
@@ -1511,6 +1525,7 @@ function saveAll(){
   localStorage.setItem('apResM', JSON.stringify(masteryD));
   localStorage.setItem('apResC', JSON.stringify(contactD));
   localStorage.setItem('apResSp',JSON.stringify(sprintD));
+  localStorage.setItem('apResDis',JSON.stringify(dismissedAutoAwards));
 }
 
 // ═══ UTILITIES ═══
@@ -2371,7 +2386,12 @@ async function pullLiveData(){
     saveAll();
     rebuildDashboardFromLiveData();
 
-    showSync(`✓ Live sync complete. Loaded ${loadedStudents || STUDENTS.length} scholars from the tracker tab and refreshed synced logs.`, 'ok');
+    const now = new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+    localStorage.setItem('apResLastSync', now);
+    showSync(`✓ Live sync complete at ${now}. Loaded ${loadedStudents || STUDENTS.length} scholars, ${ptsLog.length} point entries.`, 'ok');
+    // Update nav refresh button timestamp
+    const syncLbl = document.getElementById('syncTimeLabel');
+    if(syncLbl) syncLbl.textContent = `Last synced: ${now}`;
   } catch(e){
     showSync('Pull failed: ' + e.message, 'err');
   }
@@ -2589,18 +2609,26 @@ function checkAutoAwards(){
     const name=s.first+' '+s.last;
     const awarded=ptsLog.filter(e=>e.student===name);
     WC_MILESTONES.forEach(t=>{
-      if(s.wc>=t.wc&&!awarded.some(e=>e.achievement===t.name))
-        alerts.push({s,t});
+      const dismissKey=name+'||'+t.name;
+      if(s.wc>=t.wc&&!awarded.some(e=>e.achievement===t.name)&&!dismissedAutoAwards.includes(dismissKey))
+        alerts.push({s,t,dismissKey});
     });
   });
   if(!alerts.length){wrap.innerHTML='';return;}
   wrap.innerHTML=`<div style="font-family:'Cinzel',serif;font-size:9px;color:var(--green-ok);margin-bottom:7px;letter-spacing:.06em;">✨ WORD COUNT MILESTONES — Auto-Award Eligible</div>`+
-    alerts.slice(0,6).map(({s,t})=>`<div class="auto-row">
+    alerts.slice(0,6).map(({s,t,dismissKey})=>`<div class="auto-row">
       <span style="font-size:16px;">📝</span>
       <div style="flex:1;"><strong style="font-size:10px;">${s.first} ${s.last}</strong>
       <div style="font-size:9px;opacity:.55;">${t.name} · ${s.wc.toLocaleString()} words</div></div>
       <button class="fbtn sm" onclick="awardWcMilestone('${s.first} ${s.last}','${s.house}','${t.name}',${t.pts})">+${t.pts}pts ⚡</button>
+      <button class="fbtn sm" style="border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.35);margin-left:4px;" onclick="dismissAutoAward('${dismissKey.replace(/'/g,"\\'")}')">✕</button>
     </div>`).join('');
+}
+
+function dismissAutoAward(dismissKey){
+  if(!dismissedAutoAwards.includes(dismissKey)) dismissedAutoAwards.push(dismissKey);
+  saveAll();
+  checkAutoAwards();
 }
 
 function awardWcMilestone(name, house, achieveName, pts){
@@ -3065,6 +3093,7 @@ function generateEmailPreview(){
   const incProgress=document.getElementById('ec_progress')?.checked;
   const incWc=document.getElementById('ec_wc')?.checked;
   const incScore=document.getElementById('ec_score')?.checked;
+  const incPoints=document.getElementById('ec_points')?.checked;
   const incGoal=document.getElementById('ec_goal')?.checked;
   const incDeadline=document.getElementById('ec_deadline')?.checked;
   const incSupport=document.getElementById('ec_support')?.checked;
@@ -3111,6 +3140,11 @@ function generateEmailPreview(){
     }
     if(incWc) body+=`📝 WORD COUNT: ${s.wc.toLocaleString()} words (Goal: 4,000–5,000)\n\n`;
     if(incScore) body+=`🎯 PROJECTED SCORE: ${s.score}\n\n`;
+    if(incPoints){
+      const pts=scholarPts(s.first+' '+s.last);
+      const hpts=housePts(s.house);
+      body+=`⚡ HOUSE POINTS\n${s.first} has earned ${pts.toLocaleString()} individual points. House ${s.house} currently has ${hpts.toLocaleString()} total points in the House Cup.\n\n`;
+    }
     if(incPraise&&s.noticings) body+=`💛 TEACHER FEEDBACK\n"${s.noticings}"\n\n`;
     const goals=scholarGoalsD[s.first+' '+s.last]||{};
     if(incGoal&&goals.short) body+=`📌 THIS WEEK'S GOAL\n${goals.short}\n\n`;
@@ -3120,6 +3154,12 @@ function generateEmailPreview(){
       body+=`📄 GROUP PROGRESS\nPlease check in with your scholar about their current paper status. The goal is to have all 5 sections (Introduction, Literature Review, Method, Results, Conclusion) in draft form before the April 15 recommended completion date.\n\n`;
     }
     if(incWc) body+=`📝 WORD COUNT GOAL: 4,000–5,000 words\n\n`;
+    if(incPoints){
+      body+=`⚡ HOUSE CUP STANDINGS\n`;
+      const order=Object.keys(HOUSES).sort((a,b)=>housePts(b)-housePts(a));
+      order.forEach((h,i)=>{ body+=`${['🥇','🥈','🥉','4️⃣'][i]} House ${h}: ${housePts(h).toLocaleString()} pts\n`; });
+      body+='\n';
+    }
     if(incPraise) body+=`💛 I am proud of the work this group has been doing. AP Research is one of the most rigorous academic experiences your scholar will have in high school, and they are doing it.\n\n`;
     if(incGoal) body+=`📌 THIS WEEK, encourage your scholar to: identify the sections still incomplete and dedicate at least 30 focused minutes per day to their draft.\n\n`;
   }
@@ -3143,6 +3183,25 @@ function openMailtoLink(){
   // BCC all students and parents
   const bcc=encodeURIComponent([...emailRecipients.map(r=>r.email),...emailRecipients.map(r=>r.parentEmail)].filter(Boolean).join(','));
   window.location.href=`mailto:${from}?bcc=${bcc}&subject=${subject}&body=${body.slice(0,1800)}`;
+}
+
+function openGmailLink(){
+  const subject=encodeURIComponent(document.getElementById('emailSubject')?.value||'AP Research Update');
+  const body=encodeURIComponent(document.getElementById('emailPreviewText')?.textContent||'');
+  const bcc=encodeURIComponent([...emailRecipients.map(r=>r.email),...emailRecipients.map(r=>r.parentEmail)].filter(Boolean).join(','));
+  // Gmail compose URL — opens in the currently logged-in Gmail account
+  const gmailUrl=`https://mail.google.com/mail/?view=cm&fs=1&bcc=${bcc}&su=${subject}&body=${body.slice(0,3000)}`;
+  window.open(gmailUrl,'_blank');
+}
+
+// ═══ NAV REFRESH ═══
+async function navPullLiveData(btn){
+  if(btn){btn.textContent='⏳ Syncing…';btn.disabled=true;}
+  await pullLiveData();
+  if(btn){
+    btn.textContent='✓ Refreshed';
+    setTimeout(()=>{btn.textContent='🔄 Refresh';btn.disabled=false;},2500);
+  }
 }
 
 // ═══ UPDATED show() ───────────────────────────────────────────────────────
@@ -3184,6 +3243,12 @@ window.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('sprintDate').value=new Date().toISOString().split('T')[0];
   document.getElementById('contactDate').value=new Date().toISOString().split('T')[0];
   document.getElementById('studentModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+  // Show last sync time
+  const lastSync=localStorage.getItem('apResLastSync');
+  const syncLbl=document.getElementById('syncTimeLabel');
+  if(syncLbl&&lastSync) syncLbl.textContent=`Last synced: ${lastSync}`;
+  // Auto-refresh every 5 minutes so both teachers stay current
+  setInterval(()=>{ pullLiveData(); }, 5*60*1000);
 });
 
 </script>
