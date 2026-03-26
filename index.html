@@ -974,7 +974,10 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
       <button class="fbtn sm" onclick="testSync()">🔄 Verify Connection</button>
       <button class="fbtn sm" onclick="pullLiveData()">⬇️ Pull Live Data</button>
       <button class="fbtn sm" onclick="window.open(APP_CONFIG.sheetUrl,'_blank')">📄 Open Sheet</button>
-      <button class="fbtn sm" onclick="window.open(getActiveScriptUrl(),'_blank')">🌐 Open Web App</button>
+      <button class="fbtn sm" onclick="window.open(getActiveScriptUrl(),'_blank')" title="Open this in a new tab to authorize — required once per browser">🌐 Authorize Web App</button>
+    </div>
+    <div style="font-size:10px;opacity:.55;margin-top:8px;line-height:1.6;">
+      <strong style="color:var(--gold-l);">First time on a new browser?</strong> Click <strong>🌐 Authorize Web App</strong> → sign into Google → you'll see JSON text → come back and click <strong>⬇️ Pull Live Data</strong>.
     </div>
     <div class="sync-status" id="syncStatus"></div>
   </div>
@@ -2004,7 +2007,12 @@ async function testSync(silent=false){
     showSync('Connected, but the response was unexpected: ' + JSON.stringify(d), 'err');
     return false;
   } catch(e){
-    showSync('Connection failed. Check the deployment access, script URL, and redeployment. Error: ' + e.message, 'err');
+    const isAuthErr = e.message && (e.message.includes('load failed') || e.message.includes('401') || e.message.includes('403'));
+    if(isAuthErr){
+      showSync('⚠️ Authorization needed: Open the Web App URL directly in a new browser tab, sign in with your Google account, then come back and click 🔄 Refresh. (One-time step per browser)', 'err');
+    } else {
+      showSync('Connection failed: ' + e.message + ' — Check the URL, redeploy if needed, then click 🔄 Refresh.', 'err');
+    }
     return false;
   }
 }
