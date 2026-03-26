@@ -430,26 +430,27 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 
 /* ══ GOAL HUB ══════════════════════════════════════════ */
 .gh-wrap{overflow-x:auto;border-radius:10px;border:1px solid rgba(212,168,67,.12);}
-.gh-tbl{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed;}
-.gh-tbl th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.1em;padding:9px 11px;text-align:left;border-bottom:1px solid rgba(212,168,67,.18);opacity:.5;background:#1a1410;position:sticky;top:0;white-space:nowrap;cursor:pointer;user-select:none;overflow:hidden;}
+.gh-tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.gh-tbl th{font-family:'Cinzel',serif;font-size:8px;letter-spacing:.1em;padding:9px 11px;text-align:left;border-bottom:1px solid rgba(212,168,67,.18);opacity:.5;background:#1a1410;position:sticky;top:0;white-space:nowrap;cursor:pointer;user-select:none;}
 .gh-tbl th:hover{opacity:.85;}
-.gh-tbl td{padding:9px 11px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;overflow:hidden;}
+.gh-tbl td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
 .gh-tbl tr:hover td{background:rgba(212,168,67,.035);}
 .gh-name{font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--parch);margin-bottom:2px;cursor:pointer;}
 .gh-name:hover{color:var(--gold-l);}
 .gh-house{font-size:9px;display:flex;align-items:center;gap:3px;}
-.gh-goal-cell{max-width:220px;min-width:160px;}
+.gh-goal-cell{max-width:200px;min-width:150px;}
 .gh-goal-text{font-size:10px;line-height:1.5;opacity:.75;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 .gh-goal-empty{font-size:10px;opacity:.3;font-style:italic;}
 .gh-goal-input{background:rgba(0,0,0,.3);border:1px solid rgba(212,168,67,.25);border-radius:5px;padding:5px 8px;color:var(--parch);font-family:'Crimson Pro',serif;font-size:11px;outline:none;width:100%;resize:vertical;min-height:52px;line-height:1.4;}
 .gh-goal-input:focus{border-color:rgba(212,168,67,.5);}
-.gh-status{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:12px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:.02em;cursor:pointer;border:1px solid;transition:all .15s;white-space:nowrap;user-select:none;max-width:128px;box-sizing:border-box;}
-.gh-status-cell{width:138px;min-width:138px;max-width:138px;overflow:hidden;padding:6px 8px !important;}
+.gh-status-cell{width:120px;min-width:120px;max-width:120px;}
+.gh-status{display:block;width:110px;padding:4px 8px;border-radius:12px;font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.04em;cursor:pointer;border:1px solid;transition:background .15s,border-color .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;user-select:none;box-sizing:border-box;}
+.gh-status-inner{display:flex;align-items:center;gap:4px;pointer-events:none;}
 .gh-status.mastered{background:rgba(82,199,136,.15);color:var(--green-ok);border-color:rgba(82,199,136,.3);}
 .gh-status.approaching{background:rgba(240,204,106,.12);color:var(--yellow-warn);border-color:rgba(240,204,106,.3);}
 .gh-status.needs-work{background:rgba(239,83,80,.12);color:var(--red-danger);border-color:rgba(239,83,80,.3);}
 .gh-status.not-assessed{background:rgba(255,255,255,.05);color:rgba(255,255,255,.35);border-color:rgba(255,255,255,.12);}
-.gh-status .gh-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.gh-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;display:inline-block;}
 .gh-status.mastered .gh-dot{background:var(--green-ok);}
 .gh-status.approaching .gh-dot{background:var(--yellow-warn);}
 .gh-status.needs-work .gh-dot{background:var(--red-danger);}
@@ -458,7 +459,7 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 .gh-edit-btn:hover{background:rgba(212,168,67,.15);}
 .gh-save-btn{font-family:'Cinzel',serif;font-size:8px;padding:3px 9px;border-radius:5px;border:1px solid rgba(82,199,136,.35);background:rgba(82,199,136,.1);color:var(--green-ok);cursor:pointer;white-space:nowrap;}
 .gh-save-btn:hover{background:rgba(82,199,136,.2);}
-.gh-noticing-cell{max-width:180px;font-size:9px;opacity:.6;line-height:1.5;font-style:italic;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+.gh-noticing-cell{max-width:170px;font-size:9px;opacity:.6;line-height:1.5;font-style:italic;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
 /* filter bar */
 .gh-filter-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
 .gh-search{background:rgba(0,0,0,.3);border:1px solid rgba(212,168,67,.2);border-radius:5px;padding:6px 12px;color:var(--parch);font-family:'Crimson Pro',serif;font-size:11px;outline:none;width:220px;}
@@ -839,25 +840,15 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
 
     <div class="gh-wrap">
       <table class="gh-tbl" id="ghTable">
-        <colgroup>
-          <col style="width:145px;">
-          <col style="width:100px;">
-          <col style="width:210px;">
-          <col style="width:138px;">
-          <col style="width:210px;">
-          <col style="width:138px;">
-          <col style="width:180px;">
-          <col style="width:80px;">
-        </colgroup>
         <thead><tr>
-          <th onclick="ghSort('name')">Name ↕</th>
-          <th onclick="ghSort('house')">House</th>
-          <th>Skills Goal</th>
+          <th onclick="ghSort('name')" style="min-width:130px;">Name ↕</th>
+          <th onclick="ghSort('house')" style="min-width:80px;">House</th>
+          <th style="min-width:170px;">Skills Goal</th>
           <th onclick="ghSort('skill')" class="gh-status-cell">Skill Status ↕</th>
-          <th>Habit Goal</th>
+          <th style="min-width:170px;">Habit Goal</th>
           <th onclick="ghSort('habit')" class="gh-status-cell">Habit Status ↕</th>
-          <th>Noticings / Progress</th>
-          <th>Actions</th>
+          <th style="min-width:150px;">Noticings / Progress</th>
+          <th style="min-width:70px;">Actions</th>
         </tr></thead>
         <tbody id="ghBody"></tbody>
       </table>
@@ -963,7 +954,7 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
     <div class="alert-banner" style="margin-bottom:14px;">
       <span>⚠️</span>
       <div>
-        <strong>Multi-Teacher Access Fix:</strong> For another teacher to read data, the Apps Script must be deployed as <strong>Execute as: Me</strong> and <strong>Who has access: Anyone</strong> (not "Anyone with a Google Account"). If the other teacher gets an error, redeploy with those exact settings and paste the new URL below. All teachers should use the same URL and click 🔄 Refresh to see current data.
+        <strong>DREAM Workspace Deployment:</strong> Your school's Google Workspace does not allow "Anyone" (anonymous) access. Use these exact settings when deploying: <strong>Execute as: Me</strong> · <strong>Who has access: Anyone with Google account</strong>. Both teachers must be signed into any Google account in their browser — the page will use their Google session automatically. If you get a login redirect when syncing, open the web app URL directly in a tab first to authorize, then come back and click 🔄 Refresh.
       </div>
     </div>
     <div class="sync-info">This version is prewired to your Google Sheet and deployed Apps Script. You can keep the default connection or paste a different deployed Apps Script URL as an override. The HTML uses JSONP instead of fetch so it works better from a Claude artifact or other standalone hosted page.</div>
@@ -993,9 +984,10 @@ main{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:22px 12p
     <div class="sync-info">Paste this into Extensions → Apps Script → Deploy → Web App (Anyone). Replace the Sheet ID. This creates new tabs without touching existing ones, enables live point sync, and exposes student data for refresh.</div>
     <div class="code-block" id="scriptBlock">// ═══════════════════════════════════════════════
 // AP RESEARCH — MINISTRY OF RESEARCH
-// Google Apps Script v4 — Claude Artifact Compatible
-// Deploy as Web App → Anyone can access
-// Optional: bind to the sheet to use the custom menu
+// Google Apps Script v5 — DREAM Workspace Compatible
+// Deploy as Web App:
+//   Execute as: Me
+//   Who has access: Anyone with Google account
 // ═══════════════════════════════════════════════
 
 const SHEET_ID = &#x27;1llsHnCkLPU7mBB2ICt_vb6_aDiW1-Py1tYBpJjsJF1A&#x27;;
@@ -1012,6 +1004,21 @@ const TAB_HEADERS = {
   [CONTACTS_TAB]: [&#x27;Date&#x27;,&#x27;Student&#x27;,&#x27;House&#x27;,&#x27;Type&#x27;,&#x27;Note&#x27;,&#x27;Logged By&#x27;],
   [SPRINTS_TAB]: [&#x27;Date&#x27;,&#x27;Winning House&#x27;,&#x27;Points&#x27;]
 };
+
+// ── CORS helper — required so the HTML page can fetch from script.google.com ──
+function createOutput(data, callback) {
+  const json = JSON.stringify(data);
+  // If a JSONP callback was requested, wrap it
+  if (callback) {
+    return ContentService
+      .createTextOutput(callback + &#x27;(&#x27; + json + &#x27;)&#x27;)
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+  // Otherwise return JSON with permissive CORS headers
+  return ContentService
+    .createTextOutput(json)
+    .setMimeType(ContentService.MimeType.JSON);
+}
 
 function onOpen() {
   try {
@@ -1068,8 +1075,6 @@ function doGet(e) {
     else if (action === &#x27;contacts&#x27;) result = getContacts();
     else if (action === &#x27;sprints&#x27;) result = getSprints();
     else if (action === &#x27;verify&#x27;) result = verifyWorkbook();
-
-    // JSONP-friendly write actions for standalone hosted HTML / Claude artifacts
     else if (action === &#x27;addPoints&#x27;) result = addPoints({
       house: e.parameter.house || &#x27;&#x27;,
       student: e.parameter.student || &#x27;&#x27;,
@@ -1380,16 +1385,13 @@ function escapeHtml(str) {
     <ol class="inst-list">
       <li>Open your <a href="https://docs.google.com/spreadsheets/d/1llsHnCkLPU7mBB2ICt_vb6_aDiW1-Py1tYBpJjsJF1A/edit" target="_blank" style="color:var(--gold-l);">Google Sheet</a></li>
       <li>Click <strong>Extensions → Apps Script</strong></li>
-      <li>Delete existing code, paste the script above</li>
-      <li>The SHEET_ID is already filled in — no change needed</li>
-      <li>Click 💾 Save, then <strong>Deploy → New Deployment</strong></li>
-      <li>Type: <strong>Web App</strong> · Execute as: <strong>Me</strong> · Who has access: <strong>Anyone</strong> (NOT "Anyone with a Google Account") · Click Deploy</li>
-      <li>⚠️ <strong>IMPORTANT for multi-teacher access:</strong> "Execute as: Me" + "Anyone" is required so colleagues can read data without being logged into Google. If you previously deployed as "Anyone with a Google Account," redeploy and use the new URL.</li>
-      <li>Copy the Web App URL and paste it in the field above, then click 💾 Save Override</li>
-      <li>Click <strong>🔄 Verify Connection</strong> — you should see "Connected!"</li>
-      <li>Five new tabs auto-create: <em>House Cup Points, Mastery Tracker, Parent Contacts, Writing Sprints</em></li>
-      <li>Click <strong>⬇️ Pull Live Data</strong> to sync live student data from the tracker tab</li>
-      <li>Share the HTML file URL with your co-teacher — they should click 🔄 Refresh in the nav to pull current data</li>
+      <li>Delete existing code, paste the script above, click 💾 Save</li>
+      <li>Click <strong>Deploy → New Deployment</strong></li>
+      <li>Type: <strong>Web App</strong> · Execute as: <strong>Me</strong> · Who has access: <strong>Anyone with Google account</strong> (this is the most permissive option available in the DREAM Workspace) · Click Deploy</li>
+      <li>Copy the Web App URL, paste it in the Connected Web App field above, click 💾 Save Override</li>
+      <li>Click 🔄 <strong>Verify Connection</strong> — you should see "Connected!"</li>
+      <li><strong>For the other teacher:</strong> Make sure they are signed into any Google account in Chrome. The first time, have them open the web app URL directly in a new tab (it may ask them to authorize). After that, 🔄 Refresh on the main page will work.</li>
+      <li>Click <strong>⬇️ Pull Live Data</strong> to sync student data from the tracker tab</li>
     </ol>
   </div>
 </div>
@@ -2220,6 +2222,23 @@ function resetSheetsUrl(){
   showSync('Default deployed web app restored.', 'ok');
 }
 
+// ── fetch-based request (works with "Anyone with Google account" deployment) ──
+function scriptRequest(params = {}) {
+  const url = getActiveScriptUrl();
+  if (!url) return Promise.reject(new Error('No script URL configured'));
+  const query = new URLSearchParams(params);
+  return fetch(url + '?' + query.toString(), {
+    method: 'GET',
+    credentials: 'include',   // sends Google session cookie so auth works
+    redirect: 'follow'
+  })
+  .then(r => {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  });
+}
+
+// Keep jsonpRequest as fallback for environments that block credentials
 function jsonpRequest(params = {}) {
   return new Promise((resolve, reject) => {
     const cbName = '__jsonp_cb_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
@@ -2252,6 +2271,16 @@ function jsonpRequest(params = {}) {
   });
 }
 
+// Try fetch first, fall back to JSONP if it fails (CORS issue)
+async function apiRequest(params = {}) {
+  try {
+    return await scriptRequest(params);
+  } catch(e) {
+    // CORS or auth error — fall back to JSONP
+    return await jsonpRequest(params);
+  }
+}
+
 async function testSync(silent=false){
   if(!getActiveScriptUrl()){
     showSync('Apps Script URL is missing.', 'err');
@@ -2259,7 +2288,7 @@ async function testSync(silent=false){
   }
   if(!silent) showSync('Verifying live connection…', 'ok');
   try{
-    const d = await jsonpRequest({ action:'ping' });
+    const d = await apiRequest({ action:'ping' });
     if(d && d.ok){
       showSync('✓ Connected to the live spreadsheet web app.', 'ok');
       return true;
@@ -2353,10 +2382,10 @@ async function pullLiveData(){
 
   try{
     const [studentsData, pointsData, contactsData, sprintsData] = await Promise.all([
-      jsonpRequest({ action:'students' }),
-      jsonpRequest({ action:'points' }),
-      jsonpRequest({ action:'contacts' }),
-      jsonpRequest({ action:'sprints' })
+      apiRequest({ action:'students' }),
+      apiRequest({ action:'points' }),
+      apiRequest({ action:'contacts' }),
+      apiRequest({ action:'sprints' })
     ]);
 
     let loadedStudents = 0;
@@ -2411,7 +2440,7 @@ async function pullLiveData(){
 async function syncToSheets(entry){
   if(!getActiveScriptUrl()) return;
   try{
-    await jsonpRequest({
+    await apiRequest({
       action:'addPoints',
       house: entry.house || '',
       student: entry.student || '',
@@ -2426,7 +2455,7 @@ async function syncToSheets(entry){
 async function syncContactToSheets(entry){
   if(!getActiveScriptUrl()) return;
   try{
-    await jsonpRequest({
+    await apiRequest({
       action:'addContact',
       student: entry.student || '',
       house: entry.house || '',
@@ -2763,7 +2792,7 @@ function cycleGoalStatus(key, type){
 function statusPillHTML(status, key, type){
   const lbl = GH_LABELS[status]||status;
   const kesc = key.replace(/'/g,"\'");
-  return `<span class="gh-status ${status}" onclick="ghCycleInline('${kesc}','${type}',this)"><span class="gh-dot"></span>${lbl}</span>`;
+  return `<span class="gh-status ${status}" onclick="ghCycleInline('${kesc}','${type}',this)"><span class="gh-status-inner"><span class="gh-dot"></span>${lbl}</span></span>`;
 }
 
 // ── Goal Hub build ─────────────────────────────────────────────────────────
@@ -2871,10 +2900,9 @@ function buildGoalHub(){
 function ghCycleInline(key, type, el){
   const next = cycleGoalStatus(key, type);
   el.className = 'gh-status ' + next;
-  el.querySelector('.gh-dot')?.setAttribute('class','gh-dot');
-  const span = el.querySelector('span:last-child');
-  if(span) span.textContent = GH_LABELS[next];
-  else el.innerHTML = `<span class="gh-dot"></span>${GH_LABELS[next]}`;
+  const inner = el.querySelector('.gh-status-inner');
+  if(inner) inner.innerHTML = `<span class="gh-dot"></span>${GH_LABELS[next]}`;
+  else el.innerHTML = `<span class="gh-status-inner"><span class="gh-dot"></span>${GH_LABELS[next]}</span>`;
 }
 
 function ghSetView(v, btn){
@@ -2915,15 +2943,10 @@ function cycleHabitStatus(){
 }
 
 function renderDetailStatusPills(key){
-  const sp=document.getElementById('sgSkillStatusPill');
-  const hp=document.getElementById('sgHabitStatusPill');
-  if(sp) sp.outerHTML = statusPillHTML(getGoalStatus(key,'skill'),key,'skill').replace('onclick="ghCycleInline','id="sgSkillStatusPill" onclick="cycleSkillStatus() //');
-  if(hp) hp.outerHTML = statusPillHTML(getGoalStatus(key,'habit'),key,'habit').replace('onclick="ghCycleInline','id="sgHabitStatusPill" onclick="cycleHabitStatus() //');
-  // Simpler: just set class+text directly
   const spEl=document.getElementById('sgSkillStatusPill');
   const hpEl=document.getElementById('sgHabitStatusPill');
-  if(spEl){const st=getGoalStatus(key,'skill');spEl.className='gh-status '+st;spEl.innerHTML=`<span class="gh-dot"></span>${GH_LABELS[st]}`;}
-  if(hpEl){const st=getGoalStatus(key,'habit');hpEl.className='gh-status '+st;hpEl.innerHTML=`<span class="gh-dot"></span>${GH_LABELS[st]}`;}
+  if(spEl){const st=getGoalStatus(key,'skill');spEl.className='gh-status '+st;spEl.innerHTML=`<span class="gh-status-inner"><span class="gh-dot"></span>${GH_LABELS[st]}</span>`;}
+  if(hpEl){const st=getGoalStatus(key,'habit');hpEl.className='gh-status '+st;hpEl.innerHTML=`<span class="gh-status-inner"><span class="gh-dot"></span>${GH_LABELS[st]}</span>`;}
 }
 
 function buildScholarGoals(){
