@@ -2471,7 +2471,7 @@ function checkAutoAwards(){
       <span style="font-size:16px;">📝</span>
       <div style="flex:1;"><strong style="font-size:10px;">${s.first} ${s.last}</strong>
       <div style="font-size:9px;opacity:.55;">${t.name} · ${s.wc.toLocaleString()} words</div></div>
-      <button class="fbtn sm" onclick="awardWcMilestone('${s.first} ${s.last}','${s.house}','${t.name}',${t.pts})">+${t.pts}pts ⚡</button>
+      <button class="fbtn sm" onclick="awardWcMilestone('${(s.first+' '+s.last).replace(/'/g,"\\'")}','${s.house}','${t.name.replace(/'/g,"\\'")}',${t.pts})">+${t.pts}pts ⚡</button>
       <button class="fbtn sm" style="border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.35);margin-left:4px;" onclick="dismissAutoAward('${dismissKey.replace(/'/g,"\\'")}')">✕</button>
     </div>`).join('');
 }
