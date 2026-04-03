@@ -2314,7 +2314,7 @@ QA_ACHIEVES.forEach(a=>ANAMES_MAP[a.key]=a.name);
 
 let awardView = 'house';
 let qaGroup   = null;  // {type:'house'|'period'|'caseload'|'advisor', value:string}
-let qaAchievements = []; // array of {key,pts,name} — multi-select
+let qaAchieve = null;
 let qaSelected= [];
 
 const WC_MILESTONES = [
@@ -2324,15 +2324,6 @@ const WC_MILESTONES = [
   {wc:3000, pts:25, name:'Deep Dive (3,000+ words)'},
   {wc:4000, pts:30, name:'Magnum Territory (4,000+ words)'},
   {wc:5000, pts:50, name:'Unbreakable Opus (5,000+ words)'},
-];
-
-// Score-based auto-awards — awarded once per student per score level
-const SCORE_MILESTONES = [
-  {score:5, pts:100, name:'Score 5 Projection — Ministry Scholar (100 pts)'},
-  {score:4, pts:75,  name:'Score 4 Projection — Order of Excellence (75 pts)'},
-  {score:3, pts:50,  name:'Score 3 Projection — Keeper of Knowledge (50 pts)'},
-  {score:2, pts:25,  name:'Score 2 Projection — Scholar in Progress (25 pts)'},
-  {score:1, pts:10,  name:'Score 1 Projection — Apprentice Researcher (10 pts)'},
 ];
 
 function setAwardView(v, btn){
@@ -2378,17 +2369,10 @@ function buildAwardPanel(){
 
   // Achievement grid
   const ag=document.getElementById('qaAchieveGrid');
-  if(ag){
-    ag.innerHTML=QA_ACHIEVES.map(a=>`<div class="qa-btn${a.type!=='core'?' bonus':''}${qaAchievements.some(ac=>ac.key===a.key)?' sel':''}" onclick="qaSelectAchieve('${a.key}',${a.pts},this)">
-      <div class="qa-btn-icon">${a.icon}</div>
-      <div class="qa-btn-info"><div class="qa-btn-name">${a.name}</div><div class="qa-btn-pts">+${a.pts} pts · ${a.desc}</div></div>
-    </div>`).join('');
-    // Tip label
-    const tipEl=document.createElement('div');
-    tipEl.style.cssText='font-size:9px;opacity:.38;margin-bottom:8px;';
-    tipEl.textContent='💡 Select multiple achievements — each will be awarded separately to every scholar.';
-    ag.parentNode.insertBefore(tipEl, ag);
-  }
+  if(ag) ag.innerHTML=QA_ACHIEVES.map(a=>`<div class="qa-btn${a.type!=='core'?' bonus':''}${qaAchieve&&qaAchieve.key===a.key?' sel':''}" onclick="qaSelectAchieve('${a.key}',${a.pts},this)">
+    <div class="qa-btn-icon">${a.icon}</div>
+    <div class="qa-btn-info"><div class="qa-btn-name">${a.name}</div><div class="qa-btn-pts">+${a.pts} pts · ${a.desc}</div></div>
+  </div>`).join('');
 
   // Student select
   buildQAStudentSelect();
@@ -2422,15 +2406,9 @@ function buildQAStudentSelect(){
 }
 
 function qaSelectAchieve(key, pts, btn){
-  // Toggle: if already selected, remove; otherwise add
-  const idx = qaAchievements.findIndex(a=>a.key===key);
-  if(idx>-1){
-    qaAchievements.splice(idx,1);
-    btn.classList.remove('sel');
-  } else {
-    qaAchievements.push({key, pts, name:ANAMES_MAP[key]||key});
-    btn.classList.add('sel');
-  }
+  qaAchieve={key, pts, name:ANAMES_MAP[key]||key};
+  document.querySelectorAll('.qa-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
   updateQAPreview();
 }
 
@@ -2463,12 +2441,10 @@ function renderQAChips(){
 function updateQAPreview(){
   const p=document.getElementById('qaPtsPreview');
   if(!p) return;
-  if(!qaAchievements.length){p.textContent='';return;}
-  const totalPtsPerPerson=qaAchievements.reduce((a,ac)=>a+ac.pts,0);
+  if(!qaAchieve){p.textContent='';return;}
   const n=Math.max(1,qaSelected.length);
-  const grp=qaGroup?`${qaGroup.type==='period'?'Block ':''} ${qaGroup.value||'?'}`:'group';
-  const achNames=qaAchievements.map(a=>a.name).join(' + ');
-  p.textContent=`→ ${achNames} · +${totalPtsPerPerson} pts/scholar${n>1?' × '+n+' = +'+totalPtsPerPerson*n+' total':''}`;
+  const grp=qaGroup?`${qaGroup.type==='period'?'Block ':''} ${qaGroup.value||'?'}`:'house';
+  p.textContent=`→ +${qaAchieve.pts} pts${n>1?' × '+n+' = +'+qaAchieve.pts*n:''}  to ${grp}`;
 }
 
 function checkAutoAwards(){
@@ -2483,28 +2459,16 @@ function checkAutoAwards(){
   students.forEach(s=>{
     const name=s.first+' '+s.last;
     const awarded=ptsLog.filter(e=>e.student===name);
-    // Word count milestones
     WC_MILESTONES.forEach(t=>{
       const dismissKey=name+'||'+t.name;
       if(s.wc>=t.wc&&!awarded.some(e=>e.achievement===t.name)&&!dismissedAutoAwards.includes(dismissKey))
-        alerts.push({s,t,dismissKey,icon:'📝'});
+        alerts.push({s,t,dismissKey});
     });
-    // Score projection milestones
-    const sn=scoreN(s.score);
-    if(sn>=1&&!isDanger(s)){
-      SCORE_MILESTONES.forEach(t=>{
-        if(sn===t.score){
-          const dismissKey=name+'||'+t.name;
-          if(!awarded.some(e=>e.achievement===t.name)&&!dismissedAutoAwards.includes(dismissKey))
-            alerts.push({s,t,dismissKey,icon:'⭐'});
-        }
-      });
-    }
   });
   if(!alerts.length){wrap.innerHTML='';return;}
   wrap.innerHTML=`<div style="font-family:'Cinzel',serif;font-size:9px;color:var(--green-ok);margin-bottom:7px;letter-spacing:.06em;">✨ WORD COUNT MILESTONES — Auto-Award Eligible</div>`+
-    alerts.slice(0,8).map(({s,t,dismissKey,icon})=>`<div class="auto-row">
-      <span style="font-size:16px;">${icon||'📝'}</span>
+    alerts.slice(0,6).map(({s,t,dismissKey})=>`<div class="auto-row">
+      <span style="font-size:16px;">📝</span>
       <div style="flex:1;"><strong style="font-size:10px;">${s.first} ${s.last}</strong>
       <div style="font-size:9px;opacity:.55;">${t.name} · ${s.wc.toLocaleString()} words</div></div>
       <button class="fbtn sm" onclick="awardWcMilestone('${(s.first+' '+s.last).replace(/'/g,"\\'")}','${s.house}','${t.name.replace(/'/g,"\\'")}',${t.pts})">+${t.pts}pts ⚡</button>
@@ -2546,26 +2510,23 @@ function qaBestow(){
   if(!qaGroup&&!qaSelected.length){showToast('❓','Select a house/group first.','');return;}
   const customR=(document.getElementById('qaCustomReason')||{}).value?.trim()||'';
   const customP=parseInt((document.getElementById('qaCustomPts')||{}).value)||0;
-  // Build list of achievements to award (multi-select support)
-  let achieveList=[...qaAchievements];
-  if(!achieveList.length){
-    if(customR&&customP>0) achieveList=[{key:'custom',pts:customP,name:customR}];
-    else{showToast('❓','Select at least one achievement.','');return;}
+  let achieve=qaAchieve;
+  if(!achieve){
+    if(customR&&customP>0) achieve={key:'custom',pts:customP,name:customR};
+    else{showToast('❓','Select an achievement or enter a custom award.','');return;}
   }
   const targets=qaSelected.length>0?qaSelected:[''];
   const date=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
   const getHouse=(name)=>{if(!name)return qaGroup&&qaGroup.type==='house'?qaGroup.value:'';const s=STUDENTS.find(x=>x.first+' '+x.last===name);return s?.house||'';};
+  const isBonus=['marauder','timeturner','rotw','order','custom'].includes(achieve.key);
   const writePromises = [];
   targets.forEach(student=>{
     const house=student?getHouse(student):(qaGroup?.type==='house'?qaGroup.value:'');
     if(!house) return;
-    achieveList.forEach(achieve=>{
-      const isBonus=['marauder','timeturner','rotw','order','custom'].includes(achieve.key);
-      const entry={date,house,student:student||'',achievement:achieve.name,pts:achieve.pts,note:'',isBonus};
-      ptsLog.push(entry);
-      if(achieve.key==='rotw'&&student) rotwD={name:student,house};
-      writePromises.push(writeToSheets({action:'addPoints',house,student:student||'',achievement:achieve.name,points:achieve.pts,note:'',isBonus},'Points'));
-    });
+    const entry={date,house,student:student||'',achievement:achieve.name,pts:achieve.pts,note:'',isBonus};
+    ptsLog.push(entry);
+    if(achieve.key==='rotw'&&student) rotwD={name:student,house};
+    writePromises.push(writeToSheets({action:'addPoints',house,student:student||'',achievement:achieve.name,points:achieve.pts,note:'',isBonus},'Points'));
   });
   // After all writes fire, verify at least one landed on the Sheet
   const _expectedCountQA = ptsLog.length;
@@ -2586,15 +2547,14 @@ function qaBestow(){
     }, 2500);
   });
   rebuildAll();
-  qaAchievements=[]; qaSelected=[];
+  qaAchieve=null; qaSelected=[];
   document.querySelectorAll('.qa-btn').forEach(b=>b.classList.remove('sel'));
   renderQAChips(); updateQAPreview();
   if(document.getElementById('qaCustomReason')) document.getElementById('qaCustomReason').value='';
   if(document.getElementById('qaCustomPts')) document.getElementById('qaCustomPts').value='';
-  const totalPts=achieveList.reduce((a,ac)=>a+ac.pts,0)*Math.max(1,targets.length);
-  const achSummary=achieveList.length===1?achieveList[0].name:`${achieveList.length} achievements`;
+  const pts=achieve.pts*Math.max(1,targets.length);
   const grp=qaGroup?`${qaGroup.type==='period'?'Block ':''} ${qaGroup.value||''}`:'Group';
-  showToast('⚡',`${achSummary} — +${totalPts} pts to ${grp}!`,(qaGroup?.type==='house'?qaGroup.value:'').toLowerCase());
+  showToast('⚡',`${achieve.name} — +${pts} pts to ${grp}!`,(qaGroup?.type==='house'?qaGroup.value:'').toLowerCase());
   document.getElementById('qaSuccess').style.display='block';
   setTimeout(()=>{const el=document.getElementById('qaSuccess');if(el)el.style.display='none';},2200);
 }
